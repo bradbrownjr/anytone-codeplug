@@ -1,0 +1,27 @@
+# Secrets (API tokens, site logins)
+.env
+.env.*
+!.env.example
+secrets.*
+*.secret
+
+# Regenerated from radioid.net — 32 MB, not worth versioning
+**/DigitalContactList.CSV
+
+# Raw fetcher cache (source sites' terms may not allow redistribution)
+cache/
+
+# Build output — regenerated from data/
+out/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# CPS binary codeplugs and editor junk
+*.rdt
+*.bak
+.DS_Store
+Thumbs.db
