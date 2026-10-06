@@ -39,8 +39,13 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [ ] Keep as-is: Simplex, MURS, Marine, Weather, CCEMA/public safety, Packet, satellites
 - [x] 2026-10-06: ME Event 1/2 talkgroups (31231/31232) added to TalkGroups + every Maine zone (slots from Shapleigh announcement: Event 1 TS1, Event 2 TS2; verify per site)
 - [x] 2026-10-06: added zones Bridgton ME, Peru ME, Wilmington MA, Henniker NH, Portsmouth NH; Holden ME zone rebuilt from orphaned HLDME channels; K8MOT Bridgton FM (145.21 -, 118.8) added to ME Analog + All Analog scan list
-- [ ] Skipped TGs with no contact (Audio Watch 9999, TAC312, TAC316) — add contacts/channels if wanted
-- [ ] Reconcile existing zones that disagree with NEDECN pages (freq/CC): Augusta ME (codeplug 145.17 vs NEDECN 145.24), Dexter ME and Dresden ME (CC 0 vs 12), Smyrna ME (147.09 vs 145.19), plus Bow NH, Chester NH, Boston MA, Sagamore MA, Southboro MA, Northford CT, Hudson NH, Gofftstown NH, Gunstock NH VHF, VT sites — several NEDECN pages are image/table-only and didn't parse; check by hand
+- [x] 2026-10-06: cross-referenced all 89 NEDECN repeater pages and NEDECN's CSV pack (AnyTone-878-CSV-Files.zip, dated 2026-09-24). Added TGs 9999 Audio Watch, 312, 316, 8808 NH Lakes, 31361 Upstate NY, 31235 FCEMA; added 383 missing TG channels and fixed 34 slots so every site matches its NEDECN page; fixed Dexter/Dresden CC (0->12), Augusta (145.24), Smyrna (145.19/CC12); added Mattituck, Riverhead, Selden NY and Bristol RI from the pack
+- NEDECN pages are the primary source (newer: Bridgton, Peru, Henniker, Portsmouth are not in the pack). The pack is sloppy: empty zone frequency lists, ambiguous duplicate channel names, typos (Southboro UHF 447.375 vs the page's 448.375), CC 0 entries. Use it only as a cross-check
+- [ ] Verify pack-only sites that have no NEDECN page: Bristol RI (K1CW 145.33 CC2 — NERepeaters lists K1CW 145.33 as FM only), Riverhead NY, Selden NY, Mattituck NY
+- [ ] Verify Lyndeborough NH: changed 433.9375/438.9375 -> 443.9375/448.9375 on the pack's word alone (no NEDECN page)
+- [ ] Duplicate repeater: NEDECN's Sidney page is the Augusta KC1FRJ repeater, so `Augusta ME` and `Sydney ME` zones are the same site now. Drop one
+- [ ] No NEDECN page to check against: Northford CT, Boothbay ME, Topsham ME, Goffstown UHF NH, Gunstock NH UHF, Hudson NE1B/UHF NH, Lyndon VT, Mt Snow VT. Northfield VT and Somersworth NH are marked off the air on NEDECN
+- [ ] Sort order: new channels were appended to the end of each zone, not alphabetized
 - [ ] Orphan channels not in any zone (MTWNH COOS, MTWNH VT SW, GMRS 1.. etc.) — decide keep/remove
 - [ ] GMRS zone B channel (WJ1L Alfred 2m) isn't a zone member — pre-existing quirk
 - [ ] Naming convention for analog repeaters within 16 chars (e.g. `W1QUI Falmouth`)
