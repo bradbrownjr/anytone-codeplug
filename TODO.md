@@ -51,7 +51,8 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [ ] Orphan channels not in any zone (MTWNH COOS, MTWNH VT SW, GMRS 1.. etc.) — decide keep/remove
 - [ ] GMRS zone B channel (WJ1L Alfred 2m) isn't a zone member — pre-existing quirk
 - [x] 2026-10-07: Mt Washington W1NH tone 62.5 -> 100.0; added ECT1/ECT2 SKYWARN/ECT3, X-Band V/U and a `CCEMA PACE` zone built from the two WSSM-ECT ICS-217A sheets (FM + DV); fixed DMR simplex typo 146.790 -> 145.790 (renamed `DMRS 145.790`)
-- [ ] Incorporate Maine statewide interoperability FOG (2017, mostly government channels: add receive-only), current NIFOG, Maine ARES county frequencies (ka1aar.org/download/MaineARESFreqs.pdf, 2020), and YCECT's 217A/205 (k1yem.com). Do not modify the existing RN/CCFIRE channels (covered by the CCEMA MOU)
+- [x] 2026-10-07: Maine statewide interoperability FOG added receive-only (`ME State Net`, `ME Interop`, 15 `EMA <County>` zones; `codeplug/add_maine_fog.py`) and NIFOG 2.02 VHF/UHF national, federal IR/LE and UHF medical channels (`US Interop`, `codeplug/add_nifog.py`; 700/800 MHz, low band and VTAC17 skipped)
+- [ ] Still to incorporate: Maine ARES county frequencies (ka1aar.org/download/MaineARESFreqs.pdf, 2020) and YCECT's 217A/205 (k1yem.com) as an `ME ARES` zone. Do not modify the existing RN/CCFIRE channels (covered by the CCEMA MOU)
 - [x] Naming convention for analog repeaters: `<CALL> <City>`, location always in the name (`codeplug/naming.py`, documented in CLAUDE.md)
 - [ ] 578-only: 220 MHz (1.25 m) repeaters? Cross-band / mobile-specific settings?
 
