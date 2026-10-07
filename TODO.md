@@ -45,7 +45,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - NEDECN pages are the primary source (newer: Bridgton, Peru, Henniker, Portsmouth are not in the pack). The pack is sloppy: empty zone frequency lists, ambiguous duplicate channel names, typos (Southboro UHF 447.375 vs the page's 448.375), CC 0 entries. Use it only as a cross-check
 - [ ] Verify pack-only sites that have no NEDECN page: Bristol RI (K1CW 145.33 CC2 — NERepeaters lists K1CW 145.33 as FM only), Riverhead NY, Selden NY, Mattituck NY
 - [ ] Verify Lyndeborough NH: changed 433.9375/438.9375 -> 443.9375/448.9375 on the pack's word alone (no NEDECN page)
-- [ ] Duplicate repeater: NEDECN's Sidney page is the Augusta KC1FRJ repeater, so `Augusta ME` and `Sydney ME` zones are the same site now. Drop one
+- [x] 2026-10-07: duplicate Augusta/Sydney repeater resolved: kept `Augusta ME`, removed `Sydney ME` and its 25 SIDME channels (Brad's call)
 - [ ] No NEDECN page to check against: Northford CT, Boothbay ME, Topsham ME, Goffstown UHF NH, Gunstock NH UHF, Hudson NE1B/UHF NH, Lyndon VT, Mt Snow VT. Northfield VT and Somersworth NH are marked off the air on NEDECN
 - [ ] Sort order: new channels were appended to the end of each zone, not alphabetized
 - [ ] Orphan channels not in any zone (MTWNH COOS, MTWNH VT SW, GMRS 1.. etc.) — decide keep/remove
