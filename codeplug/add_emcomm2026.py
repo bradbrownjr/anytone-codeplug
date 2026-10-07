@@ -19,7 +19,7 @@ REPEATERS = [('N1SJV Fort Kent', 146.640, 146.040, '100.0'), ('W1BC Houlton', 14
 
 if __name__ == '__main__':
     cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
-    cp.remove_from_zone('ME ARES', {'W1NPP Auburn', 'W1NPP Poland'})
+    # W1NPP Auburn/Poland (off air, expected back) were first dropped here, then restored by Brad's request; they stay in ME ARES.
     members, new = [], []
     for name, rx, tx, pl in REPEATERS:
         n = analog(cp, rx, tx=tx, tone=pl)
