@@ -6,6 +6,8 @@ channel or inserting one never breaks a list. `build` renders the CPS CSVs (freq
 name references are derived) for a radio profile.
 
     python3 codeplug/model.py bootstrap [export dir]     exports/d878uv -> data/   (one-time; adopts IDs)
+    python3 codeplug/model.py sync                        bootstrap + bootstrap-extra in one step
+    python3 codeplug/model.py bootstrap-extra d578uv      adopt 220 MHz etc. channels that only the 578 can carry
     python3 codeplug/model.py build d878uv                data/ -> out/d878uv
     python3 codeplug/model.py check d878uv                build, then compare with exports/d878uv byte for byte
 
@@ -21,10 +23,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
-GENERATED = ('Channel.CSV', 'Zone.CSV', 'ScanList.CSV', 'TalkGroups.CSV')
-RADIOS = {  # MHz ranges the radio can transmit/receive
-    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)]},
-    'd578uv': {'folder': 'd578uv', 'bands': [(136, 174), (200, 260), (400, 480)]},
+GENERATED = ('Channel.CSV', 'Zone.CSV', 'ScanList.CSV', 'TalkGroups.CSV', 'ContactTalkGroups.CSV')
+RADIOS = {  # MHz ranges the radio can transmit/receive; channels.csv uses the D878UV column names
+    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}},
+    # D578UV firmware 1.14 export: renamed/fewer channel columns, no Zone Hide, ContactTalkGroups.CSV, 16-char radio ID name
+    'd578uv': {'folder': 'd578uv', 'bands': [(136, 174), (200, 260), (400, 480)], 'tg_file': 'ContactTalkGroups.CSV',
+               'colmap': {'Color Code': 'RX Color Code', 'TDMA': 'Simplex TDMA', 'TDMA Adaptive': 'Slot Suit', 'Simplex': 'Through Mode',
+                          'Exclude Channel From Roaming': 'Exclude channel from roaming'},
+               'fixed': {'Simplex': 'Off', 'Radio ID': 'KC1JMH / Brad Br'}},
 }
 
 
@@ -72,6 +78,50 @@ def bootstrap(src):
     print(f'bootstrapped {len(rows)} channels, {len(z) - 1} zones, {len(s) - 1} scan lists, {len(tg) - 1} talkgroups')
 
 
+def bootstrap_extra(radio='d578uv'):
+    """Adopt the channels (and zones) of a radio's own export that the D878UV cannot carry (e.g. 220 MHz) into data/."""
+    prof = RADIOS[radio]; src = ROOT / 'exports' / prof['folder']
+    head, chs = table('channels.csv'); c = {n: i for i, n in enumerate(head)}
+    names = {r[c['Channel Name']] for r in chs}
+    base = next(r for r in chs if r[c['Channel Name']] == 'ECT1')
+    other = read(src / 'Channel.CSV'); oh = other[0]
+    inv = {v: k for k, v in prof['colmap'].items()}
+    added, nid = [], len(chs)
+    for r in other[1:]:
+        d = dict(zip(oh, r))
+        rxf = float(d['Receive Frequency'])
+        if d['Channel Name'] in names or in_bands(rxf, RADIOS['d878uv']['bands']) or not in_bands(rxf, prof['bands']):
+            continue
+        row = list(base)
+        for k, v in d.items():
+            k = inv.get(k, k)
+            if k in c and k != 'No.':
+                row[c[k]] = v
+        row[c['Radio ID']] = base[c['Radio ID']]
+        nid += 1; row[0] = 'ch%05d' % nid
+        added.append(row)
+    ids = {r[c['Channel Name']]: r[0] for r in chs + added}
+    for r in added:
+        r[c['Scan List']] = 'None'     # the 578's own scan lists are not carried over
+    # rewrite channels.csv with the adjusted rows
+    write(DATA / 'channels.csv', [head] + chs + added, quote_all=False, eol='\n')
+    zh, zrows = table('zones.csv'); zm_h, zm = table('zone_members.csv')
+    zname = {r[1]: r[0] for r in zrows}
+    new_z, new_m = [], []
+    ordered = sorted(added, key=lambda r: float(r[c['Receive Frequency']]))
+    if ordered:       # all 578-only channels go in one zone, named for the band
+        zid = 'z%03d' % (len(zrows) + 1)
+        new_z.append([zid, '220', ordered[0][0], ordered[0][0], '0'])
+        new_m += [[zid, i, r[0]] for i, r in enumerate(ordered, 1)]
+    # Maine ARES list: state coordination simplex 223.500 and the Oxford 224.620 repeater (578 only)
+    for i, n in enumerate(('1.25m Calling', 'W1IF Hebron ME'), 950):
+        if n in ids and 'ME ARES' in zname:
+            new_m.append([zname['ME ARES'], i, ids[n]])
+    write(DATA / 'zones.csv', [zh] + zrows + new_z, quote_all=False, eol='\n')
+    write(DATA / 'zone_members.csv', [zm_h] + zm + new_m, quote_all=False, eol='\n')
+    print(f'adopted {len(added)} {radio}-only channels into zone 220')
+
+
 def in_bands(freq, bands):
     return any(lo <= float(freq) < hi for lo, hi in bands)
 
@@ -89,7 +139,9 @@ def build(radio, out=None, static=None):
     keep = [r for r in chs if in_bands(r[c['Receive Frequency']], prof['bands']) and in_bands(r[c['Transmit Frequency']], prof['bands'])]
     by_id = {r[0]: r for r in keep}
     header = read(static / 'Channel.CSV')[0]
-    write(out / 'Channel.CSV', [header] + [[str(i)] + r[1:] for i, r in enumerate(keep, 1)])
+    cm = prof['colmap']
+    pick = [(c[cm.get(h, h)] if h != 'No.' else None, prof['fixed'].get(h)) for h in header]
+    write(out / 'Channel.CSV', [header] + [[str(i) if j is None else (fx if fx is not None else r[j]) for j, fx in pick] for i, r in enumerate(keep, 1)])
     name = lambda cid: by_id[cid][c['Channel Name']]
     rx = lambda cid: by_id[cid][c['Receive Frequency']]
     tx = lambda cid: by_id[cid][c['Transmit Frequency']]
@@ -104,8 +156,9 @@ def build(radio, out=None, static=None):
         if not m:
             continue
         a, b = (a if a in by_id else m[0]), (b if b in by_id else m[0])
-        rows.append([str(len(rows) + 1), zname, '|'.join(map(name, m)), '|'.join(map(rx, m)), '|'.join(map(tx, m)),
-                     name(a), rx(a), tx(a), name(b), rx(b), tx(b), hide])
+        row = [str(len(rows) + 1), zname, '|'.join(map(name, m)), '|'.join(map(rx, m)), '|'.join(map(tx, m)),
+               name(a), rx(a), tx(a), name(b), rx(b), tx(b), hide]
+        rows.append(row[:len(zh)])
     write(out / 'Zone.CSV', [zh] + rows)
     sh = read(static / 'ScanList.CSV')[0]
     sh_h, sh_rows = table('scanlists.csv')
@@ -122,8 +175,8 @@ def build(radio, out=None, static=None):
         rows.append([str(len(rows) + 1), sname, '|'.join(map(name, m)), '|'.join(map(rx, m)), '|'.join(map(tx, m)), mode, psel,
                      p1, *f(p1), p2, *f(p2), rev, lbA, lbB, drop, dwell])
     write(out / 'ScanList.CSV', [sh] + rows)
-    th = read(static / 'TalkGroups.CSV')[0]
-    write(out / 'TalkGroups.CSV', [th] + [[str(i)] + r[1:] for i, r in enumerate(table('talkgroups.csv')[1], 1)])
+    th = read(static / prof['tg_file'])[0]
+    write(out / prof['tg_file'], [th] + [[str(i)] + r[1:] for i, r in enumerate(table('talkgroups.csv')[1], 1)])
     # OptionalSetting.CSV stores 0-based zone numbers: re-point by zone name if zones moved.
     return out, len(keep)
 
@@ -132,6 +185,10 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'bootstrap':
         bootstrap(sys.argv[2] if len(sys.argv) > 2 else ROOT / 'exports' / 'd878uv')
+    elif cmd == 'sync':          # exports/d878uv -> data/, then adopt the 578-only channels
+        bootstrap(ROOT / 'exports' / 'd878uv'); bootstrap_extra('d578uv')
+    elif cmd == 'bootstrap-extra':
+        bootstrap_extra(sys.argv[2] if len(sys.argv) > 2 else 'd578uv')
     elif cmd in ('build', 'check'):
         out, n = build(sys.argv[2])
         print('built', out, n, 'channels')

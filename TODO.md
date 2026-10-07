@@ -9,7 +9,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [x] README: what this is, how to build, how to import into the CPS
 
 ## 1. Inputs from Brad
-- [ ] Export all CSVs from the **578 CPS** into `exports/d578uv/` (Tools → Export, all tables, with the `.LST`)
+- [x] 2026-10-08: 578 CPS export (firmware 1.14) is in `exports/d578uv/`. Differences from the 878: 50 channel columns (`Color Code`, `TDMA`, `TDMA Adaptive`, `Simplex`; no APRS-mute/TxCC/ARC4 etc.), Zone.CSV has no `Zone Hide`, talkgroups are in `ContactTalkGroups.CSV`, radio ID name is 16 chars (`KC1JMH / Brad Br`), no OptionalSetting/Roaming*/APRS/AES files, and the `.LST` is empty. Still to do: re-export once the firmware is updated if the newer layout matters
 - [ ] Record CPS + firmware versions for both radios (in README)
 - [ ] Fill in `.env`: RepeaterBook API token, myGMRS login (NESMC needs none)
 - [ ] Decide what "active" means for analog repeaters: NESMC coordination status, NERepeaters last-updated age, or both
@@ -80,3 +80,6 @@ Goal: program a colleague's radio and hand them a manual for it. One guide per r
 - [x] 2026-10-07: YCECT GMRS (Shapleigh-Pub 462.600/162.2 = Fort Ridge, GMRS 15/16) added to ME ARES
 - [ ] DCS CSV format: RepeaterBook's AnyTone wiki says only that 'if DCS, the letter N is appended' to the CTCSS/DCS Encode/Decode value; the `D` prefix and `I` (inverted) suffix are not documented there, so `D023N` is a best inference. Verify by exporting one DCS channel from the CPS (or test-importing the 4 DPL GMRS channels), then use DCS for the FOG channels (left Off so far)
 - [x] RepeaterBook: dropped (Brad: API access not going to happen); coordinators + NERepeaters remain the cross-check
+- [x] 2026-10-08: `model.py` 578 profile (column map, fixed Radio ID, ContactTalkGroups, no Zone Hide) builds `out/d578uv` (2881 channels, 154 zones) from the same data; `model.py sync` re-adopts the 578-only 220 MHz channels into a `220` zone (12 channels incl. 223.500 and 224.620). Adopted KA1EKS Millinocket, KQ1L Lincoln, K1PQ Brownville from the old 578 codeplug into ME Analog
+- [ ] 578: untested import. The generated `out/d578uv/Channel.CSV` has not been imported into the CPS; the 578's old scan lists (Southern ME, Northern ME, NH Analog, CCEMA, MURS...) are not carried over (only the 878's five), 578 OptionalSetting/hotkeys/startup zone untouched, and the old 578 zones Sydney ME/Southern ME/Northern ME are gone (Sydney removed; the ME 220 channels now live in `220`). The 878 and 578 codeplugs still reference scan lists that do not exist (ISS, AO-91, Packet, ...) — pre-existing
+- [ ] 578 `Simplex` column: the 878 `Through Mode` has no confirmed 578 equivalent; the generator writes `Simplex` = Off for every channel

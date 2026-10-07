@@ -43,7 +43,7 @@ def commit():
 def build(folder, out, title):
     chs = {r['Channel Name']: r for r in rows(folder / 'Channel.CSV')}
     zones = rows(folder / 'Zone.CSV')
-    tgs = rows(folder / 'TalkGroups.CSV')
+    tgs = rows(folder / ('TalkGroups.CSV' if (folder / 'TalkGroups.CSV').exists() else 'ContactTalkGroups.CSV'))
     ss = getSampleStyleSheet()
     small = ss['BodyText'].clone('small', fontSize=7, leading=8.5)
     head = f'{title} guide'
@@ -74,7 +74,7 @@ def build(folder, out, title):
         for n in (z['Zone Channel Member'].split('|') if z['Zone Channel Member'] else []):
             r = chs[n]
             if r['Channel Type'] == 'D-Digital':
-                info = f"CC{r['RX Color Code']} TS{r['Slot']} {r['Contact']}"
+                info = f"CC{r.get('RX Color Code', r.get('Color Code'))} TS{r['Slot']} {r['Contact']}"
             else:
                 info = (r['CTCSS/DCS Encode'] if r['CTCSS/DCS Encode'] != 'Off' else '')
             data.append([Paragraph(escape(n), small), r['Receive Frequency'], r['Transmit Frequency'], r['Channel Type'][2:], Paragraph(escape(info), small),
