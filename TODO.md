@@ -59,3 +59,13 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [ ] `make`/script entry points: `fetch`, `build`, `validate`, `diff`
 - [ ] Update CLAUDE.md with the tool's commands and layout once it exists
 - [ ] Optional: scheduled GitHub Action to fetch + open a PR when sources change
+
+## 6. Radio guides (printable PDF)
+Goal: program a colleague's radio and hand them a manual for it. One guide per radio model (D878UV, D578UV), generated from the same data as the CSVs so it never drifts from the codeplug.
+- [ ] Programmable button map: every side/top/front/long-press key function, with a labeled diagram of the radio showing where each button is
+- [ ] How to move between zones and channels (and A/B VFO) on that model, step by step, plus scan, priority, talk-around, power, TX-prohibit and emergency functions
+- [ ] Zone list with channel counts, then per-zone channel tables (name, RX/TX, tone or color code/slot/talkgroup, notes), with the CCEMA PACE zone first
+- [ ] Talkgroup list with slots and what each is for, DMR radio ID and contact setup, and a quick-reference card (one page, laminate-friendly)
+- [ ] Mark receive-only channels (government/interop) and any usage restrictions (e.g. amateur-only, CCEMA MOU channels)
+- [ ] Build step: generate Markdown/HTML from `data/`, then render to PDF (print-ready, page numbers, date + git commit in the footer so a printed copy can be traced to a codeplug version)
+- [ ] Need from Brad: photos or confirmation of the physical button layout for each radio, and how the D578UV's keys are assigned today (from the 578 CPS export)
