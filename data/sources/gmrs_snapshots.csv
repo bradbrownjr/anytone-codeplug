@@ -1,0 +1,75 @@
+state,name,city,rx,tone_in,tone_out,type,updated,snapshot
+ME,Hussey Hill 650,Oakland,462.650,100.0,100.0,Open System,5 days,2026-10-07
+ME,Johnson Hill 625,Presque Isle,462.625,77.0,77.0,Open System,11 days,2026-10-07
+ME,Gardiner 600,Gardiner,462.600,123.0,123.0,Open System,11 days,2026-10-07
+ME,York 725,York,462.725,141.3,141.3,Open System,11 days,2026-10-07
+ME,Ragged Mtn 700,Camden,462.700,77.0,77.0,Open System,14 days,2026-10-07
+ME,Peaked Mtn 625,Dixmont,462.625,77.0,77.0,Open System,14 days,2026-10-07
+ME,Mt Waldo 675,Frankfort,462.675,77.0,77.0,Open System,14 days,2026-10-07
+ME,Front Ridge 600,Orland,462.600,100.0,100.0,Open System,14 days,2026-10-07
+ME,Cooper Hill 575,Cooper,462.575,77.0,77.0,Open System,14 days,2026-10-07
+ME,Bull Hill 600,Charleston,462.600,77.0,77.0,Open System,14 days,2026-10-07
+ME,Blackcap Mtn 725,Eddington,462.725,77.0,77.0,Open System,14 days,2026-10-07
+ME,Bald Mtn 550,Dedham,462.550,77.0,77.0,Open System,14 days,2026-10-07
+ME,Bagley Mtn 625,Lincoln,462.625,88.5,88.5,Open System,14 days,2026-10-07
+ME,Lane Rd,Greene,462.725,136.5,136.5,Permission Required,1 month,2026-10-07
+ME,Patten Rd,Greene,462.550,136.5,136.5,Permission Required,1 month,2026-10-07
+ME,Spruce 675,Woodstock,462.675,156.7,156.7,Open System,1 month,2026-10-07
+ME,York650,York,462.650,,,Permission Required,1 month,2026-10-07
+ME,Unity 725,Unity,462.725,107.2,,Open System,1 month,2026-10-07
+ME,Hiram GMR,Hiram,462.575,156.7,156.7,Permission Required,1 month,2026-10-07
+ME,Hazzy,Limestone,462.575,123.0,123.0,Open System,1 month,2026-10-07
+NH,Litchfield 6,Litchfield,462.600,141.3,,Open System,11 hours,2026-10-07
+NH,Epsom,Epsom,462.700,141.3,,Open System,11 hours,2026-10-07
+NH,Ossipee GMR,Ossipee,462.550,156.7,156.7,Permission Required,1 month,2026-10-07
+NH,Keene 725,Keene,462.725,141.3,156.7,Open System,1 month,2026-10-07
+NH,WASH600,Washington,462.600,,,Permission Required,1 month,2026-10-07
+NH,Tooky650,Contoocook,462.650,,,Permission Required,1 month,2026-10-07
+NH,Monroe 625,Monroe,462.625,162.2,162.2,Open System,4 months,2026-10-07
+NH,Pembroke 575,Pembroke,462.575,156 DPL,156 DPL,Open System,5 months,2026-10-07
+NH,Pittsfield 600,Pittsfield,462.600,156 DPL,156 DPL,Open System,6 months,2026-10-07
+NH,Milton 700,Milton,462.700,250.3,250.3,Open System,8 months,2026-10-07
+NH,WRPK503 Repeater,Sandown,462.700,136.5,136.5,Open System,8 months,2026-10-07
+NH,Lit 55-oh,Temple,462.550,,,Permission Required,9 months,2026-10-07
+NH,Lit Holler 55-oh,Richmond,462.550,,,Permission Required,9 months,2026-10-07
+VT,Lake Champaign Radio Club,Burlington,462.625,110.9,110.9,Open System,1 month,2026-10-07
+VT,WRTS869,Windham,462.550,,,Open System,1 month,2026-10-07
+VT,Shelburne 675,Shelburne,462.675,141.3,141.3,Open System,9 months,2026-10-07
+CT,Capital City Repeater,Hartford,462.725,,,Members Only (Free),12 hours,2026-10-07
+CT,Stateline GMRS675,Woodstock,462.675,,,Permission Required,1 month,2026-10-07
+CT,CAFM Fairfield,Fairfield,462.650,110.9,110.9,Open System,1 month,2026-10-07
+CT,UNCAS550,Uncasville,462.550,156.7,156.7,Open System,1 month,2026-10-07
+CT,Babcock Hill,Lebanon,462.700,,,Permission Required,1 month,2026-10-07
+CT,Enfield Family,Enfield,462.600,,,Members Only (Free),1 month,2026-10-07
+CT,Enfield EmComm,Enfield,462.625,88.5,88.5,Open System,1 month,2026-10-07
+CT,Stateline GMRS 700,Killingly,462.700,,,Permission Required,1 month,2026-10-07
+CT,Beacon725,Beacon Falls,462.725,156.7,156.7,Permission Required,1 month,2026-10-07
+CT,SnowMan's,New Britain,462.675,,,Permission Required,3 months,2026-10-07
+CT,WSLG 725 Repeater,Windsor Locks,462.725,,,Permission Required,4 months,2026-10-07
+CT,Bridgeport 700,Bridgeport,462.700,77.0,77.0,Open System,6 months,2026-10-07
+MA,Litchfield 625 (Pepperell),Pepperell,462.625,141.3,,Open System,11 hours,2026-10-07
+MA,Dennis 725,Dennis,462.725,071 DPL,071 DPL,Open System,4 days,2026-10-07
+MA,Falmouth_550,Falmouth,462.550,88.5,88.5,Open System,1 month,2026-10-07
+MA,NORTH Carver 625,Carver,462.625,110.9,110.9,Open System,1 month,2026-10-07
+MA,GMRSLive Node 2141,Gardner,462.575,023 DPL,023 DPL,Open System,1 month,2026-10-07
+MA,New England GMRS 550 Rpt,North Attleboro,462.550,67.0,67.0,Open System,1 month,2026-10-07
+MA,Glos550,Gloucester,462.550,100.0,100.0,Open System,1 month,2026-10-07
+MA,Kingston 675,Kingston,462.675,203.5,203.5,Open System,1 month,2026-10-07
+MA,Norwell 700,Norwell,462.700,203.5,203.5,Open System,1 month,2026-10-07
+MA,Tewksbury,Tewksbury,462.575,94.8,94.8,Open System,2 months,2026-10-07
+NY,Derby550,Derby,462.550,110.9,,Open System,1 day,2026-10-07
+NY,SquidNet 650,Staten Island,462.650,123.0,203.5,Open System,4 days,2026-10-07
+NY,Baker Schoolhouse,Cortland,462.700,,71.9,Open System,7 days,2026-10-07
+NY,Norwood Echo,Norwood,462.575,77.0,77.0,Open System,8 days,2026-10-07
+NY,NORWOOD/POTSDAM,Norwood,462.725,77.0,77.0,Open System,8 days,2026-10-07
+NY,NORWOOD,Norwood,462.550,136.5,136.5,Open System,8 days,2026-10-07
+NY,Brooklyn South Radio Group,Brooklyn,462.600,141.3,141.3,Open System,11 days,2026-10-07
+NY,Central 625,Montour Falls,462.625,103.5,103.5,Open System,15 days,2026-10-07
+NY,Fourth Coast,Massena,462.625,77.0,77.0,Open System,20 days,2026-10-07
+RI,Newport 625,Newport,462.625,136.5,,Open System,11 days,2026-10-07
+RI,Portsmouth EMA,Portsmouth,462.575,67.0,67.0,Open System,25 days,2026-10-07
+RI,WCKBXT1,West Greenwich,462.650,127.3,127.3,Permission Required,6 months,2026-10-07
+RI,North Providence 725,North Providence,462.725,100.0,100.0,Open System,6 months,2026-10-07
+RI,TIVERTON 600,Tiverton,462.600,118.8,118.8,Open System,10 months,2026-10-07
+RI,Lincoln 700,Warwick,462.700,,,Permission Required,1 year,2026-10-07
+RI,Federal Hill 6500,Providence,462.650,141.3,141.3,Open System,1 year,2026-10-07
