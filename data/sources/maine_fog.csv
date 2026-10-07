@@ -1,0 +1,207 @@
+page,section,config,name,users,rx,rx_tone,tx,tx_tone,remarks
+3,MSCOMMNET Region Net,Duplex,Gray,All Govt,151.1600,162.2,155.9700,162.2,Gray RCC zone
+3,MSCOMMNET Region Net,Duplex,Hosac Mtn,All Govt,169.8875,162.2,159.1650,162.2,Gray RCC zone
+3,MSCOMMNET Region Net,Duplex,Mt Agamenticus,All Govt,155.4525,162.2,156.1500,162.2,Gray RCC zone
+3,MSCOMMNET Region Net,Duplex,Ossipee Mtn,All Govt,172.4250,162.2,159.3300,162.2,Patch to Zone Dispatch: Gray RCC
+3,MSCOMMNET Region Net,Duplex,Pleasant Mtn,All Govt,169.6625,162.2,163.5750,162.2,Gray RCC zone
+3,MSCOMMNET Region Net,Duplex,Spruce Mtn,All Govt,172.7750,162.2,161.4600,162.2,Patch to Zone Dispatch: Gray RCC
+3,MSCOMMNET Region Net,Duplex,York,All Govt,159.4500,162.2,153.9200,162.2,Patch to Zone Dispatch: Gray RCC
+3,MSCOMMNET Region Net,Duplex,Augusta,All Govt,155.8500,162.2,151.0625,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Coggan's Hill,All Govt,154.7250,162.2,159.3000,162.2,Patch to Zone Dispatch: Augusta RCC
+3,MSCOMMNET Region Net,Duplex,Cook Hill,All Govt,151.1750,162.2,159.2400,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Eaton Mtn,All Govt,152.1425,162.2,159.3750,162.2,Patch to Zone Dispatch: Augusta RCC
+3,MSCOMMNET Region Net,Duplex,Granite Hill,All Govt,151.3550,162.2,159.3825,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Huntoon Hill,All Govt,160.5300,162.2,159.2850,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Mt Blue,All Govt,172.6750,162.2,160.5900,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Mt Ephraim,All Govt,155.7300,162.2,159.4425,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Sugarloaf Mtn,All Govt,172.5750,162.2,154.7700,162.2,Patch to Zone Dispatch: Augusta RCC
+3,MSCOMMNET Region Net,Duplex,West Kennebago,All Govt,167.7875,162.2,156.0900,162.2,Augusta RCC Zone
+3,MSCOMMNET Region Net,Duplex,Whitten Hill,All Govt,161.1300,162.2,159.4050,162.2,Patch to Zone Dispatch: Augusta RCC
+3,MSCOMMNET Region Net,Duplex,Bald Mtn,All Govt,157.5000,162.2,159.2700,162.2,Patch to Zone Dispatch: Bangor RCC
+3,MSCOMMNET Region Net,Duplex,Big Moose Mtn,All Govt,155.4300,162.2,151.1900,162.2,Bangor RCC Zone
+4,MSCOMMNET Region Net,Duplex,Big Spencer,All Govt,161.1300,162.2,158.4975,162.2,Bangor RCC Zone
+4,MSCOMMNET Region Net,Duplex,BOMARC,All Govt,154.6575,162.2,159.3300,162.2,Patch to Zone Dispatch: Gray RCC
+4,MSCOMMNET Region Net,Duplex,Cadillac Mtn,All Govt,160.8900,162.2,165.1375,162.2,Patch to Zone Dispatch: Bangor RCC
+4,MSCOMMNET Region Net,Duplex,Cooper,All Govt,160.8600,162.2,159.4650,162.2,Patch to Zone Dispatch: Bangor RCC
+4,MSCOMMNET Region Net,Duplex,Fish Hill,All Govt,154.7025,162.2,159.3375,162.2,Patch to Zone Dispatch: Gray RCC
+4,MSCOMMNET Region Net,Duplex,Garland,All Govt,151.2200,162.2,157.7625,162.2,Patch to Zone Dispatch: Bangor RCC
+4,MSCOMMNET Region Net,Duplex,Musquash Mtn,All Govt,155.4000,162.2,161.3400,162.2,Patch to Zone Dispatch: Bangor RCC
+4,MSCOMMNET Region Net,Duplex,Norway Bluff,All Govt,151.7300,162.2,159.7350,162.2,Bangor RCC Zone
+4,MSCOMMNET Region Net,Duplex,Passadumkeag,All Govt,172.5250,162.2,160.0575,162.2,Bangor RCC Zone
+4,MSCOMMNET Region Net,Duplex,Priestly Mtn,All Govt,152.5025,162.2,154.9275,162.2,Bangor RCC Zone
+4,MSCOMMNET Region Net,Duplex,Ashland,All Govt,154.3250,162.2,159.1350,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,Benedicta,All Govt,151.6700,162.2,155.7150,162.2,Patch to Zone Dispatch: Houlton RCC
+4,MSCOMMNET Region Net,Duplex,Chase Mtn,All Govt,154.6725,162.2,153.8000,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,Cyr Mtn,All Govt,159.4425,162.2,156.0525,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,Houlton,All Govt,160.8000,162.2,151.2500,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,New Sweden,All Govt,153.9425,162.2,156.1650,162.2,Patch to Zone Dispatch: Houlton RCC
+4,MSCOMMNET Region Net,Duplex,No 9 Mtn,All Govt,151.2650,162.2,154.7325,162.2,Patch to Zone Dispatch: Houlton RCC
+4,MSCOMMNET Region Net,Duplex,Patten,All Govt,158.8125,162.2,153.8975,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,Robinson Mtn,All Govt,155.9400,162.2,161.2800,162.2,Houlton RCC Zone
+4,MSCOMMNET Region Net,Duplex,Saint Francis,All Govt,154.7925,162.2,156.1350,162.2,Patch to Zone Dispatch: Houlton RCC
+5,State of Maine CONOP,Simplex,SWSP,All Govt,154.7100,,154.7100,,
+5,State of Maine CONOP,Simplex,NWCC,All Govt,155.4750,,155.4750,,
+5,State of Maine CONOP,Simplex,EMS/LASAR,All Govt,155.1600,,155.1600,,
+5,State of Maine CONOP,Simplex,SPCC,All Govt,154.9350,,154.9350,,
+5,State of Maine CONOP,Simplex,SWF,All Govt,154.3100,,154.3100,,
+5,State of Maine CONOP,Simplex,SWCC,All Govt,154.6950,,154.6950,,
+5,State of Maine CONOP,Simplex,VCALL10,All Govt,155.7525,156.7,155.7525,156.7,
+6,Marine Frequencies,Tactical,Marine - 06,SAR,156.3000,,156.3000,,Safety and SAR
+6,Marine Frequencies,Tactical,Marine - 09,Public Safety,156.4500,,156.4500,,Local Use
+6,Marine Frequencies,Tactical,Marine - 10,Public Safety,156.5000,,156.5000,,Local Use
+6,Marine Frequencies,Tactical,Marine - 16,SAR,156.8000,,156.8000,,Emergency/Distress
+6,Marine Frequencies,Tactical,Marine - 17,Public Safety,156.8500,,156.8500,,State & Local Ops
+6,Marine Frequencies,Tactical,Marine - 21A,USCG,157.0500,,157.0500,,Coast Guard
+6,Marine Frequencies,Tactical,Marine - 22A,Safety,157.1000,,157.1000,,Coast Guard contact
+6,Marine Frequencies,Tactical,Marine - 23A,USCG,157.1500,,157.1500,,Coast Guard
+6,Marine Frequencies,Tactical,Marine - 81A,USCG,157.0750,,157.0750,,Environ Prot Ops
+6,Marine Frequencies,Tactical,Marine - 83A,USCG,157.1750,,157.1750,,Coast Guard contact
+7,FCC Interoperable Channels,Simplex,VCALL10,All Govt,155.7525,156.7,155.7525,156.7,
+7,FCC Interoperable Channels,Simplex,VTAC11,All Govt,151.1375,156.7,151.1375,156.7,
+7,FCC Interoperable Channels,Simplex,VTAC12,All Govt,154.4525,156.7,154.4525,156.7,
+7,FCC Interoperable Channels,Simplex,VTAC13,All Govt,158.7375,156.7,158.7375,156.7,
+7,FCC Interoperable Channels,Simplex,VTAC14,All Govt,159.4725,156.7,159.4725,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE21,Fire,154.2800,156.7,154.2800,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE22,Fire,154.2650,156.7,154.2650,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE23,Fire,154.2950,156.7,154.2950,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE24,Fire,154.2725,156.7,154.2725,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE25,Fire,154.2875,156.7,154.2875,156.7,
+7,FCC Interoperable Channels,Simplex,VFIRE26,Fire,154.3025,156.7,154.3025,156.7,
+7,FCC Interoperable Channels,Simplex,VMED28,EMS,155.3400,156.7,155.3400,156.7,
+7,FCC Interoperable Channels,Simplex,VMED29,EMS,155.3475,156.7,155.3475,156.7,
+7,FCC Interoperable Channels,Simplex,VLAW31,Law,155.4750,156.7,155.4750,156.7,
+7,FCC Interoperable Channels,Simplex,VLAW32,Law,155.4825,156.7,155.4825,156.7,
+8,FCC Interoperable Channels,Repeater,UCAL40,All Govt,453.2125,156.7,458.2125,156.7,
+8,FCC Interoperable Channels,Simplex,UCAL40D,All Govt,453.2125,156.7,453.2125,156.7,
+8,FCC Interoperable Channels,Repeater,UTAC41,All Govt,453.4625,156.7,458.4625,156.7,
+8,FCC Interoperable Channels,Simplex,UTAC41D,All Govt,453.4625,156.7,453.4625,156.7,
+8,FCC Interoperable Channels,Repeater,UTAC42,All Govt,453.7125,156.7,458.7125,156.7,
+8,FCC Interoperable Channels,Simplex,UTAC42D,All Govt,453.7125,156.7,453.7125,156.7,
+8,FCC Interoperable Channels,Repeater,UTAC43,All Govt,453.8625,156.7,458.8625,156.7,
+8,FCC Interoperable Channels,Simplex,UTAC43D,All Govt,453.8625,156.7,453.8625,156.7,
+9,Androscoggin County EMA,Simplex,Andro EMA,EMA,154.1150,192.8,154.1150,192.8,
+9,Androscoggin County EMA,Simplex,Andro EMA Tac,EMA,158.7450,173.8,158.7450,173.8,
+9,Androscoggin County EMA,Simplex,County Fire,FD,154.2650,127.3,154.2650,127.3,
+10,Aroostook County EMA,Simplex,AKEMA,EMA / IMAT,154.0550,,154.0550,,Talk Around
+10,Aroostook County EMA,Repeater,AKEMA North,EMA / IMAT,155.3100,141.3,156.0600,141.3,Fort Kent
+10,Aroostook County EMA,Repeater,AKEMA Central,EMA / IMAT,154.0550,136.5,159.0600,136.5,Caribou
+10,Aroostook County EMA,Repeater,AKEMA South,EMA / IMAT,154.3550,146.2,158.9550,146.2,Houlton
+11,Cumberland County EMA,Simplex,EMA CALL,All-as Directed,155.7600,192.8,155.7600,192.8,EMA Interagency Hailing/Coordination
+11,Cumberland County EMA,Simplex,EMA TAC 1,All-as Directed,155.1000,173.8,155.1000,173.8,Mobile & Portable Only
+11,Cumberland County EMA,Simplex,EMA TAC 2,All-as Directed,155.6400,173.8,155.6400,173.8,Mobile & Portable Only
+11,Cumberland County EMA,Simplex,EMA TAC 3,All-as Directed,155.6850,173.8,155.6850,173.8,Restricted Use - contact CCEMA
+11,Cumberland County EMA,Simplex,EMA TAC 4,All-as Directed,155.9550,173.8,155.9550,173.8,Restricted Use - contact CCEMA
+11,Cumberland County EMA,Simplex,EMA TAC 5,All-as Directed,155.3700,173.8,155.3700,173.8,Restricted Use - contact CCEMA
+11,Cumberland County EMA,Simplex,EMS 1,Fire/EMS,155.3850,CSQ,155.3850,CSQ,
+11,Cumberland County EMA,Repeater,CNTYFD,LE/Fire/EMS,155.6250,CSQ,160.4550,107.2,Request use from CCRRC
+11,Cumberland County EMA,Repeater,CNTYLE,LE/Fire/EMS,154.8750,CSQ,160.5450,107.2,Request use from CCRRC
+11,Cumberland County EMA,Repeater,T-PIKE,LE/Fire/EMS,151.0700,107.2,155.9700,107.2,ME Turnpike Interoperability
+12,Franklin County,Repeater,FN EMA,Public Safety,158.8275,D612N,154.8525,D612N,Mosher Hill Tower
+12,Franklin County,Repeater,FN EMA,Public Safety,158.8275,D624N,154.8525,D624N,Mt. Blue Tower
+12,Franklin County,Repeater,FN EMA,Public Safety,155.7750,100.0,151.4375,100.0,West Kennebago Tower
+12,Franklin County,Simplex,EMA TAC,Public Safety,158.8275,D612N,158.8275,D612N,Talk Around
+12,Franklin County,Simplex,EMA UHF,Public Safety,453.2250,,453.2250,,125 / 125 / Talk Around
+12,Franklin County,Repeater,FN SO,Law Enf.,155.2500,179.9,151.4300,179.9,Mosher Hill Tower
+12,Franklin County,Repeater,FN SO,Law Enf.,155.2500,123.0,159.2325,123.0,Sugarloaf Tower
+12,Franklin County,Repeater,COUNTY FIRES,Fire,155.0550,103.5,151.3400,103.5,Mosher Hill Tower
+12,Franklin County,Repeater,COUNTY FIRE N,Fire,158.8800,D612N,155.0100,D612N,Sugarloaf Tower
+12,Franklin County,Repeater,RANGELEY,Public Safety,154.0850,100.0,155.9550,100.0,Rangeley Tower
+12,Franklin County,Repeater,NORTHSTAR S,EMS,152.3750,D351N,157.6350,D351N,York Hill Tower
+12,Franklin County,Repeater,NORTHSTAR N,EMS,155.2200,D311N,151.3025,D311N,Sugarloaf Tower
+13,Hancock County,Simplex,Hancock EMA,EMA/IMAT,155.8350,151.4,155.8350,151.4,N Ellsworth Tower
+13,Hancock County,Repeater,County Fire N,FD,154.2500,151.4,153.8900,94.8,N Ellsworth Tower
+13,Hancock County,Repeater,County Fire S,FD,154.2500,151.4,153.8900,151.4,Cadillac Mtn
+13,Hancock County,Repeater,County Fire W,FD,154.2500,151.4,153.8900,100.0,Blue Hill
+13,Hancock County,Repeater,Hancock RCC,Law,155.0550,110.9,153.9050,110.9,Cadillac Mtn
+13,Hancock County,Repeater,Hancock EMA Rptr,EMA/IMAT,155.8350,151.4,151.2050,127.3,KNER798 Bull Hill
+13,Hancock County,Repeater,County Fire E,FD,154.2500,151.4,153.8900,127.3,WPXL919 Bull Hill
+13,Hancock County,Repeater,County EMS E,EMS,159.1800,D306N,156.2400,127.3,WQAQ315 Bull Hill
+13,Hancock County,Repeater,Hancock RCC,Law,155.0550,110.9,153.9050,127.3,WQAQ315 Bull Hill
+14,Kennebec County,Repeater N,KCEMA,All Gov't,155.8050,D612N,151.2500,D612N,Shared with SO
+14,Kennebec County,Repeater C,KCEMA,All Gov't,155.8050,D712N,151.2500,D712N,
+14,Kennebec County,Repeater S,KCEMA,All Gov't,158.2350,123.0,151.2500,D123N,
+14,Kennebec County,Tactical,KCEMA,All Gov't,155.8050,,155.8050,,
+15,Knox County,Simplex,KXEMA,EM Forces,155.7450,,155.7450,,Talkaround
+15,Knox County,Repeater (*Note 1),KRCC,Fire/EMS,152.2025,203.5,158.6625,203.5,Simulcast-Multi Site
+15,Knox County,Repeater (*Note 1),KNOX LAW,LAW,153.9950,203.5,155.8725,203.5,Simulcast-Multi Site
+15,Knox County,Repeater,SOUTHTAC,FD/PD/EMS,155.3850,103.5,159.0600,103.5,Benner Hill Repeater
+15,Knox County,Repeater,NORTHTAC,FD/PD/EMS,152.5625,127.3,157.8300,127.3,Coggins Hill Repeater
+15,Knox County,Repeater (*Note 2) RACESSIML,Amateur/RACES 147.060,91.5,147.660,91.5,147.660,91.5,Amateur Simulcast- Multi Site
+16,Lincoln County,Repeater,LNEMA,All Govt,155.9175,229.1,150.7750,229.1,
+16,Lincoln County,Simplex,LNEMA TA,All Govt,155.9175,229.1,155.9175,229.1,
+16,Lincoln County,Repeater,County Fire,Fire/EMS,155.9850,118.8,158.7750,127.3,Simulcast
+16,Lincoln County,Repeater,County Law,Law,154.0475,110.9,155.5275,110.9,Simulcast
+16,Lincoln County,Simplex,Fire Simplex,Fire/EMS,155.9850,118.8,155.9850,118.8,
+16,Lincoln County,Simplex,Fire Ground 1,Fire/EMS,154.1300,127.3,154.1300,127.3,Up to 100 watt mobile
+16,Lincoln County,Simplex,Fire Ground 2,Fire/EMS,153.7925,D152N,153.7925,D152N,5 watt portable only
+16,Lincoln County,Simplex,Fire Ground 3,Fire/EMS,159.1275,D152N,159.1275,D152N,5 watt portable only
+17,Oxford County,Repeater,County Fire,Fire/Rescue,154.0700,110.9,151.4525,82.5,Spruce Mt/Woodstock
+17,Oxford County,Repeater,County Fire,Fire/Rescue,154.0700,110.9,151.4525,88.5,Streaked Mt/Paris
+17,Oxford County,Repeater,County Fire,Fire/Rescue,154.0700,110.9,151.4525,77.0,Black Mt/Rumford
+17,Oxford County,Repeater,County Fire,Fire/Rescue,154.0700,110.9,151.4525,94.8,Pleasant Mt/Bridgton
+17,Oxford County,Repeater,County Fire,Fire/Rescue,154.0700,110.9,151.4525,103.5,Peaked Mt/Hiram
+17,Oxford County,Repeater,County Prime,Law Enf,155.0700,192.8,151.2350,218.1,Spruce Mt/Woodstock
+17,Oxford County,Repeater,County Prime,Law Enf,155.0700,192.8,151.2350,179.9,Streaked Mt/Paris
+17,Oxford County,Repeater,County Prime,Law Enf,155.0700,192.8,151.2350,225.7,Black Mt/Rumford
+17,Oxford County,Repeater,County Prime,Law Enf,155.0700,192.8,151.2350,210.7,Pleasant Mt/Bridgton
+17,Oxford County,Repeater,County Prime,Law Enf,155.0700,192.8,151.2350,203.5,Peaked Mt/Hiram
+17,Oxford County,Simplex,County EMA,EMA,159.9950,,155.9950,,
+18,Penobscot County,Duplex,COM 2 Dixmont,All Users,153.7400,CSQ,158.7750,100.0,
+18,Penobscot County,Duplex,COM 2 Blackcap,All Users,153.7400,CSQ,158.7750,114.8,
+18,Penobscot County,Duplex,COM 2 Charleston,All Users,153.7400,CSQ,158.7750,107.2,
+18,Penobscot County,Duplex,COM 2 Lincoln,All Users,153.7400,CSQ,158.7750,94.8,
+18,Penobscot County,Duplex,COM 2 Springfield,All Users,153.7400,CSQ,158.7750,82.5,
+18,Penobscot County,Duplex,COM 2 Medway,All Users,153.7400,CSQ,158.7750,162.2,
+18,Penobscot County,Duplex,COM 2 Millinocket,All Users,153.7400,CSQ,158.7750,CSQ,118.0
+18,Penobscot County,Duplex,COM 2 Patten,All Users,153.7400,CSQ,158.7750,77.0,
+18,Penobscot County,Duplex,COM 2 Dexter,All Users,153.7400,CSQ,158.7750,136.5,
+18,Penobscot County,Duplex,COM 3 Dixmont,All Users,151.4075,100.0,156.2325,100.0,
+18,Penobscot County,Duplex,COM 3 Blackcap,All Users,151.4075,100.0,156.2325,100.0,
+18,Penobscot County,Duplex,COM 3 Charleston,All Users,151.4075,100.0,156.2325,100.0,
+18,Penobscot County,Duplex,COM 3 Dexter,All Users,151.4075,100.0,156.2325,100.0,
+18,Penobscot County,Duplex,Brewer Fire,All Users,154.4150,186.2,153.7700,186.2,
+18,Penobscot County,Duplex,Hampden Fire/PD,All Users,155.8800,114.8,153.8300,114.8,
+18,Penobscot County,Duplex,Orono/Old Town,All Users,155.7750,136.5,154.0700,136.5,
+19,Piscataquis County,Repeater,EMA,All Govt,155.8425,136.5,153.7625,136.5,
+19,Piscataquis County,Repeater,SO Primary,All Govt,155.0250,192.8,153.9950,192.8,
+19,Piscataquis County,Simplex,SO Tactical,All Govt,155.0250,,155.0250,,
+19,Piscataquis County,Simplex,PSEMA,All Govt,458.2500,,458.2500,,Tactical
+20,Sagadahoc County EMA,Repeater,EMA,EMA,155.9550,192.8,153.7850,192.8,
+21,Somerset County EMA,Repeater,County Fire N,Fire,154.3250,118.8,150.7750,118.8,
+21,Somerset County EMA,Tactical,County Fire S,Fire,154.3250,151.4,154.3250,151.4,
+21,Somerset County EMA,Repeater,County Fire C,Fire,154.3250,173.8,150.7750,173.8,
+21,Somerset County EMA,Repeater,County Bald,Fire,154.3250,146.2,150.7750,146.2,
+21,Somerset County EMA,Repeater,County Amb,EMS,155.9025,D731N,153.8375,D731N,
+21,Somerset County EMA,Repeater,SO Eaton,Law Enf,154.8300,151.4,158.9700,100.0,
+21,Somerset County EMA,Repeater,SO Squaw,Law Enf,154.8300,118.8,158.9700,118.8,
+21,Somerset County EMA,Repeater,Somerset EMA,EMA,154.9950,D731N,153.9650,D731N,
+22,Waldo County EMA,Repeater,WLDO EMA,EMA/IMAT,156.1425,123.0,158.9700,123.0,Located on Aborn Hill
+22,Waldo County EMA,Simplex,EMA SIMP,EMA/IMAT,156.1425,123.0,156.1425,123.0,Talk A Round
+22,Waldo County EMA,Simplex,EMA TAC,EMA/IMAT,155.7600,,155.7600,,Tactical
+22,Waldo County EMA,Repeater,CC-1,All Govt,155.6625,123.0,151.4300,123.0,Located on Aborn Hill
+22,Waldo County EMA,Repeater,CC-2,All Govt,159.1050,123.0,154.8975,123.0,Located on Aborn Hill
+22,Waldo County EMA,Repeater,CC-3,All Govt,159.4650,123.0,151.3250,123.0,Located in S. Liberty
+22,Waldo County EMA,Repeater,CC-4,All Govt,156.1875,123.0,158.9925,123.0,Located in Stockton Spr
+22,Waldo County EMA,Repeater,QUAKER HILL,All Govt,155.1750,82.5,154.0700,82.5,Located in Unity
+22,Waldo County EMA,Repeater,HARRIS,EMA/IMAT,156.1725,123.0,159.0825,123.0,Statewide EMA
+22,Waldo County EMA,Simplex,WC TAC 1,All Govt,155.8275,,155.8275,,Tactical
+22,Waldo County EMA,Simplex,WC TAC 2,All Govt,158.9475,,158.9475,,Tactical
+22,Waldo County EMA,Simplex,WC TAC 3,All Govt,158.9775,,158.9775,,Tactical
+22,Waldo County EMA,Simplex,WC UHF 1,All Govt,453.7375,,453.7375,,Tactical
+22,Waldo County EMA,Simplex,WC UHF 2,All Govt,458.7375,,458.7375,,Tactical
+22,Waldo County EMA,Repeater,FIRE NRTH,Fire/EMS,155.3850,123.0,153.9500,123.0,To Call Waldo RCC
+22,Waldo County EMA,Repeater,FIRE SOTH,Fire/EMS,159.1350,123.0,151.1000,123.0,To Call Waldo RCC
+22,Waldo County EMA,Repeater,WLDO SO,Law,156.0300,127.3,159.0300,127.3,Simulcast System
+22,Waldo County EMA,Repeater,LE-2,Law,154.7325,127.3,158.8425,127.3,Simulcast System
+22,Waldo County EMA,Simplex,MCP Link,EMA/IMAT,155.5200,,155.5200,,Link to Vehicle Repeater
+22,Waldo County EMA,Simplex,WC LVHF,EMA/IMAT,42.1400,,42.1400,,Tactical
+23,Washington County EMA,Simplex,County Fire,FD/IMAT,154.1900,107.2,154.1900,107.2,
+23,Washington County EMA,Repeater,Reg 8 Cooper,FD/IMAT,154.9950,107.2,153.7850,107.2,Hub covers most of County
+23,Washington County EMA,Repeater,Reg 8 Mitton,FD/IMAT,154.9950,179.9,153.7850,179.9,West part of county
+23,Washington County EMA,Repeater,Reg 8 Musquash,FD/IMAT,154.9950,,153.7850,,118 / North to Aroostook
+23,Washington County EMA,Repeater,Reg 8 Cherryfield,FD/IMAT,154.9950,151.4,153.7850,151.4,Far west part of county
+23,Washington County EMA,Repeater,SO Cooper,Law,155.5650,192.8,154.7400,192.8,Hub covers most of County
+23,Washington County EMA,Repeater,SO Mitten,Law,155.5650,179.9,154.7400,179.9,West part of county
+23,Washington County EMA,Repeater,SO Danforth,Law,155.5650,118.8,154.7400,118.8,North to Aroostook
+24,York County EMA,Repeater,YC VHF,All gov't,159.7800,156.7,159.7800,156.7,Call YCEMA/Command 1
+24,York County EMA,Repeater,YC UHF,All gov't,465.4500,110.9,460.4500,110.9,Call YCEMA/Command 1
