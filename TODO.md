@@ -35,7 +35,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 
 ## 4. Codeplug content
 - [ ] DMR: refresh NEDECN sites/talkgroups/zones; drop decommissioned sites; refresh `RoamingChannel`/`RoamingZone`
-- [ ] Analog: replace "ME Analog"/"NH Analog" with one zone per state — CT, MA, ME, NH, RI, VT (split 2m/440 if over 250)
+- [x] 2026-10-07: Analog: CT/MA/RI/VT Analog zones created and ME/NH Analog extended with the approved activity rule (`codeplug/add_analog_states.py`, data in `data/sources/analog_candidates.csv`); existing channels untouched. Review: outputs skipped for unknown offset (147.505, 445.025, 446.325, 446.675); repeaters with no PL get carrier squelch
 - [ ] Per-state analog scan lists
 - [ ] GMRS: rebuild repeater list from myGMRS (keep simplex GMRS 1–22)
 - [ ] Keep as-is: Simplex, MURS, Marine, Weather, CCEMA/public safety, Packet, satellites

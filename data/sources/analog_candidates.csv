@@ -1,0 +1,324 @@
+state,freq,call,city,updated,recent,net_or_link,pl,notes,sponsor,source
+MA,145.110,N1CON,Concord,2024-05-06,0,0,110.9,O 110.9e,Colonial Wireless Association,nesmc
+MA,145.110,W1SMA,New Bedford,2026-08-22,1,0,67.0,O 67.0 L(E4215 I4215),SouthCoast Massachusetts Amateur Radio Team,nesmc
+MA,145.130,W1GLO,Gloucester,2013-05-30,0,0,107.2,O 107.2 L(E480139)ex,Cape Ann Amateur Radio Association,nesmc
+MA,145.130,AB1RS,Shelburne,2014-04-13,0,0,173.8,#O 173.8,AB1RS,nesmc
+RI,145.130,W1RI,West Warwick,2026-09-15,1,0,77.0,O 77.0 L(QUAHOG)e,JUBULEE AMATEUR RADIO CLUB OF RHODE ISLAND,nesmc
+MA,145.150,WA1DGW,Fall River,2024-11-10,1,0,123.0,O 123.0 L(E668385)ers,"Bristol County Repeater Association, Inc.",nesmc
+ME,145.150,K1QA,Calais,2025-07-09,1,0,,O 100.0,K1QA Amateur Radio Society,nesmc
+RI,145.170,NB1RI,Cumberland,2025-09-08,1,1,67.0,O 67.0 L(RCI Network)ersx,Narragansett Bay Amateur Radio Club,nesmc
+MA,145.210,KB1BEM,Boston,2020-06-24,0,0,100.0,O 100.0e,Isaac E Weekes,nesmc
+ME,145.210,K8MOT,Bridgton,2026-04-26,1,0,118.8,(TRIAL) O 118.8 P25:NAC:A01 ex,Digital Mountain Radio Team,nesmc
+MA,145.230,W1BOS,Boston,2017-03-04,0,0,88.5,O 88.5 100.0esx,Boston Amateur Radio Club,nesmc
+MA,145.270,WA1YFV,Harwich,2025-09-04,1,0,67.0,O 67.0 L(147.255Truro)e,Pilgrim Amateur Radio Club,nesmc
+MA,145.310,W1KBN,Boston,2025-08-16,1,0,123.0,O 123.0e,Northeastern University Wireless Club,nesmc
+MA,145.310,W1WPI,Worcester,2025-05-10,1,0,100.0,O 100.0 L(449.025)a,WPI Wireless Association,nesmc
+NH,145.330,W1FN,Hanover,2025-05-10,1,1,100.0,O 100.0 L(E363356 147.21 VT)esx,"Twin State Radio Club, Inc.",nesmc
+MA,145.350,KT1S,Haverhill,2026-09-08,1,0,136.5,O 136.5e,Michael S. Lambrou,nesmc
+RI,145.350,N1BS,North Providence,2025-08-26,1,1,67.0,O 67.0 L(RCI Network)er,Narragansett Bay Amateur Radio Club,nesmc
+MA,145.370,N1WW,Gardner,2024-05-06,0,0,136.5,O 136.5 L(I8581)ersx WX,City Of Gardner Office Of Emergency Management,nesmc
+NH,145.370,N1PCE,Whitefield,2025-05-10,1,1,114.8,O 114.8 L(E707723 NNH Rptr Net)s,John E Ryan,nesmc
+MA,145.410,W1DVC,Harvard,2025-05-10,1,0,74.4,O 74.4rsx,Harvard Repeater Association,nesmc
+ME,145.410,WJ1L,Alfred,2025-05-10,1,0,103.5,O 103.5e,Edward C Lambert,nesmc
+MA,145.430,KC1CLA,Burlington,2025-03-22,1,1,146.2,O 146.2x,Minuteman Repeater Association,nesmc
+MA,145.450,W1GZ,Fitchburg,2014-03-13,0,0,74.4,O 74.4 L(E688832 I8433)es,Montachusett Amateur Radio Asso.,nesmc
+RI,145.450,W1SYE,Portsmouth,2025-05-10,1,0,100.0,O 100.0e,Newport County Radio Club (NwptCntyRC),nesmc
+MA,145.470,NS1RA,Danvers,2014-01-26,0,0,136.5,O 136.5 L(E314375 I4427)rs,North Shore Radio Association,nesmc
+ME,145.470,W1YA,Orono,2024-11-10,1,0,71.9,O 71.9,University Of Maine Amateur Radio Club,nesmc
+MA,145.490,W1IEM,Ipswich,2024-05-06,0,0,131.8,O 131.8ers WX,Ipswich Emergency Management,nesmc
+MA,145.490,KC1EB,North Adams,2018-07-02,0,0,100.0,O 100.0,Paul Howcroft,nesmc
+RI,146.460,NB1RI,West Greenwich,2022-12-04,0,0,67.0,O 67.0rs,Narragansett Bay Amateur Radio Club,nesmc
+MA,146.610,K1KWP,Mendon,2016-01-12,0,1,146.2,O 146.2 L(MMRA),Minuteman Repeater Association,nesmc
+ME,146.610,WB5NKJ,Franklin,2025-08-18,1,1,107.2,O 107.2,David P Baldwin,nesmc
+MA,146.625,NA1P,Orange,2024-11-24,1,0,110.9,O 110.9,North Quabbin Repeater Association,nesmc
+MA,146.625,K1KKM,West Newbury,2020-05-03,0,0,131.8,O 131.8x,Pentucket Radio Association,nesmc
+ME,146.640,KA1UMG,Burlington,2022-04-15,0,0,82.5,O 82.5e,Michael A. Watson KA1UMG,nesmc
+NH,146.655,W1NH,Mt Washington,2019-05-06,0,0,100.0,O 100.0esx,Greg Fitch,nesmc
+MA,146.670,W1TOM,Agawam,2015-10-11,0,0,127.3,O 127.3es,"Mount Tom Amateur Repeater Association, Inc.",nesmc
+ME,146.670,W1LH,Topsfield,2024-12-28,1,0,100.0,O 100.0es,Cooper Mountain Repeater Group,nesmc
+MA,146.685,N1ZIZ,Plymouth,2024-05-06,0,0,82.5,O 82.5 DCS(131) ers WX,Genesis Amateur Radio Society,nesmc
+RI,146.700,K1CR,North Providence,2015-10-25,0,0,123.0,O 123.0er,K1CR,nesmc
+MA,146.715,KB1AEV,Holyoke,2025-08-26,1,0,100.0,O 100.0e,KB1AEV,nesmc
+MA,146.715,KC1US,North Reading,2023-12-02,0,1,146.2,O 146.2 L(MMRA)rx,Minuteman Repeater Association,nesmc
+NH,146.715,K1JWM,Alstead,2026-07-29,1,1,123.0,O 123.0 L(N1IMO-N1IMN)e,N1IMO-N1IMN,nesmc
+NH,146.715,W1COS,Clarksville,2017-02-13,0,0,100.0,O 100.0 L(224.080 Agsz)ers,Coos County ARES,nesmc
+RI,146.715,K1NQG,Exeter,2026-09-20,1,0,67.0,O 67.0,Fidelity Amateur Radio Club,nesmc
+MA,146.730,W1SGL,Barnstable,2026-08-16,1,0,67.0,O 67.0e,Cape Cod And Islands Amateur Radio Association,nesmc
+ME,146.730,K1FS,Caribou,2019-11-17,0,0,123.0,O 123.0es,Aroostook Amateur Radio Association,nesmc
+ME,146.730,KA1C,Madison,2018-06-20,0,0,91.5,O 91.5es,Stephen A. Roderick - KA1C,nesmc
+NH,146.730,N1IMO,Hollis,2023-06-11,0,1,88.5,O 88.5 L(E336966 N1IMO-N1IMN)es,N1IMO-N1IMN,nesmc
+RI,146.760,KR1RI,North Scituate,2015-03-31,0,0,67.0,O 67.0esx WX,Rhode Island Amateur FM Repeater Service Inc,nesmc
+MA,146.775,NA1R,West Bridgewater,2019-10-06,0,0,,O DCS(244) ex,NA1R,nesmc
+MA,146.790,W1TUK,Nantucket,2026-01-31,1,0,107.2,O 107.2ers,Nantucket Amateur Radio Association,nesmc
+NH,146.790,N1IMO,Pittsfield,2025-05-10,1,1,88.5,O 88.5 L(E336966 N1IMO-N1IMN)sx,N1IMO-N1IMN,nesmc
+MA,146.820,K1BOS,Boston,2023-11-27,0,1,146.2,O 146.2 L(MMRA)x,Minuteman Repeater Association,nesmc
+ME,146.835,K1AAM,Naples,2014-06-11,0,0,103.5,103.5ex,K1AAM,nesmc
+NH,146.850,K1CA,Derry,2024-03-09,0,1,85.4,O 85.4ex,Interstate Radio Society,nesmc
+RI,146.850,N1MIX,Greenville,2014-04-01,0,1,146.2,O 146.2 L(N1MIX)e,N1MIX,nesmc
+MA,146.865,K1CNX,Sharon,2021-06-17,0,0,103.5,O 103.5ersx,Sharon CD,nesmc
+MA,146.880,NS1RA,Salem,2025-05-10,1,0,118.8,O 118.8e,North Shore Radio Association,nesmc
+MA,146.895,K1HRV,Walpole,2014-02-10,0,0,123.0,O 123.0 L(E665560)ers WX,Walpole Emergency Management Agency,nesmc
+ME,146.910,KB1NEB,Ellsworth,2018-02-19,0,0,151.4,O 151.4ersx,Hancock County Amateur Radio Emergency Communications,nesmc
+ME,146.910,KE1M,Rumford,2025-06-09,1,0,100.0,O 100.0 L(224.62 )x,Mark T Beedy,nesmc
+ME,146.925,WJ1L,Lyman,2021-11-11,0,0,103.5,O 103.5 L(448.725)er,Edward Lambert,nesmc
+NH,146.925,NX1DX,Charlestown,2025-05-10,1,0,118.8,O 118.8,Eugene J Augustinowicz And Vincent F Augustinowicz,nesmc
+MA,146.940,W1TOM,Holyoke,2013-06-10,0,1,127.3,O 127.3ersx,"Mount Tom Amateur Repeater Association, Inc.",nesmc
+ME,146.940,N1ME,East Holden,2024-12-28,1,0,100.0,O 100.0 146.2e,Pine State Amateur Radio Club,nesmc
+NH,146.940,W1ALE,Concord,2016-04-19,0,0,114.8,O 114.8,Captial Area Repeater Society,nesmc
+MA,146.955,W1MA,Dennis,2025-09-04,1,0,88.5,O 88.5 L(E20024)ersx WX,Barnstable Amateur Radio Club,nesmc
+MA,146.955,WB1GOF,Westford,2025-05-10,1,0,74.4,O 74.4 L(E380799)ersx WX,PART Of Westford - WB1GOF,nesmc
+MA,146.970,W1BIM,Paxton,2025-05-10,1,0,114.8,O 114.8ex,Central Mass ARA,nesmc
+ME,146.970,AA1PN,Exeter,2023-11-29,0,0,100.0,O 100.0 L(Exeter maine)x,Clarence I Rider Jr,nesmc
+MA,146.985,KB1BSS,Leyden,2025-05-10,1,0,136.5,O 136.5ersx,"FRANKLIN COUNTY AMATEUR RADIO CLUB, INC",nesmc
+MA,146.985,NE1AR,Milton,2025-09-07,1,1,88.5,O 88.5 L(449.125),New England Amateur Radio,nesmc
+ME,146.985,K1LX,Newcastle,2025-07-09,1,0,136.5,O 136.5ers,Lincoln County Amateur Radio Club,nesmc
+NH,146.985,N1LT,Gilford,2022-03-15,0,1,123.0,O 123.0sx WX,Central New Hampshire Amateur Radio Club,nesmc
+RI,146.985,NB1RI,Exeter,2025-10-16,1,1,67.0,O 67.0 L(RCI Network)ersx,Narragansett Bay Amateur Radio Club,nesmc
+MA,147.000,W1AEC,Dartmouth,2026-08-22,1,0,67.0,O 67.0 L(E4210 I4210)er WX,"Southeastern Massachusetts Amateur Radio Association, Inc.",nesmc
+MA,147.000,W1TOM,Granville,2013-06-18,0,0,127.3,O 127.3e WX,Mount Tom Amateur Radio Association,nesmc
+MA,147.015,N1EXC,Lawrence,2025-09-16,1,0,88.5,O 88.5 L(E524572 *REPDOM*),N1EXC,nesmc
+MA,147.015,KB1CYO,Mansfield,2014-10-31,0,0,67.0,O 67.0e,"NWS, Foxboro EMA, Mansfield EMA",nesmc
+ME,147.015,K1AAM,Hiram,2014-08-05,0,1,103.5,O 103.5ex,K1aam,nesmc
+NH,147.045,N1IMO,Nashua,2023-01-11,0,1,100.0,O 100.0es,N1IMO-N1IMN,nesmc
+MA,147.060,W1KG,Medway,2025-05-10,1,0,100.0,O 100.0 L(224.66),W1KG,nesmc
+ME,147.060,W1PBR,Hope,2023-02-26,0,0,91.5,O 91.5ersx,Penbay ARC,nesmc
+NH,147.060,K1JWM,Francestown,2026-07-29,1,1,123.0,O 123.0 L(N1IMO-N1IMN)e,N1IMO-N1IMN,nesmc
+RI,147.075,NB1RI,Portsmouth,2026-08-16,1,1,67.0,O 67.0 L(RCI Network)ersx,Narragansett Bay Amateur Radio Club,nesmc
+MA,147.090,K1LBG,Wrentham,2015-01-29,0,0,146.2,O 146.2 L(E222792 I4751)ersx,K1lbg & Emarg,nesmc
+ME,147.090,W1RKZ,Falmouth,2019-06-10,0,0,100.0,O 100.0aesx WX,"Blackstrap Repeater Club, W1RKZ",nesmc
+MA,147.105,W1XOJ,Monson,2015-03-25,0,0,162.2,O 162.2e,Yankee Network,nesmc
+ME,147.105,N1BUG,Brownville,2024-02-28,0,0,103.5,O 103.5esx WX,Paul Kelley N1BUG,nesmc
+MA,147.120,W1DC,Billerica,2025-11-19,1,1,146.2,O 146.2e,MMRA/1200 Radio Club,nesmc
+ME,147.120,W1OCA,Norway,2016-02-15,0,0,136.5,O 136.5ers,Oxford County ARES,nesmc
+RI,147.120,N1HBG,Providence,2026-08-16,1,0,67.0,O 67.0 L(E507890),Jose A. Peresz,nesmc
+MA,147.135,KA1GG,Taunton,2026-08-16,1,0,67.0,O 67.0rsx,Pilgrim Amateur Wireless Association,nesmc
+MA,147.150,W1FY,Framingham,2026-07-30,1,0,100.0,O 100.0 L(E506576),Framingham ARA,nesmc
+ME,147.165,W1EMA,Belfast,2025-01-16,1,0,136.5,O 136.5eprs,Waldo County ARES Races Assn,nesmc
+NH,147.165,NY1Z,Salem,2026-04-02,1,0,136.5,O 136.5,Mount Moriah Repeater Society,nesmc
+MA,147.180,W1MV,Bridgewater,2015-07-16,0,1,67.0,O 67.0 L(E451971 I4388)ex WX,Massasoit Amatuer Radio Association,nesmc
+ME,147.180,W1BHR,Farmington,2023-02-26,0,0,123.0,O 123.0es,Bass Hill Repeater Group,nesmc
+NH,147.180,W1UWS,Unity,2018-08-28,0,0,110.9,O 110.9,Connecticut Valley FM Association,nesmc
+MA,147.195,K1SMH,Attleboro,2026-08-16,1,1,127.3,O 127.3 L(E50822 Echolink)ersx WX,Sturdy Memorial Hospital Amateur Radio Club,nesmc
+NH,147.195,WB2MJG,Plaistow,2025-03-23,1,0,100.0,O 100.0e,WB2MJG,nesmc
+NH,147.195,K1JWM,Richmond,2025-09-04,1,1,123.0,O 123.0 L(E336966 N1IMO-N1IMN)e,N1IMO-N1IMN,nesmc
+MA,147.210,K1QVR,Warren,2013-06-11,0,0,88.5,O 88.5rs,Quaboag Valley Amateur Radio Club,nesmc
+MA,147.210,W1JLI,Wrentham,2026-08-01,1,0,100.0,O 100.0 L(E313106 I4393)rs,Norwood ARC,nesmc
+NH,147.210,KC2LT,East Derry,2012-11-24,0,0,107.2,O 107.2 L(KC2LT 441.30)esx,KC2LT / KC1ASR / KC1AST,nesmc
+ME,147.225,W1BHR,Livermore Falls,2025-08-18,1,0,123.0,O 123.0,Bass Hill Repeater Group,nesmc
+NH,147.225,KA1OKQ,Concord,2016-04-19,0,0,100.0,O 100.0,KA1OKQ,nesmc
+MA,147.240,KV1J,Marlborough,2022-09-28,0,0,71.9,O 71.9 110.9ers,TH Group,nesmc
+ME,147.240,WA1ZDA,Hope,2025-07-09,1,0,110.9,O 110.9,WA1ZDA,nesmc
+MA,147.255,WA1YFV,Truro,2024-11-10,1,0,67.0,O 67.0 L(E403358 145.27 Har)e,Pilgrim Amateur Radio Club,nesmc
+ME,147.255,KB1RAI,Gardiner,2023-03-03,0,1,114.8,O 114.8er,Late Night Amateur Radio Club,nesmc
+NH,147.255,N1IMO,Wilton,2023-07-14,0,0,127.3,O 127.3 L(N1IMO-N1IMN3)s,N1IMO-N1IMN Repeater System,nesmc
+MA,147.270,W1MRA,Marlborough,2014-07-16,0,1,146.2,O 146.2 L(MMRA Net)esx,Minuteman Repeater Association,nesmc
+ME,147.270,W1EMA,Knox,2023-03-03,0,1,136.5,O 136.5ers,Waldo County ARES RACES Assn,nesmc
+ME,147.270,N1SNR,Westbrook,2016-05-01,0,1,103.5,O 103.5 L(N1ROA Net)ex WX,N1ROA,nesmc
+NH,147.285,W1FN,Claremont,2024-06-29,0,0,103.5,FM 103.5 region:SE coord:nesmc,Twin State RC,vircc
+MA,147.300,K1GHG,Quincy,2026-07-20,1,0,110.9,(TRIAL) O 110.9,Great Hill Gang Radio Club,nesmc
+ME,147.300,W1GEE,Hampden,2022-04-15,0,0,100.0,O 100.0e WX,W1GEE,nesmc
+NH,147.300,W1JY,Franklin,2024-03-03,0,0,123.0,O 123.0s,Central New Hampshire Amateur Radio Club,nesmc
+MA,147.315,WB1EWS,Fitchburg,2024-01-23,0,0,100.0,O 100.0 L(WB1EWS)ex,Paul Andrews,nesmc
+NH,147.315,N1PCE,Groveton,2019-06-09,0,0,100.0,O 100.0,John E Ryan,nesmc
+RI,147.315,W1WRI,Westerly,2016-03-16,0,0,110.9,O 110.9es,The Westerly Amateur Radio Team,nesmc
+ME,147.330,W1LH,Cooper,2024-12-28,1,0,118.8,O 118.8esx WX,W1LH,nesmc
+NH,147.330,N1SM,Manchester,2013-10-27,0,0,141.3,O 141.3,N1SM,nesmc
+RI,147.330,W1AQ,Rumford,2025-09-22,1,0,173.8,O 173.8s,W1AQ,nesmc
+MA,147.345,N1NC,Pepperell,2025-05-10,1,0,100.0,O 100.0ers,Nashoba Valley Amateur Radio Club,nesmc
+ME,147.345,KB1PRG,Alfred,2023-11-12,0,0,123.0,O 123.0,KB1PRG Repeater Group/ YCEMA,nesmc
+MA,147.360,W1LJO,Newton,2017-04-17,0,0,67.0,O 67.0 L(E117424),Middlesex Amateur Radio Club,nesmc
+ME,147.360,K1SA,Portland,2025-05-10,1,0,100.0,O 100.0,K1SA,nesmc
+NH,147.360,K1JWM,Gilsum,2026-07-29,1,1,123.0,O 123.0 L(N1IMO-N1IMN)e,N1IMO-N1IMN,nesmc
+MA,147.375,N1YHS,Falmouth,2024-05-06,0,0,110.9,O 110.9ers,N1YHS,nesmc
+ME,147.375,K1HF,Springfield,2024-12-28,1,0,100.0,O 100.0ex,Mark D Burgess,nesmc
+NH,147.375,W1VTP,New Boston,2013-12-18,0,0,88.5,O 88.5,Alan Brown,nesmc
+MA,147.390,KB1MH,Uxbridge,2013-10-09,0,0,118.8,O 118.8e,John M Smoot,nesmc
+RI,147.390,NB1RI,Westerly,2026-08-16,1,1,67.0,O 67.0 L(RCI Network)ersx,Narragansett Bay Amateur Radio Club,nesmc
+NH,441.300,KC2LT,Derry,2017-10-31,0,0,107.2,O 107.2 L(KC2LT)ex,KC2LT/KC1ASR/KC1AST,nesmc
+MA,441.500,N1KUE,Medfield,2014-11-23,0,0,88.5,O 88.5r,Temple Emanual,nesmc
+NH,441.900,N1LHP,Pembroke,2022-08-21,0,1,88.5,O 88.5 97.4 L(Phantom Net),N1LHP,nesmc
+NH,442.000,K1DED,Londonderry,2014-07-22,0,0,100.0,O 100.0 L(E511025)e,DANNY DEMERS,nesmc
+NH,442.150,N1IMO,Pittsfield,2021-05-18,0,1,88.5,O 88.5 L(N1IMO-N1IMN)s,N1IMO-N1IMN,nesmc
+MA,442.250,K5TEC,Lowell,2026-03-05,1,1,88.5,O 88.5 L(MMRA)e,Minuteman Repeater Association,nesmc
+MA,442.300,N1KUB,Clinton,2013-06-10,0,0,74.4,O 74.4e,John Bernard - Clinton Emergency Management Agency,nesmc
+NH,442.350,W1VN,Newbury,2019-02-09,0,0,88.5,O 88.5,K1JY,nesmc
+MA,442.500,AE1TH,Braintree,2024-03-08,0,0,118.8,O 118.8,Braintree Emergency Managment Agency (bema),nesmc
+NH,442.550,K1JC,Chester,2025-05-10,1,0,88.5,O 88.5,K1JC,nesmc
+MA,442.700,N1DCH,Weston,2020-02-25,0,1,88.5,O 88.5 L(MMRA),Minuteman Repeater Association,nesmc
+MA,442.750,KB1AEV,Granville,2021-10-13,0,1,151.4,O 151.4 L(E108930 I4096 KB1AEV Link)e,KB1AEV Link System,nesmc
+MA,442.900,N1NC,Pepperell,2025-05-10,1,0,100.0,O 100.0ers,Nashoba Valley Amateur Radio Club,nesmc
+RI,443.150,K1CW,Bristol,2013-02-27,0,0,94.8,O 94.8es,Michael H Gibbemeyer,nesmc
+MA,443.200,W1TOM,Holyoke,2025-05-10,1,1,127.3,O 127.3es,"Mount Tom Amateur Repeater Association, Inc.",nesmc
+MA,443.300,N1OHZ,Worcester,2012-09-10,0,0,100.0,O 100.0,N1OHZ,nesmc
+NH,443.400,W1AKS,Goffstown,2025-08-27,1,0,186.2,O 186.2esx,NH Radio Active In Disaster Incidence Operations,nesmc
+MA,443.450,AB1RS,Deerfield,2014-04-13,0,0,173.8,O 173.8,AB1RS,nesmc
+NH,443.500,N1IMO,Hollis,2025-05-10,1,1,88.5,O 88.5 L(E336966 N1IMO-N1IMN)es,N1IMO-N1IMN,nesmc
+NH,443.500,KA1UAG,West Lebanon,2012-09-12,0,1,131.8,O 131.8 L(KA1UAG NEFMA),KA1UAG,nesmc
+NH,443.550,W1FN,Hanover,2025-05-10,1,1,136.5,"O 136.5 L(E363356 147.285, NH)es",Twin State Radio Club,nesmc
+NH,443.650,N1IHF,Pembroke,2021-03-30,0,0,131.8,O 131.8,N1IHF,nesmc
+MA,443.700,N1SIF,Belchertown,2025-05-10,1,0,179.9,O 179.9e,N1SIF,nesmc
+NH,443.800,WA1ZYX,Walpole,2015-03-06,0,0,141.3,O 141.3 L(Statewide)e,KA1QFA,nesmc
+NH,443.950,W1FN,Claremont,2024-06-29,0,0,103.5,O 103.5es,"Twin State Radio Club, Inc.",nesmc
+ME,444.000,KC1FRJ,Dedham,2023-02-26,0,0,100.0,O 100.0e,Gerard E. Ouellette,nesmc
+MA,444.100,N1LHP,North Andover,2016-10-30,0,1,,C L(Phantom Net)e,N1LHP,nesmc
+ME,444.200,KC1FRJ,Dixmont,2026-07-15,1,0,100.0,O 100.0e,Gerard E. Ouellette,nesmc
+RI,444.200,N1HBG,Providence,2025-08-28,1,0,88.5,O 88.5 L(E524936) BI,Jose A. Perez,nesmc
+NH,444.250,N1IMO,Hollis,2023-06-25,0,0,107.2,O 107.2 L(E336966 N1IMO-N1IMN)esx,N1IMO-N1IMN,nesmc
+ME,444.300,W1LH,Cooper,2022-04-15,0,0,100.0,O 100.0esx,Roger Holst,nesmc
+RI,444.350,KA1MHA,Middletown,2026-09-20,1,0,67.0,O 67.0,STEPHEN COTE,nesmc
+ME,444.400,N1ME,Holden,2024-12-28,1,0,,O 88.5 L(146.940)e,Pine State Amateur Radio Club,nesmc
+MA,444.600,W1TKZ,Wellesley,2025-05-10,1,0,88.5,O 88.5 L(147.030)e,Wellesley Amateur Radio Society,nesmc
+ME,444.600,N1SNR,Westbrook ,2016-05-01,0,1,82.5,O 82.5 L(E44600 N1ROA Net)ex WX,N1ROA,nesmc
+ME,444.800,N1DP,Franklin,2022-04-15,0,1,100.0,O 100.0es PKT,"David W. Perham, N1DP",nesmc
+NH,444.800,N1IMO,Nashua,2023-01-11,0,1,131.8,O 131.8 L(N1IMO-N1IMN2)es,N1IMO-N1IMN,nesmc
+ME,444.850,KB1PRG,Alfred,2022-07-22,0,0,103.5,O 103.5s,Timothy Wilkins,nesmc
+NH,444.900,KA1UAG,Enfield,2012-09-12,0,1,131.8,O 131.8,KA1UAG,nesmc
+ME,444.950,K1PQ,Brownville,2024-02-28,0,0,103.5,O 103.5 L(E906049)e,Piscataquis Amateur Radio Club,nesmc
+NH,444.950,W1ET,Hanover,2013-12-19,0,0,88.5,O 88.5,Dartmouth Amateur Radio Association,nesmc
+MA,444.9625,KP4KWB,Lowell,2023-10-01,0,0,179.9,O 179.9e BI,Coqui Ham Radio Club,nesmc
+MA,446.325,W1STR,Natick,2025-09-07,1,1,146.2,O 146.2 L(E4942 I4942 CLAYNET),New England Amateur Radio Inc (NE1AR),nesmc
+NH,446.475,K1DED,Windham,2013-06-10,0,0,88.5,O 88.5e WX,Danny Demers,nesmc
+RI,446.475,N1MIX,Providence,2017-07-02,0,0,,O DCS(411) e WX,N1MIX,nesmc
+MA,446.625,NS1RA,Salem,2013-06-10,0,0,88.5,O 88.5,North Shore Radio Association,nesmc
+MA,446.675,N1EM,Marlborough,2025-01-15,1,0,88.5,O 88.5ers,Algonquin Amateur Radio Club,nesmc
+NH,446.825,W1WU,Ossipee,2022-03-17,0,0,97.4,O 97.4e,Coldan Farm,nesmc
+RI,447.025,WA1ABC,Warwick,2026-09-20,1,1,67.0,O 67.0 L(E55920 I5920 QRN),Community College Of RI Radio Club,nesmc
+NH,447.125,WA1HCO,Mont Vernon,2013-12-19,0,0,88.5,O 88.5,Self,nesmc
+NH,447.425,WA1ZYX,Temple,2013-06-10,0,0,141.3,O 141.3ex,WA1ZYX,nesmc
+MA,447.525,W1RAB,Gloucester,2016-04-10,0,0,114.8,O 114.8e,W1RAB,nesmc
+MA,447.575,N1CON,Concord,2024-05-06,0,0,110.9,O 110.9e,Colonial Wireless Association,nesmc
+MA,447.675,KB1DFN,Natick,2025-09-22,1,0,203.5,O 203.5er,NATICK EMERGENCY MANAGEMENT AGENCY,nesmc
+MA,447.975,NA1HS,North Attleborough,2025-05-17,1,0,88.5,O 88.5e,N. Attleborough EMA,nesmc
+MA,447.9875,W1XOJ,Paxton,2007-10-28,0,1,136.5,O 136.5 162.2 L(Yankee Network),Yankee Network,nesmc
+MA,448.025,NN1C,Hopkinton,2025-09-15,1,0,146.2,O 146.2,Marty Sullaway,nesmc
+RI,448.075,N1MIX,Greenville,2014-03-14,0,1,,O DCS(411) L(N1MIX),SMITHFIELD EMA,nesmc
+MA,448.175,W1FRS,Framingham,2024-05-06,0,0,88.5,O 88.5 L(I4610 WA1NVC),WA1NVC,nesmc
+NH,448.225,WA1PBJ,Sargents Purchase,2016-05-27,0,0,88.5,O 88.5e,White Mountain Amateur Radio Club,nesmc
+NH,448.275,W1BST,Gilford,2026-08-24,1,0,,(TRIAL) O 123.0 L(E875273 147.03 W1BST)s,Lakes Region Repeater Association,nesmc
+MA,448.575,K1LBG,Wrentham,2024-11-10,1,0,88.5,O 88.5ex,Wrentham Emergency Management,nesmc
+MA,448.675,NN1C,Newton,2026-04-20,1,0,218.1,(TRIAL) O 218.1,HamRadioBoston,nesmc
+NH,448.675,KB1IIT,Bow,2025-05-10,1,0,,O,KB1IIT,nesmc
+ME,448.725,WJ1L,Alfred,2013-06-10,0,0,103.5,O 103.5e,Edward C Lambert,nesmc
+MA,449.025,W1WPI,Worcester,2025-05-10,1,0,88.5,O 88.5 L(E460920 145.310)a,WPI Wireless Association,nesmc
+ME,449.025,W1IMD,Woodstock,2025-05-10,1,0,82.5,O 82.5 136.5 L(W1IMD)x,W1IMD,nesmc
+MA,449.125,NE1AR,Milton,2025-09-07,1,1,146.2,O 146.2 L(CLAYNET),"New England Amateur Radio, (NE1AR)",nesmc
+RI,449.225,N1JBC,North Providence,2026-06-05,1,1,141.3,O 141.3 L(E55920 I5920 QRN),"Jed S. Barton, IV",nesmc
+NH,449.275,N3LEE,Greenville,2025-09-14,1,0,100.0,O 100.0e EXP,NetworkedRadio.NET,nesmc
+ME,449.325,W1JIB,Harpswell ,2024-06-03,0,1,110.9,O 110.9 L(E798845 Allstar)e,W1jib,nesmc
+NH,449.325,W1FKF,Loudon,2020-01-29,0,0,88.5,O 88.5e,Donald Twombly,nesmc
+NH,449.375,N1IMO,Peterborough,2025-05-10,1,1,88.5,O 88.5 L(E336966 N1IMO-N1IMN)sx,N1IMO-N1IMN,nesmc
+NH,449.450,WA1ZYX,Deerfield,2025-05-29,1,0,123.0,O 123.0ex,WA1ZYX,nesmc
+ME,449.625,KA1C,Madison,2017-10-31,0,0,91.5,O 91.5es,Stephen A. Roderick - KA1C,nesmc
+NH,449.625,K1CA,Derry,2024-03-09,0,0,85.4,O 85.4x,Interstate Repeater Society,nesmc
+RI,449.675,N1LMA,Westerly,2026-09-20,1,0,127.3,O 127.3 L(EN1LMA-L N1LMA)es,Charlie Recchia,nesmc
+MA,449.725,W1XM,Cambridge,2020-04-28,0,0,114.8,O 114.8ex,MIT UHF,nesmc
+ME,449.725,N1GNN,Exeter,2025-07-09,1,0,103.5,O 103.5 L(224.240),"Karl J Smith, N1GNN",nesmc
+NH,449.775,NY1Z,Salem,2026-04-02,1,0,,O,Mt. Moriah Repeater Society,nesmc
+MA,449.825,N1PAH,Pelham,2019-01-24,0,1,110.9,O 110.9 107.2 L(53.09)ex,N1PAH,nesmc
+MA,449.825,N1LHP,Woburn,2026-08-21,1,0,136.5,O 136.5 L(224.060)e,Phantom Net,nesmc
+NH,449.825,N1PCE,Whitefield,2015-03-14,0,1,82.5,O 82.5 L(NNH Rptr Net)s,John E Ryan,nesmc
+MA,449.925,W1MRA,Marlborough,2018-05-04,0,1,88.5,O 88.5 L(E4133 I4133 MMRA)esx,Minuteman Repeater Association,nesmc
+RI,449.9375,W1WNS,West Greenwich,2025-05-10,1,0,,O DCS(244) L(448.775 Webo)e,AT&T Mobility,nesmc
+ME,449.975,WA1ZDA,Rockland,2016-04-30,0,0,110.9,O 110.9x,Hatchet Mt Radio System,nesmc
+CT,145.110,W1BRS,Vernon,2025-05-03,1,0,77.0,O 77.0e,Bears Of Manchester,csma
+CT,145.230,K1YON,East Hartland,2025-05-10,1,0,,O,HartlandEM,csma
+CT,145.290,W1BCG,Killingworth,2026-08-09,1,0,110.9,O 110.9x,SARC,csma
+CT,145.330,N1TUP,Manchester,2022-11-13,0,0,88.5,O 88.5,N1TUP,csma
+CT,145.350,KA1BQO,Wethersfield,2025-05-10,1,0,,Oe@,Joseph Zacchio,csma
+CT,145.370,KB1AEV,Torrington,2018-11-18,0,0,151.4,O 151.4e L(KB1AEV) O 151.4,KB1AEV,csma
+CT,145.390,W1DX,Ledyard,2015-11-05,0,0,156.7,O 156.7 L(224.38),AWASEC,csma
+CT,145.410,W1HDN,Vernon,2025-08-18,1,1,141.3,O 141.3e L(PVRA West),PVRA,csma
+CT,145.450,W1AW,Newington,2025-05-10,1,0,127.3,O 127.3e,NARL,csma
+CT,145.470,K9OEM,Glastonbury,2021-06-12,0,1,77.0,O 77.0e L(KB1AEV),Manchester OEM,csma
+CT,146.475,W1NLK,Norwalk,2012-09-12,0,0,100.0,O 100.0e,Greater Norwalk Amateur Radio Club,csma
+CT,146.610,W1GB,West Haven,2014-10-19,0,0,110.9,O 110.9es,SouthCentral Connecticut Amateur Radio Association,csma
+CT,146.640,W1HDN,Hartford,2021-06-11,0,0,141.3,O 141.3e,PVRA,csma
+CT,146.655,W1EE,Stamford,2020-06-24,0,0,100.0,O 100.0es,Stamford Amateur Radio Assocation,csma
+CT,146.670,W1NLC,Groton,2024-05-06,0,0,156.7,O 156.7es,SCRAMS,csma
+CT,146.730,N1NW,Baltic,2025-09-10,1,0,156.7,O 156.7e L(E711268) s,Radio Amateur Society Of Norwich,csma
+CT,146.730,NA1RA,New Milford,2022-05-01,0,1,151.4,O 151.4e L(NA1RA) s WX,Northville Amateur Radio Association,csma
+CT,146.745,W1HDN,Avon,2013-12-08,0,0,82.5,O 82.5e,Pioneer Valley Repeater Association,csma
+CT,146.775,N1LLL,New Canaan,2018-06-21,0,0,100.0,O 100.0,N1LLL,csma
+CT,146.775,W1BCG,Westbrook,2024-05-06,0,0,110.9,O 110.9e,SARC,csma
+CT,146.790,W1HDN,Vernon,2025-08-23,1,1,82.5,O 82.5e L(I4159 PVRA East) x WX,PVRA,csma
+CT,146.850,W1HDN,Torrington,2025-08-18,1,1,141.3,O 141.3e L(PVRA West) x,PVRA,csma
+CT,146.895,N1MUC,Fairfield,2014-05-16,0,0,77.0,O 77.0e,N1MUC,csma
+CT,146.985,W1VAR,Shelton,2014-11-19,0,0,141.3,O 141.3s,Valley Amateur Radio Association,csma
+CT,147.030,KA1KD,Bethel,2019-07-21,0,0,100.0,O 100.0 DCS( ) es,Bethel Educational Amateur Radio Society,csma
+CT,147.030,W1EDH,Portland,2013-06-11,0,0,110.9,O 110.9,CT Amateur Radio Emergency Service,csma
+CT,147.045,N1TUP,Manchester,2025-05-02,1,0,88.5,O 88.5,N1TUP,csma
+CT,147.060,W1DX,Salem,2026-09-20,1,0,156.7,O 156.7e L(224.240),AWASEC,csma
+CT,147.090,W1EDH,Glastonbury,2025-08-30,1,0,110.9,O 110.9es,CT Amateur Radio Emergency Service,csma
+CT,147.120,W1HDN,Danbury,2025-08-18,1,1,141.3,O 141.3e L(PVRA West),PVRA,csma
+CT,147.180,W1HDN,Prospect,2025-08-18,1,1,141.3,O 141.3e L(PVRA West) x,PVRA,csma
+CT,147.225,K1MUJ,Brooklyn,2026-08-16,1,1,156.7,O 156.7e L(E47825 Echolink) sx WX,Eastern Connecticut Amateur Radio Association,csma
+CT,147.240,KB1AEV,Torrington,2018-11-13,0,1,151.4,O 151.4e L(KB1AEV) x WX O 151.4e L(E147345 I4395 KB1AEV) x WX,KB1AEV,csma
+CT,147.255,AA1VE,East Haven,2014-10-19,0,0,110.9,O 110.9e,SouthCentral Connecticut Amateur Radio Association,csma
+CT,147.270,KB1AEV,Barkhamsted,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV) x,KB1AEV,csma
+CT,147.285,W1BAA,Sharon,2013-12-18,0,0,77.0,O 77.0e,SBARC,csma
+CT,147.300,W1QI,Danbury,2025-04-21,1,0,100.0,O 100.0,Candlewood Amateur Radio Association,csma
+CT,147.300,NA1RC,Lebanon,2026-09-20,1,0,77.0,O 77.0e,NatchARA,csma
+CT,147.330,W1EOO,Winsted,2025-05-10,1,0,141.3,O 141.3e L(KB1AEV) WX,Winsted Civil Defense,csma
+CT,147.345,KB1AEV,Vernon,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV) x,KB1AEV,csma
+CT,147.505,W1SPC,Woodbridge,2026-09-17,1,0,77.0,O 77.0e L(E7505 I7505) s RB WX,Shore Point Amateur Radio Club,csma
+CT,440.250,W1LCR,Goshen,2022-05-15,0,0,123.0,O 123.0ex,Frank Jankowics W1LCR,csma
+CT,440.450,N1ZU,Fairfield,2025-05-17,1,0,77.0,O 77.0e,Fairfield Amateur Radio Association,csma
+CT,441.500,N1LXV,Fairfield ,2014-06-06,0,0,77.0,O 77.0e,N1LXV,csma
+CT,441.650,KB1AEV,Watertown,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV) x,KB1AEV,csma
+CT,441.700,N1KGN,Bridgeport,2014-03-05,0,0,77.0,"O 77.0e L(E441700 146.445, Bpt)",N1KGN,csma
+CT,441.800,N1TUP,Stafford Springs,2022-05-15,0,1,77.0,O 77.0e L(KB1AEV Net),KB1AEV/N1TUP,csma
+CT,441.850,NA1RA,Washington,2021-11-23,0,1,151.4,O 151.4e L(KB1AEV ) s WX,Northville Amateur Radio Association,csma
+CT,441.950,W1HLO,Norwich,2014-05-24,0,0,67.0,O 67.0,Norwich Free Academy,csma
+CT,442.250,KB1AEV,Torrington,2021-10-11,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV) x,KB1AEV,csma
+CT,442.400,K1ENF,Enfield,2014-06-06,0,0,94.8,O 94.8e,Enfield Cert,csma
+CT,442.450,W1UED,"Terryville, Ct 06786",2021-09-01,0,0,88.5,(TRIAL) O 88.5e EXP,Daniel Kinane Jr,csma
+CT,442.500,W1WPD,Woodbridge,2025-08-18,1,0,77.0,O 77.0 DCS(073) e L(E46633 I4663) s RB WX O DCS(073) e L(E46633 I4663) s RB WX,Shore Point Amateur Radio Club,csma
+CT,442.600,KB1AEV,Vernon,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV) x,KB1AEV,csma
+CT,443.100,W1HDN,Hartford,2013-11-07,0,0,114.8,O 114.8e,Pioneer Valley Repeater Association,csma
+CT,443.250,W1CDT,Stafford Springs,2024-06-07,0,0,114.8,(TRIAL) O 114.8e,Same As Applicant,csma
+CT,443.300,W1HDN,Vernon,2025-08-23,1,1,114.8,O 114.8e L(PVRA East) x,PVRA,csma
+CT,443.550,N1LUF,Milford,2014-02-11,0,0,77.0,O 77.0ex,N1LUF,csma
+CT,443.600,W1HDN,Torrington,2025-08-18,1,1,82.5,O 82.5e L(PVRA West Ne) x,PVRA,csma
+CT,443.650,W1HDN,Danbury,2025-08-18,1,1,141.3,O 141.3e L(PVRA West),PVRA,csma
+CT,444.200,KB1AEV,Meriden,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV ) x,KB1AEV,csma
+CT,444.450,N1GTL,Hamden,2016-09-03,0,0,100.0,O 100.0e,N1GTL,csma
+CT,444.650,KB1AEV,Harwington,2018-11-13,0,1,151.4,O 151.4e L(E147345 I4395 KB1AEV Net) x,KB1AEV,csma
+CT,444.800,NA1RA,Roxbury,2021-11-23,0,0,151.4,O 151.4e L(NA1RA) sx,Northville Amateur Radio Association,csma
+CT,444.950,N1TUP,Tolland,2023-11-12,0,0,151.4,O 151.4e L(KB1AEV) x,N1TUP,csma
+CT,448.000,W1XOJ,E. Hartland,2025-05-10,1,0,162.2,O 162.2ex,YANKEE NET,csma
+CT,448.000,W1XOJ,Meriden,2025-05-10,1,0,192.8,O 192.8 162.2ex,YANKEE NET,csma
+CT,448.725,WE1SPN,Bristol,2014-12-19,0,1,77.0,O 77.0e L(DARI),WARC,csma
+CT,449.375,N1CRS,West Hartford,2024-08-08,0,0,141.3,O 141.3 L(224.6 vernon),Charter Oak Radio Society,csma
+CT,449.625,W1EDH,Glastonbury,2026-09-20,1,0,110.9,O 110.9e,CT Amateur Radio Emergency Service,csma
+VT,145.15,WB1GQR,Bolton,2020-06-24,0,0,100.0,FM 100.0 region:NW/ECent coord:VIRCC flag:X 445.025/GARA,RANV,vircc
+VT,145.23,N1STA,St Albans,2007-11-04,0,0,100.0,FM 100.0 region:NW coord:VIRCC,St Albans ARC,vircc
+NH,145.33,W1FN,Hanover,2025-05-10,1,1,100.0,FM 100.0 region:ECent coord:nesmc,Twin State RC,vircc
+VT,145.39,WA1ZMS,Mt Equinox,2025-05-10,1,0,100.0,FM 100.0 region:SW/WCent coord:VIRCC flag:X,WA1ZMS,vircc
+VT,146.61,W1KOO,Burlington,2013-12-18,0,0,100.0,FM 100.0 region:NW coord:VIRCC,Burlington ARC,vircc
+VT,146.625,W1BD,Williamstown,2025-08-24,1,0,100.0,FM 100.0 region:ECent coord:VIRCC 145.47,Central VT ARC,vircc
+VT,146.745,K1JAY,Jay Peak,2025-05-10,1,0,100.0,FM 100.0 region:NE coord:VIRCC,St. Albans ARC,vircc
+VT,146.76,W1UWS,Mt Ascutney,2016-01-07,0,0,110.9,FM 110.9 region:SE coord:VIRCC,CT Vly FM Assn,vircc
+VT,146.835,K1SV,Shaftsbury,2014-10-17,0,0,100.0,FM 100.0 region:SW coord:VIRCC E68420,So VT ARC,vircc
+VT,146.85,W1CTE,Essex Jct,2025-05-10,1,0,100.0,FM 100.0 region:NW coord:VIRCC flag:weak,Essex HS,vircc
+VT,146.865,WR1VT,Brattleboro,2016-02-15,0,0,100.0,FM 100.0 region:SE coord:VIRCC,West River RC,vircc
+VT,146.88,W1ABI,Killington,2015-12-07,0,0,110.9,FM 110.9 region:Cent coord:VIRCC flag:X,Northeast FM RA,vircc
+VT,146.97,K1MOQ,Tunbridge,2026-08-20,1,0,100.0,FM 100.0 region:Cent coord:VIRCC,K1MOQ,vircc
+VT,147.015,N1HWI,Marlboro,2025-05-10,1,0,100.0,FM 100.0 region:SE coord:VIRCC,N1HWI,vircc
+VT,147.045,W1GMW,Rutland,2014-10-30,0,0,100.0,FM 100.0 region:WCent coord:VIRCC,Green Mt Wireless,vircc
+VT,147.09,WA1KFX,Newfane,2019-05-20,0,0,110.9,FM 110.9 region:SE coord:VIRCC,Northeast FM RA,vircc
+VT,147.15,W1STM,Springfield,2020-12-29,0,0,110.9,FM 110.9 region:SE coord:VIRCC flag:weak,Springfield Telescope RC,vircc
+VT,147.21,KB1FDA,Corinth,2025-05-10,1,0,100.0,FM 100.0 region:ECent coord:VIRCC,KB1FDA,vircc
+VT,147.36,KA1LM,Middlebury,2024-11-10,1,0,100.0,FM 100.0 region:WCent coord:VIRCC,Addison Co ARA,vircc
+VT,443.40,N1STA,St Albans,2025-05-10,1,0,162.2,FM 162.2 region:NW coord:VIRCC NFMRA,St Albans ARC,vircc
+NH,443.55,W1FN,Hanover,2025-05-10,1,1,136.5,FM 136.5 region:ECent coord:nesmc,Twin State RC,vircc
+NH,443.80,WA1ZYX,Walpole,2015-03-06,0,0,141.3,FM 141.3 region:SE coord:nesmc,WA1ZYX,vircc
+NH,443.95,W1FN,Claremont,2024-06-29,0,0,103.5,FM 103.5 region:SE coord:nesmc,Twin State RC,vircc
+VT,444.05,K1EQX,Mt. Equinox,2025-05-10,1,1,100.0,FM 100.0 region:SW coord:VIRCC NFMRA,Northeast FM RA,vircc
+VT,444.55,W1ABI,Killington,2025-05-10,1,1,110.9,FM 110.9 region:Cen coord:VIRCC NFMRA,Northeast FM RA,vircc
+VT,444.65,W1AAK,Monkton,2025-05-10,1,1,110.9,FM 110.9 region:NW coord:VIRCC NFMRA,Northeast FM RA,vircc
+VT,444.70,WA1KFX,Newfane,2026-05-16,1,1,110.9,FM 110.9 region:SE coord:VIRCC NFMRA,Northeast FM RA,vircc
+NH,444.90,KA1UAG,Enfield,2012-09-12,0,1,131.8,FM 131.8 region:ECent coord:nesmc NFMRA,KA1UAG,vircc
+VT,445.025,WB1GQR,Bolton,2025-05-10,1,0,110.9,FM 110.9 region:NW/ECent coord:VIRCC 145.15/GARA,RANV,vircc
+VT,447.225,K1JAY,Jay Peak,2025-05-10,1,0,100.0,FM 100.0 region:NE coord:VIRCC NFMRA,St. Albans ARC,vircc
+VT,449.125,W1AAK,Burke,2025-05-10,1,1,110.9,FM 110.9 region:NE coord:VIRCC NFMRA,Northeast FM RA,vircc
+VT,449.175,WA1ZMS,Rutland,2013-12-19,0,0,100.0,FM 100.0 region:WCent coord:VIRCC flag:OFF I4993,WA1ZMS,vircc
