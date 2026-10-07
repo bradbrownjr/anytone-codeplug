@@ -11,7 +11,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 ## 1. Inputs from Brad
 - [ ] Export all CSVs from the **578 CPS** into `exports/d578uv/` (Tools → Export, all tables, with the `.LST`)
 - [ ] Record CPS + firmware versions for both radios (in README)
-- [ ] Fill in `.env`: RepeaterBook API token, NESMC login, myGMRS login
+- [ ] Fill in `.env`: RepeaterBook API token, myGMRS login (NESMC needs none)
 - [ ] Decide what "active" means for analog repeaters: NESMC coordination status, NERepeaters last-updated age, or both
 
 ## 2. Generator tool (`codeplug/`, Python)
@@ -25,7 +25,9 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 ## 3. Fetchers (snapshots go to `cache/`, gitignored; normalized output to `data/sources/`)
 - [ ] **NEDECN** — repeater pages + official AnyTone CSV pack (nedecn.org/downloads/codeplugs/); also check their D578UV codeplug for column layout
 - [ ] **NERepeaters** — parse the embedded data in `NERepeaters.php` (freq, offset, state, city, call, tones, last-updated)
-- [ ] **NESMC** — logged-in fetch of coordination data; treat as authoritative for coordinated/active status
+- [x] **Coordinators** (`codeplug/fetch_coordinators.py`, writes `cache/`): no logins needed. NESMC (ME/NH/MA/RI) and CSMA (CT) share one search backend at rptr.amateur-radio.net (radius queries, max 120 mi, swept from several centers; 144 and 440 only); VIRCC (VT) is a static table at ranv.org/rptr.html that needs a browser-style User-Agent and also lists some NY/NH/QC repeaters. Owners can hide records, so absence != uncoordinated. Notes carry DMR/P25/Fusion/D-STAR modes
+- [ ] Coordinator lists have no offsets (except VIRCC) — derive from band plan (2m ±0.6, 70cm ±5) or cross-check RepeaterBook
+- [ ] VIRCC has no "last updated" date; sanity-check against NERepeaters
 - [ ] **RepeaterBook** — token API export for CT/MA/ME/NH/RI/VT, 2m + 70cm FM (cross-check)
 - [ ] **myGMRS** — find the JSON endpoint behind mygmrs.com/repeaters; pull New England GMRS repeaters
 - [ ] **RadioID** — regenerate `DigitalContactList.CSV` (N.A. only, or full DB, depending on radio memory)
