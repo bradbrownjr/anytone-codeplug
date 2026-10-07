@@ -89,6 +89,19 @@ class Codeplug:
         z[self.zc['Zone Channel Member RX Frequency']] = '|'.join(self.col(self.by[m], 'Receive Frequency') for m in members)
         z[self.zc['Zone Channel Member TX Frequency']] = '|'.join(self.col(self.by[m], 'Transmit Frequency') for m in members)
 
+    def remove_from_zone(self, name, drop):
+        """Drop members from a zone (the channels themselves stay)."""
+        z = self.zone(name)
+        members = [m for m in self.members(name) if m not in drop]
+        z[self.zc['Zone Channel Member']] = '|'.join(members)
+        z[self.zc['Zone Channel Member RX Frequency']] = '|'.join(self.col(self.by[m], 'Receive Frequency') for m in members)
+        z[self.zc['Zone Channel Member TX Frequency']] = '|'.join(self.col(self.by[m], 'Transmit Frequency') for m in members)
+        for k in ('A Channel', 'B Channel'):
+            if z[self.zc[k]] in drop:
+                z[self.zc[k]] = members[0]
+                z[self.zc[k + ' RX Frequency']] = self.col(self.by[members[0]], 'Receive Frequency')
+                z[self.zc[k + ' TX Frequency']] = self.col(self.by[members[0]], 'Transmit Frequency')
+
     def add_talkgroup(self, tid, name, call_type='Group Call'):
         if not any(r[1] == tid for r in self.tgs):
             last = max((i for i, r in enumerate(self.tgs) if r[3] == 'Group Call'), default=len(self.tgs) - 1)
