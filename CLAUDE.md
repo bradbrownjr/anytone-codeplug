@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Codeplugs for KC1JMH's **AnyTone AT-D878UV** (DMR/analog HT) and **AT-D578UV** (mobile), as CSV files imported into the AnyTone CPS. Original CPS exports live in `exports/d878uv/` and `exports/d578uv/`. A Python generator that builds both radios' CSVs from one data source is planned. See `TODO.md` for the work plan and status.
+Codeplugs for KC1JMH's **AnyTone AT-D878UV** (DMR/analog HT) and **AT-D578UV** (mobile), as CSV files imported into the AnyTone CPS. Original CPS exports live in `exports/d878uv/` and `exports/d578uv/`. `codeplug/model.py` is the start of a Python generator that builds both radios' CSVs from one ID-linked data source in `data/` (`bootstrap`/`build`/`check`; round-trips the 878 export byte for byte). The `add_*.py` scripts still edit `exports/d878uv` directly. See `TODO.md` for the work plan and status.
 
 Data sources: nedecn.org (DMR repeaters, plus its official AnyTone CSV pack), the state frequency coordinators — nesmc.org (ME/NH/MA/RI), ctspectrum.com (CT), ranv.org/rptr.html for VIRCC (VT) — all public, no login; fetch with `python3 codeplug/fetch_coordinators.py`, nerepeaters.com, RepeaterBook (API token), mygmrs.com (GMRS). NEDECN's per-site web pages are more current and more reliable than its CSV pack (see `TODO.md`); the pack has typos, empty zone frequency lists and duplicate channel names. Credentials go in `.env` (gitignored; see `.env.example`). Raw fetches go in `cache/` (gitignored).
 

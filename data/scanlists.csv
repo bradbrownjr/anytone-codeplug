@@ -1,0 +1,6 @@
+id,name,Scan Mode,Priority Channel Select,Priority Channel 1,Priority Channel 2,Revert Channel,Look Back Time A[s],Look Back Time B[s],Dropout Delay Time[s],Dwell Time[s]
+s001,Weather,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s002,GMRS,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s003,Marine,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s004,All Analog,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s005,Simplex,Off,Priority Channel Select1,Off,Off,Selected,0.0,0.0,0.0,0.0

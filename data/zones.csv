@@ -1,0 +1,148 @@
+id,name,a_id,b_id,hide
+z001,Bridgeport CT,ch00001,ch00002,0
+z002,Coventry CT,ch00021,ch00022,0
+z003,Killingly CT,ch00041,ch00042,0
+z004,Monroe CT,ch00060,ch00061,0
+z005,Northford CT,ch00080,ch00081,0
+z006,Norwalk CT,ch00094,ch00095,0
+z007,Prospect CT,ch00114,ch00115,0
+z008,Rocky Hill CT,ch00133,ch00134,0
+z009,Seymour CT,ch00153,ch00154,0
+z010,Boston MA,ch00175,ch00174,0
+z011,Chelmsford MA,ch00195,ch00194,0
+z012,Danvers MA,ch00234,ch00233,0
+z013,Dennis MA,ch00214,ch00213,0
+z014,East Falmouth MA,ch00253,ch00252,0
+z015,Eastham MA,ch00273,ch00272,0
+z016,Gardner MA,ch00293,ch00292,0
+z017,Haverhill MA,ch00312,ch00311,0
+z018,Hingham MA,ch00331,ch00330,0
+z019,Marblehead MA,ch00370,ch00369,0
+z020,North Adams MA,ch00409,ch00408,0
+z021,Northamp UHF MA,ch00429,ch00428,0
+z022,Northamp VHF MA,ch00449,ch00448,0
+z023,Sagamore MA,ch00469,ch00468,0
+z024,Southboro UHF MA,ch00489,ch00488,0
+z025,Southboro VHF MA,ch00509,ch00508,0
+z026,Sudbury MA,ch00351,ch00350,0
+z027,W Tisbury MA,ch00389,ch00388,0
+z028,Walpole MA,ch00529,ch00528,0
+z029,Wilmington MA,ch00548,ch00548,0
+z030,Worcester MA,ch00566,ch00565,0
+z031,Augusta ME,ch00586,ch00583,0
+z032,Boothbay ME,ch00611,ch00608,0
+z033,Bridgton ME,ch00632,ch00632,0
+z034,Buckfield ME,ch00651,ch00658,0
+z035,Calais ME,ch00677,ch00674,0
+z036,Camden ME,ch00702,ch00699,0
+z037,Dexter ME,ch00752,ch00749,0
+z038,Dresden ME,ch00727,ch00724,0
+z039,Farmington ME,ch00778,ch00775,0
+z040,Fort Kent ME,ch00802,ch00799,0
+z041,Gouldsboro ME,ch00828,ch00825,0
+z042,Holden ME,ch00855,ch00855,0
+z043,Kibby Mtn ME,ch00883,ch00879,0
+z044,Knox ME,ch00906,ch00903,0
+z045,Lincoln ME,ch00956,ch00953,0
+z046,Litchfield ME,ch00931,ch00931,0
+z047,New Sharon ME,ch00983,ch00980,0
+z048,Peru ME,ch01035,ch01035,0
+z049,Portland ME,ch01054,ch01054,0
+z050,Presque Isle ME,ch01007,ch01004,0
+z051,Shapleigh ME,ch01079,ch01079,0
+z052,Smyrna ME,ch01128,ch01125,0
+z053,Sydney ME,ch01103,ch01100,0
+z054,Topsham ME,ch01154,ch01151,0
+z055,Bow NH,ch01174,ch01170,0
+z056,Campton NH,ch01245,ch01239,0
+z057,Chester NH,ch01199,ch01193,0
+z058,Clarksville NH,ch01220,ch01216,0
+z059,Concord NH,ch01286,ch01282,0
+z060,Crotched MT NH,ch01265,ch01260,0
+z061,Derry NH,ch01308,ch01304,0
+z062,Franklin NH,ch01333,ch01327,0
+z063,Gilford NH,ch01353,ch01348,0
+z064,Goffstown UHF NH,ch01443,ch01437,0
+z065,Gofftstown NH,ch01418,ch01413,0
+z066,Gunstock NH UHF,ch01377,ch01371,0
+z067,Gunstock NH VHF,ch01394,ch01390,0
+z068,Hanover NH,ch01463,ch01457,0
+z069,Henniker NH,ch02199,ch02199,0
+z070,Hudson NE1B NH,ch02217,ch02211,0
+z071,Hudson NH UHF,ch01484,ch01479,0
+z072,Hudson NH VHF,ch01501,ch01497,0
+z073,Keene NH,ch01525,ch01520,0
+z074,Lyndeborough NH,ch01549,ch01543,0
+z075,Mt Washington NH,ch01564,ch01563,0
+z076,North Conway NH,ch01591,ch01586,0
+z077,Portsmouth NH,ch01615,ch01615,0
+z078,Rochester NH,ch01631,ch01626,0
+z079,Sanbornton NH,ch01652,ch01648,0
+z080,Sommersworth NH,ch01674,ch01670,0
+z081,Wakefield NH,ch01697,ch01692,0
+z082,West Ossipee NH,ch01719,ch01714,0
+z083,Mattituck NY,ch01758,ch01758,0
+z084,Montauk NY,ch01768,ch01764,0
+z085,Mt Beacon NY,ch01741,ch01737,0
+z086,Peconic NY,ch01784,ch01780,0
+z087,Riverhead NY,ch01797,ch01797,0
+z088,Selden NY,ch01803,ch01803,0
+z089,Bristol RI,ch01832,ch01832,0
+z090,Providence RI,ch01850,ch01837,0
+z091,Bolton VT,ch01899,ch01879,0
+z092,Brattleboro VT,ch01946,ch01926,0
+z093,Burke Mtn VT,ch01969,ch01950,0
+z094,Burlington VT,ch01923,ch01902,0
+z095,Corinth VT,ch01992,ch01972,0
+z096,Jay Peak VT,ch02039,ch02019,0
+z097,Lyndon VT,ch02057,ch02042,0
+z098,Monkton VT,ch02081,ch02060,0
+z099,Mt Ascutney VT,ch01876,ch01856,0
+z100,Mt Equinox VT,ch02016,ch01995,0
+z101,Mt Snow VT,ch02143,ch02128,0
+z102,Northfield VT,ch02101,ch02085,0
+z103,Pico Peak VT,ch02125,ch02104,0
+z104,Warren VT,ch02166,ch02146,0
+z105,Williamstown VT,ch02189,ch02169,0
+z106,Simplex,ch02266,ch02266,0
+z107,ME Analog,ch02235,ch02230,0
+z108,NH Analog,ch02255,ch02254,0
+z109,GMRS,ch02383,ch02230,0
+z110,MURS,ch02393,ch02392,0
+z111,Marine,ch02319,ch02318,0
+z112,Weather,ch02312,ch02311,0
+z113,CCEMA PACE,ch02408,ch02268,0
+z114,CCEMA,ch02410,ch02409,0
+z115,ME State Net,ch02439,ch02439,0
+z116,ME Interop,ch02555,ch02555,0
+z117,EMA Androscoggin,ch02493,ch02493,0
+z118,EMA Aroostook,ch02495,ch02495,0
+z119,EMA Franklin,ch02498,ch02498,0
+z120,EMA Hancock,ch02507,ch02507,0
+z121,EMA Kennebec,ch02510,ch02510,0
+z122,EMA Knox,ch02512,ch02512,0
+z123,EMA Lincoln,ch02516,ch02516,0
+z124,EMA Oxford,ch02522,ch02522,0
+z125,EMA Penobscot,ch02525,ch02525,0
+z126,EMA Piscataquis,ch02529,ch02529,0
+z127,EMA Sagadahoc,ch02414,ch02414,0
+z128,EMA Somerset,ch02585,ch02585,0
+z129,EMA Waldo,ch02535,ch02535,0
+z130,EMA Washington,ch02551,ch02551,0
+z131,EMA York,ch02553,ch02553,0
+z132,US Interop,ch02422,ch02422,0
+z133,ME ARES,ch02271,ch02271,0
+z134,MA Analog,ch02654,ch02654,0
+z135,RI Analog,ch02655,ch02655,0
+z136,CT Analog,ch02768,ch02768,0
+z137,VT Analog,ch02300,ch02300,0
+z138,Packet,ch02600,ch02310,0
+z139,SAT-SO-50,ch02608,ch02606,0
+z140,SAT-ISS,ch02613,ch02611,0
+z141,SAT-AO-123,ch02618,ch02616,0
+z142,SAT-CAS-3H,ch02623,ch02621,0
+z143,SAT-IO-86,ch02628,ch02626,0
+z144,SAT-RS95S,ch02633,ch02631,0
+z145,SAT-TEVEL2,ch02638,ch02636,0
+z146,SAT-AO-91,ch02643,ch02641,0
+z147,SAT-PO-101,ch02648,ch02646,0

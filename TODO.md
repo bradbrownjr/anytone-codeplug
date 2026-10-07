@@ -6,7 +6,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [x] `git init`, `.gitignore`, `.env.example`
 - [x] Move the original 878 CPS export to `exports/d878uv/`
 - [ ] Create public GitHub repo (`gh repo create bradbrownjr/anytone-codeplug --public --source . --push`)
-- [ ] README: what this is, how to build, how to import into the CPS
+- [x] README: what this is, how to build, how to import into the CPS
 
 ## 1. Inputs from Brad
 - [ ] Export all CSVs from the **578 CPS** into `exports/d578uv/` (Tools → Export, all tables, with the `.LST`)
@@ -16,9 +16,9 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 
 ## 2. Generator tool (`codeplug/`, Python)
 - [ ] Data model + YAML source files in `data/` (channels, talkgroups, zones, scan lists, roaming, radio IDs, static settings)
-- [ ] Importer: convert the current 878 export into `data/` (one-time bootstrap)
-- [ ] Writers for `out/d878uv/` and `out/d578uv/` (per-model column maps, `.LST` manifest, QUOTE_ALL, CRLF)
-- [ ] Round-trip test: bootstrap → generate 878 → byte-identical to `exports/d878uv/`
+- [x] 2026-10-07: Importer: `codeplug/model.py bootstrap` converts the 878 export into `data/` with stable channel/zone/scan list IDs
+- [x] 2026-10-07: writer `model.py build` (QUOTE_ALL, CRLF, frequency lists derived, band filter per radio profile). Remaining: 578 column map once its export arrives; retarget the add_* scripts to edit `data/` instead of `exports/`
+- [x] Round-trip test: `model.py check d878uv` is byte-identical to `exports/d878uv/`
 - [ ] Validator: dangling zone/scan/roaming members, RX/TX lists match channels, contact/TG ID pairs, 16-char names, ≤250 channels/zone, ≤4000 channels, ≤250 zones, duplicate names
 - [ ] Dry-run diff report: what changed in channels/zones vs the last build
 
