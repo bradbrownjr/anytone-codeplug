@@ -4,7 +4,8 @@
 Rule: every listed repeater, including Permission Required / Members Only ones (Brad has the owners' permission);
 repeaters with an unlisted tone get no tone; skip DPL (DCS) tones until the CSV DCS format is confirmed.  Repeater output = listed frequency, input = +5 MHz.  TX CTCSS = the listed "Tone In"; receive
 tone squelch is left Off (matches the existing GMRS repeater channels).  Names `<City>-<ch>` (ch = last three digits).
-Existing channels are reused when RX/TX/tone match and never modified; the original `GMRS` zone is untouched.
+Repeaters listed with no tone (private/permission-only, 'Unlisted' on myGMRS) get a trailing `*` in the name to flag missing info.
+Channels are shared only within a state (same frequency and tone), plus the original channels listed in EXISTING; existing channels are never modified; the original `GMRS` zone is untouched.
 Usage: python3 codeplug/add_gmrs.py [codeplug dir]
 """
 import csv, sys
@@ -19,26 +20,30 @@ EXISTING = {'ME': ['Brunswick-700', 'Falmouth-650', 'Gray-575', 'Hiram-575', 'Po
 
 if __name__ == '__main__':
     cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
-    per, new, skipped = {s: [] for s in ZONES}, [], []
+    per, new, skipped, made = {s: [] for s in ZONES}, [], [], {}
     for r in csv.DictReader(open('data/sources/gmrs_snapshots.csv', newline='')):
         if 'DPL' in r['tone_in'] or 'DPL' in r['tone_out']:
             skipped.append(f"{r['state']} {r['city']} {r['rx']} {r['tone_in']}"); continue
-        rx = float(r['rx']); tx = round(rx + 5, 4); tone = r['tone_in'] or 'Off'
-        n = next((c[1] for c in cp.by_rx(rx) if cp.col(c, 'Transmit Frequency') == '%.5f' % tx and cp.col(c, 'CTCSS/DCS Encode') == tone
-                  and cp.col(c, 'Channel Type') == 'A-Analog' and cp.col(c, 'PTT Prohibit') != 'On'), None)
+        st, rx = r['state'], float(r['rx'])
+        tx = round(rx + 5, 4); tone = r['tone_in'] or 'Off'
+        star = '*' if not r['tone_in'] and r['type'] != 'Open System' else ''
+        # reuse only within the same state: a channel created earlier in this run, or an original channel for this state
+        n = made.get((st, rx, tone))
         if not n:
-            n = short(r['city'], 16 - 4) + '-' + r['rx'][-3:]
+            n = next((m for m in EXISTING.get(st, []) if cp.col(cp.by[m], 'Receive Frequency') == '%.5f' % rx
+                      and cp.col(cp.by[m], 'Transmit Frequency') == '%.5f' % tx and cp.col(cp.by[m], 'CTCSS/DCS Encode') == tone), None)
+        if not n:
+            n = short(r['city'], 16 - 4 - len(star)) + '-' + r['rx'][-3:] + star
             if n in cp.by:
-                n = short(r['city'], 16 - 7) + ' ' + r['state'] + '-' + r['rx'][-3:]
+                n = short(r['city'], 16 - 7 - len(star)) + ' ' + st + '-' + r['rx'][-3:] + star
             assert n not in cp.by, n
             cp.add_channels([cp.new_channel('Gray-575', n, rx, tx, decode='Off', encode=tone)]); new.append(n)
-        if n not in per[r['state']]:
-            per[r['state']].append(n)
+        made[(st, rx, tone)] = n
+        if n not in per[st]:
+            per[st].append(n)
     for st, names in per.items():
         names += [m for m in EXISTING.get(st, []) if m not in names]
-        if names and cp.zone(ZONES[st]):
-            cp.extend_zone(ZONES[st], names)
-        elif names:
+        if names:
             cp.add_zone(ZONES[st], sorted(names, key=lambda m: (float(cp.col(cp.by[m], 'Receive Frequency')), m)), before='Packet')
     errs = cp.validate(); assert not errs, errs[:10]
     cp.save(); print(len(new), 'new;', {s: len(v) for s, v in per.items()}, 'skipped', skipped)

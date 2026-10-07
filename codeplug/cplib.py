@@ -89,6 +89,16 @@ class Codeplug:
         z[self.zc['Zone Channel Member RX Frequency']] = '|'.join(self.col(self.by[m], 'Receive Frequency') for m in members)
         z[self.zc['Zone Channel Member TX Frequency']] = '|'.join(self.col(self.by[m], 'Transmit Frequency') for m in members)
 
+    def rename_channel(self, old, new):
+        """Rename a channel and every zone reference to it (zones list members and A/B channels by name)."""
+        assert len(new) <= 16 and new not in self.by and old in self.by
+        self.by[old][1] = new
+        for z in self.zones:
+            for k in ('Zone Channel Member', 'A Channel', 'B Channel'):
+                i = self.zc[k]
+                z[i] = '|'.join(new if m == old else m for m in z[i].split('|'))
+        self.reindex()
+
     def remove_from_zone(self, name, drop):
         """Drop members from a zone (the channels themselves stay)."""
         z = self.zone(name)
