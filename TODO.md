@@ -55,7 +55,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [x] 2026-10-07: `ME ARES` zone from the 2020 Maine ARES frequency list (`codeplug/add_me_ares.py`): 31 unique simplex frequencies and 19 repeaters. Skipped: 52.525 and 223.500 (not on the 878), Penobscot 145.450/67.0 and Piscataquis 147.150/71.9 (no matching coordinated repeater; verify). Check: Aroostook's 146.730 PL (list says 100.0, NESMC K1FS Caribou is 123.0) and Cumberland's 146.730 (list 100.0; existing W1KVI Falmouth channel uses 62.5, left unchanged per the CCEMA MOU)
 - [ ] Still to incorporate: YCECT's 217A/205 (k1yem.com) extras (444.850, 448.025, 446.175 etc.). Do not modify the existing RN/CCFIRE channels (covered by the CCEMA MOU)
 - [x] Naming convention for analog repeaters: `<CALL> <City>`, location always in the name (`codeplug/naming.py`, documented in CLAUDE.md)
-- [ ] 578-only: 220 MHz (1.25 m) repeaters? Cross-band / mobile-specific settings?
+- [ ] 578-only: the 578 does 220 MHz (1.25 m), so the generator must add 223.500 (Maine state coordination simplex, skipped on the 878) to its ME ARES zone, plus 220 MHz repeaters from the coordinators. Also check cross-band / mobile-specific settings
 
 ## 5. Workflow
 - [ ] `make`/script entry points: `fetch`, `build`, `validate`, `diff`
