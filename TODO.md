@@ -72,3 +72,5 @@ Goal: program a colleague's radio and hand them a manual for it. One guide per r
 - [ ] Mark receive-only channels (government/interop) and any usage restrictions (e.g. amateur-only, CCEMA MOU channels)
 - [ ] Build step: generate Markdown/HTML from `data/`, then render to PDF (print-ready, page numbers, date + git commit in the footer so a printed copy can be traced to a codeplug version)
 - [ ] Need from Brad: photos or confirmation of the physical button layout for each radio, and how the D578UV's keys are assigned today (from the 578 CPS export)
+
+- [x] 2026-10-07: ME ARES: added W1PSQ Milo 147.150 (123.0) and W1YA Orono 145.470 (71.9); verify against RepeaterBook when a token is available
