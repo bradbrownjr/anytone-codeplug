@@ -80,6 +80,15 @@ class Codeplug:
         i = len(self.zones) if before is None else next(i for i, q in enumerate(self.zones) if q[1] == before)
         self.zones.insert(i, z)
 
+    def extend_zone(self, name, new_members):
+        """Append channels to an existing zone (keeps A/B channels)."""
+        z = self.zone(name)
+        members = self.members(name) + [m for m in new_members if m not in self.members(name)]
+        assert len(members) <= 250 and all(m in self.by for m in members)
+        z[self.zc['Zone Channel Member']] = '|'.join(members)
+        z[self.zc['Zone Channel Member RX Frequency']] = '|'.join(self.col(self.by[m], 'Receive Frequency') for m in members)
+        z[self.zc['Zone Channel Member TX Frequency']] = '|'.join(self.col(self.by[m], 'Transmit Frequency') for m in members)
+
     def add_talkgroup(self, tid, name, call_type='Group Call'):
         if not any(r[1] == tid for r in self.tgs):
             last = max((i for i, r in enumerate(self.tgs) if r[3] == 'Group Call'), default=len(self.tgs) - 1)
