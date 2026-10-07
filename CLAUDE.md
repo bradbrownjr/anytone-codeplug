@@ -8,6 +8,10 @@ Codeplugs for KC1JMH's **AnyTone AT-D878UV** (DMR/analog HT) and **AT-D578UV** (
 
 Data sources: nedecn.org (DMR repeaters, plus its official AnyTone CSV pack), the state frequency coordinators — nesmc.org (ME/NH/MA/RI), ctspectrum.com (CT), ranv.org/rptr.html for VIRCC (VT) — all public, no login; fetch with `python3 codeplug/fetch_coordinators.py`, nerepeaters.com, RepeaterBook (API token), mygmrs.com (GMRS). NEDECN's per-site web pages are more current and more reliable than its CSV pack (see `TODO.md`); the pack has typos, empty zone frequency lists and duplicate channel names. Credentials go in `.env` (gitignored; see `.env.example`). Raw fetches go in `cache/` (gitignored).
 
+## Workflow
+
+Commit and push after every change so each one is a restore point.
+
 ## File format rules (CPS import is strict)
 
 - `at-d878uv.LST` is the import manifest: first line is the file count, then `index,"Filename.CSV"`. The CPS imports by this list, so filenames must not change.
