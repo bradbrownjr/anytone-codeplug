@@ -142,7 +142,7 @@ class Codeplug:
 
 def short(name, limit):
     """Abbreviate common words, then truncate, to fit limit characters."""
-    ab = {'north': 'N', 'east': 'E', 'south': 'S', 'west': 'W', 'mountain': 'Mt', 'mount': 'Mt', 'saint': 'St', 'fort': 'Ft', 'county': 'Cty', 'tower': 'Twr'}
+    ab = {'north': 'N', 'east': 'E', 'south': 'S', 'west': 'W', 'mountain': 'Mt', 'mount': 'Mt', 'saint': 'St', 'fort': 'Ft', 'county': 'Cty', 'tower': 'Twr', 'ground': 'Gnd', 'primary': 'Pri', 'secondary': 'Sec', 'tactical': 'Tac'}
     if len(name) > limit:
         name = ' '.join(ab.get(w.lower(), w) for w in name.split())
     return re.sub(r'\s+', ' ', name)[:limit].rstrip()

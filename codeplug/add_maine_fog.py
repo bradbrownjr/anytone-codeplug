@@ -73,10 +73,76 @@ def stage_interop(cp):
     cp.add_zone('ME Interop', members, before='Packet')
 
 
+COUNTIES = {  # FOG section -> (name code, zone name)
+    'Androscoggin County EMA': ('AND', 'EMA Androscoggin'), 'Aroostook County EMA': ('ARO', 'EMA Aroostook'),
+    'Franklin County': ('FRK', 'EMA Franklin'), 'Hancock County': ('HAN', 'EMA Hancock'),
+    'Kennebec County': ('KEN', 'EMA Kennebec'), 'Knox County': ('KNX', 'EMA Knox'),
+    'Lincoln County': ('LIN', 'EMA Lincoln'), 'Oxford County': ('OXF', 'EMA Oxford'),
+    'Penobscot County': ('PEN', 'EMA Penobscot'), 'Piscataquis County': ('PIS', 'EMA Piscataquis'),
+    'Sagadahoc County EMA': ('SAG', 'EMA Sagadahoc'), 'Somerset County EMA': ('SOM', 'EMA Somerset'),
+    'Waldo County EMA': ('WLD', 'EMA Waldo'), 'Washington County EMA': ('WAS', 'EMA Washington'),
+    'York County EMA': ('YRK', 'EMA York'),
+}
+
+
+def common_words(names):
+    parts = [n.split() for n in names]
+    out = []
+    for words in zip(*parts):
+        if len(set(words)) != 1:
+            break
+        out.append(words[0])
+    return ' '.join(out) or names[0]
+
+
+def usable(r):
+    f = float(r['rx'])
+    return (136 <= f <= 174 or 400 <= f <= 480) and 'mateur' not in r['users'] + r['remarks']
+
+
+def freq_label(rx):
+    return ('%.4f' % float(rx)).rstrip('0').rstrip('.')
+
+
+def stage_counties(cp):
+    made, skipped = {}, []
+    cp.pending_after = 'CCFIRE'
+    data = {sec: [r for r in load({sec}) if usable(r) or skipped.append(r)] for sec in COUNTIES}
+    # a frequency used by more than one county gets a neutral name ('ME 155.055') instead of the first county's label
+    counties_of = {}
+    for sec, rows in data.items():
+        for r in rows:
+            counties_of.setdefault('%.5f' % float(r['rx']), set()).add(sec)
+    for sec, (code, zone) in COUNTIES.items():
+        rows = data[sec]
+        groups = {}
+        for r in rows:
+            groups.setdefault('%.5f' % float(r['rx']), []).append(r['name'])
+        members = []
+        word = sec.split()[0][:4].lower()
+        for r in rows:
+            key = '%.5f' % float(r['rx'])
+            if len(counties_of[key]) > 1:
+                name = 'ME ' + freq_label(r['rx'])
+            else:
+                base = common_words(groups[key])
+                w = base.split()
+                if len(w) > 1 and w[0].lower().startswith(word):
+                    base = ' '.join(w[1:])                      # 'Andro EMA Tac' -> 'EMA Tac' (the code already says AND)
+                name = f'{code} {short(base, 12)}'
+                if name in cp.by and key not in made and not cp.by_rx(r['rx']):
+                    name = f"{code} {short(base, 8)} {round(float(r['rx']) * 1000) % 1000:03d}"
+            n = rx_only(cp, name, r, made)
+            if n not in members:
+                members.append(n)
+        cp.add_zone(zone, members, before='Packet')
+    print('skipped (out of band / amateur):', [(r['section'][:8], r['name'], r['rx']) for r in skipped])
+
+
 if __name__ == '__main__':
     cp = Codeplug(sys.argv[2] if len(sys.argv) > 2 else 'exports/d878uv')
     before = len(cp.ch)
-    {'state-net': stage_state_net, 'interop': stage_interop}[sys.argv[1]](cp)
+    {'state-net': stage_state_net, 'interop': stage_interop, 'counties': stage_counties}[sys.argv[1]](cp)
     errs = cp.validate()
     print(f'added {len(cp.ch) - before} channels;', 'errors:' if errs else 'validation ok', errs[:10])
     if not errs:
