@@ -52,7 +52,7 @@ Goal: one source of truth that generates CPS-importable CSVs for both the **AT-D
 - [ ] GMRS zone B channel (WJ1L Alfred 2m) isn't a zone member — pre-existing quirk
 - [x] 2026-10-07: Mt Washington W1NH tone 62.5 -> 100.0; added ECT1/ECT2 SKYWARN/ECT3, X-Band V/U and a `CCEMA PACE` zone built from the two WSSM-ECT ICS-217A sheets (FM + DV); fixed DMR simplex typo 146.790 -> 145.790 (renamed `DMRS 145.790`)
 - [ ] Incorporate Maine statewide interoperability FOG (2017, mostly government channels: add receive-only), current NIFOG, Maine ARES county frequencies (ka1aar.org/download/MaineARESFreqs.pdf, 2020), and YCECT's 217A/205 (k1yem.com). Do not modify the existing RN/CCFIRE channels (covered by the CCEMA MOU)
-- [ ] Naming convention for analog repeaters within 16 chars (e.g. `W1QUI Falmouth`)
+- [x] Naming convention for analog repeaters: `<CALL> <City>`, location always in the name (`codeplug/naming.py`, documented in CLAUDE.md)
 - [ ] 578-only: 220 MHz (1.25 m) repeaters? Cross-band / mobile-specific settings?
 
 ## 5. Workflow
