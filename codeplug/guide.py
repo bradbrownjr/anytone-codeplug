@@ -27,6 +27,16 @@ BUTTONS = {
 BUTTONS['AT-D578UV'] = {'P1': ('Power', 'Repeater'), 'P2': ('Scan', 'Nuisance Delete'), 'P3': ('Digital Monitor', 'Roaming'), 'P4': ('Zone-', 'APRS Send'),
                         'P5': ('Zone+', 'GPS Information'), 'P6': ('VFO/MR', 'Reverse'), 'PA': ('Menu', 'Off'), 'PB': ('Zone+', 'Off'), 'PC': ('Zone-', 'Off'),
                         'PD': ('Exit', 'Off'), 'KNOB': ('Main Channel Switch', 'Sub CH On/Off')}
+USE = {   # operating notes; from KC1JMH's DMR page (kc1jmh.us) and the key assignments above
+    'AT-D878UV': ['<b>Digital Monitor</b> (PF2 short press): press once for single time slot (the slot of the active channel / talkgroup); press twice for double time slot, which lets you hear any talkgroup the repeater is transmitting; press again for off.',
+                  '<b>Scan</b> (PF1 short press): Menu, Scan, then option 3 "Scan List", pick a list and select "Select Cur List". Scan lists hold analog channels only; for DMR, use Digital Monitor instead. <b>Nuisance Delete</b> (PF1 long press) drops a busy channel from the scan temporarily.',
+                  '<b>Power</b> (PF3 short press) steps the power level: L low, M medium, H high, T turbo. <b>Roaming</b> (PF3 long press) searches for the strongest DMR repeater nearby.'],
+    'AT-D578UV': ['<b>Digital Monitor</b> (P3 short press): press for single time slot, again for double time slot (hear any talkgroup the repeater transmits), again for off.',
+                  '<b>Scan</b> (P2 short press) scans the selected scan list; scan lists hold analog channels only, so use Digital Monitor for DMR. <b>Nuisance Delete</b> (P2 long press) drops a busy channel temporarily.',
+                  '<b>Power</b> (P1 short press) steps the power level. <b>Roaming</b> (P3 long press) searches for the strongest DMR repeater nearby.'],
+}
+BEFORE = ('<b>Before first use:</b> this codeplug carries the owner\'s callsign and DMR ID (KC1JMH, 3123446). Replace them in the CPS under Digital, Radio ID List, '
+          'and set your callsign and SSID under Public, APRS, and the power-on text under Optional Setting.')
 KEYNOTE = {'AT-D878UV': 'Long press = hold 1 second. Key lock: manual.',
            'AT-D578UV': 'Long press = hold 2 seconds. Key lock: manual. Mic keys A-D are set as Menu, Zone+, Zone-, Exit (left to right), not the labels printed on the keys. Knob = push the channel knob.'}
 
@@ -272,6 +282,7 @@ def build(folder, out, title):
     S += [tbl([['Group', 'Zones', 'Channels', 'What it is']] + [[Paragraph(escape(k), small), str(zn), str(cn), Paragraph(escape(d), small)] for k, zn, cn, d in channel_types(chs, zones)],
               [1.6 * inch, 0.5 * inch, 0.7 * inch, 4.7 * inch])]
     S += [Spacer(1, 6), Paragraph('Channel names: DMR channels are SITE then talkgroup (e.g. BRDCT CT SW); FM repeaters are CALL City. A zone holds up to 250 channels; a scan list is selected per channel.', ss['BodyText'])]
+    S += [Spacer(1, 8), Paragraph('Using the radio', ss['Heading2'])] + [Paragraph(t, ss['BodyText']) for t in USE.get(title, [])] + [Spacer(1, 4), Paragraph(BEFORE, ss['BodyText'])]
     S += [PageBreak()]
 
     cnt = lambda z: len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0
