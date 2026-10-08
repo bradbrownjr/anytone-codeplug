@@ -47,20 +47,37 @@ class KeyDiagram(Flowable):
         c = self.canv; c.saveState(); c.setStrokeColor(colors.black)
         cx = self.W / 2
         c.setLineWidth(1.2)
-        if not self.mobile:     # handheld: body, antenna, display, keypad block, side keys on the left, top controls on the right
-            c.roundRect(cx - 0.8 * inch, 0.2 * inch, 1.6 * inch, 3.0 * inch, 8)
-            c.rect(cx - 0.55 * inch, 2.2 * inch, 1.1 * inch, 0.7 * inch); c.setFont('Helvetica', 7); c.drawCentredString(cx, 2.5 * inch, 'display')
-            c.rect(cx - 0.55 * inch, 0.45 * inch, 1.1 * inch, 1.5 * inch); c.drawCentredString(cx, 1.15 * inch, 'keypad')
-            c.line(cx + 0.45 * inch, 3.2 * inch, cx + 0.45 * inch, 3.55 * inch)
-            c.circle(cx - 0.35 * inch, 3.3 * inch, 0.1 * inch); c.circle(cx + 0.0 * inch, 3.3 * inch, 0.1 * inch)
-            for i, (x, y, t) in enumerate([(0.1, 2.35, 'side key 1 (near PTT)'), (0.1, 1.65, 'side key 2'), (0.1, 0.95, 'side key 3 / other'),
-                                              (0.1, 0.25, 'P-key row / other')]):
-                self.box(c, x * inch, y * inch, t)
-                c.setLineWidth(0.4); c.line((x + 1.45) * inch, (y + 0.25) * inch, cx - 0.8 * inch, (y + 0.25) * inch)
-            for i, (x, y, t) in enumerate([(5.95, 2.9, 'top: orange / emergency'), (5.95, 2.2, 'top: knob / channel'), (5.95, 1.5, 'top: volume / power'),
-                                              (5.95, 0.8, 'keypad / other'), (5.95, 0.1, 'other')]):
-                self.box(c, x * inch, y * inch, t)
-                c.setLineWidth(0.4); c.line(5.95 * inch, (y + 0.25) * inch, cx + 0.8 * inch, (y + 0.25) * inch)
+        if not self.mobile:     # AT-D878UV(II): layout from the user manual, "4. Radio overview" (front view and left side view)
+            fx = 2.6 * inch                                        # front view centre x
+            c.setFont('Helvetica', 6.5)
+            c.roundRect(fx - 0.7 * inch, 0.15 * inch, 1.4 * inch, 2.55 * inch, 8)
+            c.line(fx - 0.45 * inch, 2.7 * inch, fx - 0.5 * inch, 3.3 * inch)           # antenna
+            c.rect(fx - 0.15 * inch, 2.7 * inch, 0.2 * inch, 0.15 * inch)                 # channel switch
+            c.rect(fx + 0.15 * inch, 2.7 * inch, 0.25 * inch, 0.2 * inch)                 # power/vol
+            c.rect(fx - 0.55 * inch, 2.7 * inch, 0.18 * inch, 0.15 * inch)                # PF3
+            c.rect(fx - 0.5 * inch, 1.7 * inch, 1.0 * inch, 0.8 * inch); c.drawCentredString(fx, 2.05 * inch, 'LCD')
+            c.drawString(fx - 0.62 * inch, 1.55 * inch, 'Menu'); c.circle(fx, 1.45 * inch, 0.17 * inch); c.drawString(fx + 0.38 * inch, 1.55 * inch, 'Exit')
+            c.drawString(fx - 0.62 * inch, 1.2 * inch, 'P1'); c.drawString(fx + 0.45 * inch, 1.2 * inch, 'P2')
+            c.rect(fx - 0.5 * inch, 0.3 * inch, 1.0 * inch, 0.75 * inch); c.drawCentredString(fx, 0.62 * inch, 'keypad')
+            sx = 5.6 * inch                                        # left side view: PTT with PF1 above PF2 below
+            c.roundRect(sx - 0.3 * inch, 0.15 * inch, 0.6 * inch, 2.55 * inch, 6)
+            c.rect(sx - 0.2 * inch, 1.65 * inch, 0.4 * inch, 0.7 * inch); c.drawCentredString(sx, 1.98 * inch, 'PTT')
+            c.rect(sx - 0.15 * inch, 1.1 * inch, 0.3 * inch, 0.2 * inch); c.drawRightString(sx - 0.2 * inch, 1.15 * inch, 'PF1')
+            c.rect(sx - 0.15 * inch, 0.75 * inch, 0.3 * inch, 0.2 * inch); c.drawRightString(sx - 0.2 * inch, 0.8 * inch, 'PF2')
+            c.drawString(fx + 0.3 * inch, 3.3 * inch, 'FRONT VIEW'); c.drawString(sx - 0.3 * inch, 2.85 * inch, 'LEFT SIDE VIEW')
+            # write-in boxes for the keys that can be programmed; leaders point at the key
+            targets = [('PF3 - emergency key (top)', 0.1, 2.95, fx - 0.5 * inch, 2.78 * inch),
+                       ('P1 key', 0.1, 0.75, fx - 0.55 * inch, 1.23 * inch),
+                       ('P2 key', 3.9, 0.75, fx + 0.55 * inch, 1.23 * inch),
+                       ('PF1 - upper side key', 6.15, 1.45, sx + 0.15 * inch, 1.2 * inch),
+                       ('PF2 - lower side key', 6.15, 0.6, sx + 0.15 * inch, 0.85 * inch)]
+            for t, x, y, tx, ty in targets:
+                x, y = x * inch, y * inch
+                self.box(c, x, y, t, w=1.35 * inch)
+                c.setLineWidth(0.4)
+                c.line(x + (1.35 * inch if x < tx else 0), y + 0.25 * inch, tx, ty)
+            c.setFont('Helvetica', 6.5)
+            c.drawString(0.1 * inch, 0.05 * inch, 'Not programmable here: channel switch and POWER/VOL knobs (top), Menu, Exit, speaker, PTT.')
         else:                   # mobile: control head and hand microphone
             c.roundRect(0.2 * inch, 1.9 * inch, 4.2 * inch, 1.4 * inch, 6); c.setFont('Helvetica', 7); c.drawCentredString(2.3 * inch, 2.6 * inch, 'control head / display')
             c.roundRect(5.3 * inch, 0.3 * inch, 1.1 * inch, 2.6 * inch, 8); c.drawCentredString(5.85 * inch, 1.6 * inch, 'hand mic')
@@ -139,7 +156,8 @@ def build(folder, out, title):
     S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
     mobile = 'D578' in title
     S += [Paragraph('Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile), Spacer(1, 6)]
-    blank = [['Key', 'Short press', 'Long press']] + [['', '', ''] for _ in range(8)]
+    keys = [['PF1 (side, upper)', '', ''], ['PF2 (side, lower)', '', ''], ['PF3 (top, emergency)', '', ''], ['P1', '', ''], ['P2', '', '']] if not mobile else []
+    blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(8 - len(keys))]
     bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
     S += [bt]
     S += [PageBreak(), Paragraph('What is programmed on this radio', ss['Heading2'])]
