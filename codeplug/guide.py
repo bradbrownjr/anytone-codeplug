@@ -14,7 +14,8 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
-from reportlab.platypus import Flowable, KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import BaseDocTemplate, Flowable, Frame, KeepTogether, NextPageTemplate, PageBreak, PageTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.platypus.tableofcontents import TableOfContents
 
 ROOT = Path(__file__).resolve().parent.parent
 BUTTONS = []   # [(key, short press, long press)] -- needs Brad's confirmation / the 578 export
@@ -112,6 +113,18 @@ class KeyDiagram(Flowable):
         c.restoreState()
 
 
+class Lazy(Flowable):
+    """Builds its table at layout time, so page numbers learned in the first pass of multiBuild show up in the second."""
+    def __init__(self, fn):
+        super().__init__(); self.fn = fn
+
+    def wrap(self, aw, ah):
+        self.t = self.fn(); self.width, self.height = self.t.wrap(aw, ah); return self.width, self.height
+
+    def draw(self):
+        self.t.drawOn(self.canv, 0, 0)
+
+
 def rows(path):
     with open(path, newline='') as f:
         return list(csv.DictReader(f))
@@ -167,48 +180,87 @@ def build(folder, out, title):
     def footer(c, d):
         c.saveState(); c.setFont('Helvetica', 7); c.drawString(0.5 * inch, 0.35 * inch, stamp); c.drawRightString(8 * inch, 0.35 * inch, f'Page {d.page}'); c.restoreState()
 
-    def tbl(data, widths):
+    h1 = ss['Heading1'].clone('Section', fontSize=15, leading=18, spaceBefore=6, spaceAfter=4)
+    zhead = ss['Heading3'].clone('ZoneHead', fontSize=8.5, leading=10, spaceBefore=4, spaceAfter=1)
+    ztext = ss['BodyText'].clone('ztext', fontSize=6.5, leading=7.5)
+    zpage = {}                                                  # zone number -> page, filled during the first pass
+
+    def tbl(data, widths, fs=7, pad=1):
         t = Table(data, colWidths=widths, repeatRows=1)
-        t.setStyle(TableStyle([('FONTSIZE', (0, 0), (-1, -1), 7), ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-                               ('GRID', (0, 0), (-1, -1), 0.25, colors.grey), ('TOPPADDING', (0, 0), (-1, -1), 1), ('BOTTOMPADDING', (0, 0), (-1, -1), 1)]))
+        t.setStyle(TableStyle([('FONTSIZE', (0, 0), (-1, -1), fs), ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+                               ('GRID', (0, 0), (-1, -1), 0.25, colors.grey), ('TOPPADDING', (0, 0), (-1, -1), pad), ('BOTTOMPADDING', (0, 0), (-1, -1), pad), ('LEADING', (0, 0), (-1, -1), fs + 1)]))
         return t
 
-    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 12),
+    class Doc(BaseDocTemplate):
+        def afterFlowable(self, f):
+            if isinstance(f, KeepTogether):
+                f = f._content[0]
+            st = getattr(f, 'style', None)
+            if st is not None and st.name == 'Section':
+                self.notify('TOCEntry', (0, f.getPlainText(), self.page))
+            elif st is not None and st.name == 'ZoneHead':
+                zpage[f.getPlainText().split('.')[0]] = self.page
+
+    m, W, H, col = 0.5 * inch, letter[0], letter[1], (letter[0] - 1.0 * inch - 0.2 * inch) / 2
+    doc = Doc(str(out), pagesize=letter, title=head, leftMargin=m, rightMargin=m, topMargin=m, bottomMargin=0.6 * inch)
+    fy, fh = 0.6 * inch, H - 1.1 * inch
+    doc.addPageTemplates([
+        PageTemplate('one', [Frame(m, fy, W - 2 * m, fh, id='f', leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)], onPage=footer),
+        PageTemplate('two', [Frame(m, fy, col, fh, id='l', leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0),
+                             Frame(m + col + 0.2 * inch, fy, col, fh, id='r', leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)], onPage=footer)])
+
+    mobile = 'D578' in title
+    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 8),
          Paragraph('Moving between zones and channels', ss['Heading2'])]
     S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
-    mobile = 'D578' in title
     S += [Paragraph('Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile), Spacer(1, 6)]
     keys = [['PF1 (side, upper)', '', ''], ['PF2 (side, lower)', '', ''], ['PF3 (top, emergency)', '', ''], ['P1', '', ''], ['P2', '', '']] if not mobile else [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']]
     blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(8 - len(keys))]
     bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
-    S += [bt]
-    S += [PageBreak(), Paragraph('What is programmed on this radio', ss['Heading2'])]
+    S += [bt, PageBreak()]
+
     ro = sum(1 for r in chs.values() if r['PTT Prohibit'] == 'On')
+    S += [Paragraph('What is programmed on this radio', h1)]
     S += [Paragraph(f"{len(chs)} channels in {len(zones)} zones; {ro} are receive only. Zones fall into these groups:", ss['BodyText']), Spacer(1, 4)]
     S += [tbl([['Group', 'Zones', 'Channels', 'What it is']] + [[Paragraph(escape(k), small), str(zn), str(cn), Paragraph(escape(d), small)] for k, zn, cn, d in channel_types(chs, zones)],
               [1.6 * inch, 0.5 * inch, 0.7 * inch, 4.7 * inch])]
     S += [Spacer(1, 6), Paragraph('Channel names: DMR channels are SITE then talkgroup (e.g. BRDCT CT SW); FM repeaters are CALL City. A zone holds up to 250 channels; a scan list is selected per channel.', ss['BodyText'])]
-    S += [PageBreak(), Paragraph('Zones', ss['Heading2'])]
-    S += [tbl([['#', 'Zone', 'Channels']] + [[z['No.'], escape(z['Zone Name']), str(len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0)] for z in zones],
-              [0.5 * inch, 3 * inch, 1 * inch])]
-    S += [PageBreak()]
+    S += [Spacer(1, 10)]
+
+    toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=10, leading=14)]
+    S += [Paragraph('Contents', ss['Heading2']), toc, PageBreak()]
+
+    cnt = lambda z: len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0
+    def zone_table():
+        zr = [[z['No.'], z['Zone Name'], str(cnt(z)), str(zpage.get(z['No.'], ''))] for z in zones]
+        half = (len(zr) + 1) // 2
+        pair = [['#', 'Zone', 'Ch', 'Page', '#', 'Zone', 'Ch', 'Page']]
+        for i in range(half):
+            pair.append(zr[i] + (zr[i + half] if i + half < len(zr) else ['', '', '', '']))
+        w = [0.3 * inch, 1.9 * inch, 0.35 * inch, 0.45 * inch]
+        zt = tbl(pair, w + w, fs=6.5, pad=0.5)
+        zt.setStyle(TableStyle([('LINEAFTER', (3, 0), (3, -1), 1.5, colors.black)]))
+        return zt
+    zt = Lazy(zone_table)
+    S += [Paragraph('Zone list', h1), zt, NextPageTemplate('two'), PageBreak()]
+
+    S += [Paragraph('Zone channels', h1)]
     for z in zones:
-        S += [Paragraph(f"{z['No.']}. {escape(z['Zone Name'])}", ss['Heading3'])]
-        data = [['Channel', 'RX MHz', 'TX MHz', 'Type', 'Tone / CC / TG', 'Notes']]
+        data = [['Channel', 'RX MHz', 'TX MHz', 'Tone / CC TS TG']]
         for n in (z['Zone Channel Member'].split('|') if z['Zone Channel Member'] else []):
             r = chs[n]
             if r['Channel Type'] == 'D-Digital':
                 info = f"CC{r.get('RX Color Code', r.get('Color Code'))} TS{r['Slot']} {r['Contact']}"
             else:
-                info = (r['CTCSS/DCS Encode'] if r['CTCSS/DCS Encode'] != 'Off' else '')
-            data.append([Paragraph(escape(n), small), r['Receive Frequency'], r['Transmit Frequency'], r['Channel Type'][2:], Paragraph(escape(info), small),
-                         'RX only' if r['PTT Prohibit'] == 'On' else ''])
-        S += [tbl(data, [1.5 * inch, 0.9 * inch, 0.9 * inch, 0.6 * inch, 2.2 * inch, 0.8 * inch]), Spacer(1, 10)]
-    S += [PageBreak(), Paragraph('Talkgroups', ss['Heading2']),
-          tbl([['#', 'ID', 'Name', 'Call type']] + [[t['No.'], t['Radio ID'], escape(t['Name']), t['Call Type']] for t in tgs], [0.5 * inch, 1 * inch, 2.5 * inch, 1.2 * inch])]
+                info = r['CTCSS/DCS Encode'] if r['CTCSS/DCS Encode'] != 'Off' else ''
+            if r['PTT Prohibit'] == 'On':
+                info = (info + ' RX only').strip()
+            data.append([Paragraph(escape(n), ztext), r['Receive Frequency'], r['Transmit Frequency'], Paragraph(escape(info), ztext)])
+        S += [KeepTogether([Paragraph(f"{z['No.']}. {escape(z['Zone Name'])}", zhead), tbl(data, [1.05 * inch, 0.62 * inch, 0.62 * inch, col - 2.29 * inch], fs=6.5, pad=0.5)]), Spacer(1, 4)]
+    S += [Paragraph('Talkgroups', h1),
+          tbl([['#', 'ID', 'Name', 'Call type']] + [[t['No.'], t['Radio ID'], escape(t['Name']), t['Call Type']] for t in tgs], [0.4 * inch, 0.7 * inch, 1.6 * inch, col - 2.7 * inch], fs=6.5, pad=0.5)]
     Path(out).parent.mkdir(parents=True, exist_ok=True)
-    SimpleDocTemplate(str(out), pagesize=letter, leftMargin=0.5 * inch, rightMargin=0.5 * inch, topMargin=0.5 * inch, bottomMargin=0.6 * inch,
-                      title=head).build(S, onFirstPage=footer, onLaterPages=footer)
+    doc.multiBuild(S)
 
 
 if __name__ == '__main__':
