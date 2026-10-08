@@ -59,3 +59,7 @@ DCS tones are written as `D<code>N` (unverified, four GMRS channels use them; FO
 - `exports/<radio>`: raw CPS exports from the radios; templates only, never imported.
 - `import/<radio>`: generated CSVs to import into the CPS (committed). The only place to import from.
 - `guides/`: printable PDF guides (`python3 codeplug/guide.py import/d878uv guides/d878uv.pdf`, and `import/d578uv guides/d578uv.pdf AT-D578UV`), committed; regenerate after any codeplug change.
+
+## Key functions are not in the CSV
+
+PF1-3, P1-P2 (878) and P1-P6, mic A-D, knob push (578) assignments live only in the CPS binary (Optional Setting, Key Function); the CSV export has no columns for them and the import window says "Excluding Key Function". A CSV import into a fresh codeplug leaves them Off. Set them once by hand (the values are in the guides' page 1 table, `BUTTONS` in `codeplug/guide.py`) and keep the result as a `.rdt` template to start later radios from.
