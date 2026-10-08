@@ -4,7 +4,7 @@ CSV codeplugs for the **AnyTone AT-D878UV** (HT) and **AT-D578UV** (mobile), for
 FM repeaters from the state coordinators, Maine ARES / Cumberland County ECT channels, and receive-only government interoperability
 channels (Maine FOG, NIFOG).
 
-- `exports/d878uv/` — the live 878 codeplug (CPS export, edited by the scripts in `codeplug/`). `exports/d578uv/` is the 578's CPS export (firmware 1.14), used as the column/format template for its build.
+- `exports/d878uv/` — the live 878 codeplug (CPS export, edited by the scripts in `codeplug/`). `exports/d578uv/` is the 578's CPS export (firmware 1.14, incomplete: the CPS locked up mid-export), used as the column/format template for its build.
 - `data/` — the single-source tables with stable IDs (`codeplug/model.py`); `out/` is generated from it.
 - `codeplug/` — fetchers, parsers and the zone builders (`add_*.py`). `data/sources/` holds parsed source data.
 - `TODO.md` — status and open items.
