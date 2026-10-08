@@ -25,12 +25,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
 GENERATED = ('Channel.CSV', 'Zone.CSV', 'ScanList.CSV', 'TalkGroups.CSV', 'ContactTalkGroups.CSV')
 RADIOS = {  # MHz ranges the radio can transmit/receive; channels.csv uses the D878UV column names
-    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}},
+    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}, 'share': []},
     # D578UV firmware 1.14 export: renamed/fewer channel columns, no Zone Hide, ContactTalkGroups.CSV, 16-char radio ID name
     'd578uv': {'folder': 'd578uv', 'bands': [(136, 174), (200, 260), (400, 480)], 'tg_file': 'ContactTalkGroups.CSV',
                'colmap': {'Color Code': 'RX Color Code', 'TDMA': 'Simplex TDMA', 'TDMA Adaptive': 'Slot Suit', 'Simplex': 'Through Mode',
                           'Exclude Channel From Roaming': 'Exclude channel from roaming'},
-               'fixed': {'Simplex': 'Off', 'Radio ID': 'KC1JMH / Brad Br'}},
+               'fixed': {'Simplex': 'Off', 'Radio ID': 'KC1JMH / Brad Br'},
+               'share': ['RoamingChannel.CSV', 'RoamingZone.CSV']},   # NEDECN roaming tables, taken from the 878 export (same layout; the 578's are older)
 }
 
 
@@ -134,6 +135,8 @@ def build(radio, out=None, static=None):
     for f in static.iterdir():
         if f.name not in GENERATED and f.is_file():
             shutil.copyfile(f, out / f.name)
+    for f in prof['share']:
+        shutil.copyfile(ROOT / 'exports' / 'd878uv' / f, out / f)
     ch_head, chs = table('channels.csv')
     c = {n: i for i, n in enumerate(ch_head)}
     keep = [r for r in chs if in_bands(r[c['Receive Frequency']], prof['bands']) and in_bands(r[c['Transmit Frequency']], prof['bands'])]
