@@ -45,12 +45,12 @@ NAV = {
                   'Change channel: turn the channel knob (right of the display). Push the knob to switch the main channel between A and B.',
                   'P6 switches between VFO and memory (channel) mode. P1 sets power level (Power).',
                   'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
-                  'Key assignments below are from the CPS (Optional Setting -> Key Function).'],
+                  'Key assignments on page 1 are from the CPS (Optional Setting -> Key Function).'],
     'AT-D878UV': ['Change zone: press Down on the front pad for the next zone, Up for the previous zone.',
                   'Change channel: turn the channel knob (top of the radio) within the current zone.',
                   'Switch the main channel between A and B: short press P1 (Main Channel Switch).',
                   'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
-                  'Key assignments below are from the CPS (Optional Setting -> Key Function).'],
+                  'Key assignments on page 1 are from the CPS (Optional Setting -> Key Function).'],
 }
 
 
@@ -62,7 +62,8 @@ class KeyDiagram(Flowable):
         super().__init__(); self.mobile = mobile; self.keys = keys or {}; self.width, self.height = self.W, self.H
 
     def wrap(self, aw, ah):
-        return self.W, self.H
+        self.height = self.H - (0.35 * inch if self.mobile else 0)
+        return self.W, self.height
 
     def box(self, c, x, y, label, w=1.45 * inch, vals=None):
         c.setLineWidth(0.6); c.rect(x, y, w, 0.58 * inch)
@@ -254,10 +255,10 @@ def build(folder, out, title):
                              Frame(m + col + 0.2 * inch, fy, col, fh, id='r', leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)], onPage=footer)])
 
     mobile = 'D578' in title
-    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 8),
-         Paragraph('Moving between zones and channels', ss['Heading2'])]
-    S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
-    S += [Paragraph('Programmable buttons' if BUTTONS.get(title) else 'Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile, BUTTONS.get(title)), Spacer(1, 6)]
+    toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=9, leading=10.5, spaceBefore=0, spaceAfter=0)]
+    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 4),
+         Paragraph('Contents', ss['Heading2']), toc]
+    S += [Paragraph('Programmable buttons' if BUTTONS.get(title) else 'Programmable buttons (write in the assignments)', h1), KeyDiagram(mobile, BUTTONS.get(title)), Spacer(1, 6)]
     bk = BUTTONS.get(title)
     if bk:
         keys = [[n, *bk[k]] for n, k in ((('PF1 (side, upper)', 'PF1'), ('PF2 (side, lower)', 'PF2'), ('PF3 (top, emergency)', 'PF3'), ('P1', 'P1'), ('P2', 'P2')) if not mobile else
@@ -267,22 +268,20 @@ def build(folder, out, title):
     else:
         keys = [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']] if mobile else []
     blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(0 if bk else 8 - len(keys))]
-    bt = tbl(blank, [1.8 * inch, 2.35 * inch, 2.35 * inch], fs=8 if bk else 7, pad=3 if bk else 1)
+    bt = tbl(blank, [1.8 * inch, 2.35 * inch, 2.35 * inch], fs=8 if bk else 7, pad=2 if bk else 1)
     if not bk:
         bt._argH[1:] = [0.3 * inch] * (len(blank) - 1)
     if KEYNOTE.get(title):
         S += [Spacer(1, 2)]
     S += [bt] + ([Spacer(1, 4), Paragraph(KEYNOTE[title], small)] if KEYNOTE.get(title) else []) + [PageBreak()]
 
-    toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=10, leading=14)]
-    S += [Paragraph('Contents', ss['Heading2']), toc, Spacer(1, 10)]
     ro = sum(1 for r in chs.values() if r['PTT Prohibit'] == 'On')
     S += [Paragraph('What is programmed on this radio', h1)]
     S += [Paragraph(f"{len(chs)} channels in {len(zones)} zones; {ro} are receive only. Zones fall into these groups:", ss['BodyText']), Spacer(1, 4)]
     S += [tbl([['Group', 'Zones', 'Channels', 'What it is']] + [[Paragraph(escape(k), small), str(zn), str(cn), Paragraph(escape(d), small)] for k, zn, cn, d in channel_types(chs, zones)],
               [1.6 * inch, 0.5 * inch, 0.7 * inch, 4.7 * inch])]
     S += [Spacer(1, 6), Paragraph('Channel names: DMR channels are SITE then talkgroup (e.g. BRDCT CT SW); FM repeaters are CALL City. A zone holds up to 250 channels; a scan list is selected per channel.', ss['BodyText'])]
-    S += [Spacer(1, 8), Paragraph('Using the radio', ss['Heading2'])] + [Paragraph(t, ss['BodyText']) for t in USE.get(title, [])] + [Spacer(1, 4), Paragraph(BEFORE, ss['BodyText'])]
+    S += [Spacer(1, 6), Paragraph('Using the radio', h1), Paragraph('Moving between zones and channels', ss['Heading3'])] + [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, [])] + [Paragraph('Other keys', ss['Heading3'])] + [Paragraph(t, ss['BodyText']) for t in USE.get(title, [])] + [Spacer(1, 4), Paragraph(BEFORE, ss['BodyText'])]
     S += [PageBreak()]
 
     cnt = lambda z: len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0
