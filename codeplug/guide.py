@@ -20,6 +20,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 ROOT = Path(__file__).resolve().parent.parent
 # Key assignments (CPS Optional Setting -> Key Function; not in the CSV export).  {model: {key: (short press, long press)}}.
 # The 578 is still to be filled in from its CPS screen.
+REPO = 'github.com/bradbrownjr/anytone-codeplug'
 BUTTONS = {
     'AT-D878UV': {'PF1': ('Scan', 'Nuisance Delete'), 'PF2': ('Digital Monitor', 'LastCall Reply'), 'PF3': ('Power', 'Roaming'),
                   'P1': ('Main Channel Switch', 'APRS Send'), 'P2': ('V/M', 'FM'), 'UPDN': ('Up: Previous zone', 'Down: Next zone')},
@@ -220,7 +221,7 @@ def build(folder, out, title):
     ss = getSampleStyleSheet()
     small = ss['BodyText'].clone('small', fontSize=7, leading=8.5)
     head = f'{title} guide'
-    stamp = f'{head} - {datetime.date.today()} - codeplug commit {commit()}'
+    stamp = f'{head} - {datetime.date.today()} - codeplug commit {commit()} - {REPO}'
 
     def footer(c, d):
         c.saveState(); c.setFont('Helvetica', 7); c.drawString(0.5 * inch, 0.35 * inch, stamp); c.drawRightString(8 * inch, 0.35 * inch, f'Page {d.page}'); c.restoreState()
@@ -256,7 +257,8 @@ def build(folder, out, title):
 
     mobile = 'D578' in title
     toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=9, leading=10.5, spaceBefore=0, spaceAfter=0)]
-    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 4),
+    S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']),
+         Paragraph(f'Updated codeplug CSVs and this guide: <b>{REPO}</b> (CSVs in import/{folder.name}, PDFs in guides/).', small), Spacer(1, 4),
          Paragraph('Contents', ss['Heading2']), toc]
     S += [Paragraph('Programmable buttons' if BUTTONS.get(title) else 'Programmable buttons (write in the assignments)', h1), KeyDiagram(mobile, BUTTONS.get(title)), Spacer(1, 6)]
     bk = BUTTONS.get(title)
