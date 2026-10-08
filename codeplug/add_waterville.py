@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from cplib import Codeplug
 
 RX, TX, CC = 146.925, 146.325, '12'
-d = Path(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+d = Path(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
 cp = Codeplug(d)
 src = cp.members('Augusta ME')
 names = []

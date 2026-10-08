@@ -140,7 +140,7 @@ def stage_counties(cp):
 
 
 if __name__ == '__main__':
-    cp = Codeplug(sys.argv[2] if len(sys.argv) > 2 else 'exports/d878uv')
+    cp = Codeplug(sys.argv[2] if len(sys.argv) > 2 else 'import/d878uv')
     before = len(cp.ch)
     {'state-net': stage_state_net, 'interop': stage_interop, 'counties': stage_counties}[sys.argv[1]](cp)
     errs = cp.validate()

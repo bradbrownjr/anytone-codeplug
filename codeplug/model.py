@@ -5,11 +5,15 @@ data/ holds one set of tables with stable IDs; zones and scan lists reference ch
 channel or inserting one never breaks a list. `build` renders the CPS CSVs (frequency lists, numbering and
 name references are derived) for a radio profile.
 
-    python3 codeplug/model.py bootstrap [export dir]     exports/d878uv -> data/   (one-time; adopts IDs)
-    python3 codeplug/model.py sync                        bootstrap + bootstrap-extra in one step
-    python3 codeplug/model.py bootstrap-extra d578uv      adopt 220 MHz etc. channels that only the 578 can carry
-    python3 codeplug/model.py build d878uv                data/ -> out/d878uv
-    python3 codeplug/model.py check d878uv                build, then compare with exports/d878uv byte for byte
+Layout: exports/<radio>/ = raw CPS exports, used only as templates (column headers, the 578's own per-channel values);
+import/<radio>/ = the CSVs to import into the CPS (generated, committed); data/ = the source of truth;
+data/static/<radio>/ = the tables that are not generated from data/ (hotkeys, FM, roaming, OptionalSetting ...).
+import/d878uv is also the working copy that the cplib-based scripts edit; run `sync` afterwards to fold edits into data/.
+
+    python3 codeplug/model.py sync                        import/d878uv -> data/ (IDs kept by name), adopt the 578-only channels
+    python3 codeplug/model.py build d878uv                data/ -> import/d878uv   (also: build d578uv)
+    python3 codeplug/model.py check d878uv                sync round trip: data/ -> build -> byte-identical to import/d878uv?
+    python3 codeplug/model.py parity                      the two radios match except the 578's 220 MHz content
 
 Tables (UTF-8 CSV, header = CPS column names where applicable):
     data/channels.csv        id + every Channel.CSV column except `No.`
@@ -23,6 +27,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
+STATIC = DATA / 'static'
+IMPORT = ROOT / 'import'
+TEMPLATE = ROOT / 'exports'
 GENERATED = ('Channel.CSV', 'Zone.CSV', 'ScanList.CSV', 'TalkGroups.CSV', 'ContactTalkGroups.CSV')
 RADIOS = {  # MHz ranges the radio can transmit/receive; channels.csv uses the D878UV column names
     'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}, 'keep_own': [], 'share': []},
@@ -53,16 +60,28 @@ def table(name):
 def bootstrap(src):
     src = Path(src)
     DATA.mkdir(exist_ok=True)
+    def old_ids(file, key_col, id_col=0):
+        p = DATA / file
+        return {r[key_col]: r[id_col] for r in read(p)[1:]} if p.exists() else {}
+    def assign(names, old, fmt):
+        used = set(old.values()); nxt = max([int(i.lstrip('abcdefghijklmnopqrstuvwxyz')) for i in used] + [0]) + 1
+        out = {}
+        for n in names:
+            if n in old: out[n] = old[n]
+            else: out[n] = fmt % nxt; nxt += 1
+        return out
     ch = read(src / 'Channel.CSV'); head, rows = ch[0], ch[1:]
-    ids = {r[1]: 'ch%05d' % i for i, r in enumerate(rows, 1)}
-    assert len(ids) == len(rows), 'duplicate channel names'
+    assert len({r[1] for r in rows}) == len(rows), 'duplicate channel names'
+    ids = assign([r[1] for r in rows], old_ids('channels.csv', 1), 'ch%05d')
     write(DATA / 'channels.csv', [['id'] + head[1:]] + [[ids[r[1]]] + r[1:] for r in rows], quote_all=False, eol='\n')
     tg = read(src / 'TalkGroups.CSV')
-    write(DATA / 'talkgroups.csv', [['id'] + tg[0][1:]] + [['tg%04d' % i] + r[1:] for i, r in enumerate(tg[1:], 1)], quote_all=False, eol='\n')
+    tgid = assign([r[1] for r in tg[1:]], old_ids('talkgroups.csv', 1), 'tg%04d')
+    write(DATA / 'talkgroups.csv', [['id'] + tg[0][1:]] + [[tgid[r[1]]] + r[1:] for r in tg[1:]], quote_all=False, eol='\n')
     z = read(src / 'Zone.CSV'); zh = z[0]; zc = {n: i for i, n in enumerate(zh)}
     zones, members = [['id', 'name', 'a_id', 'b_id', 'hide']], [['zone_id', 'seq', 'channel_id']]
-    for i, r in enumerate(z[1:], 1):
-        zid = 'z%03d' % i
+    zids = assign([r[1] for r in z[1:]], old_ids('zones.csv', 1), 'z%03d')
+    for r in z[1:]:
+        zid = zids[r[1]]
         zones.append([zid, r[zc['Zone Name']], ids.get(r[zc['A Channel']], ''), ids.get(r[zc['B Channel']], ''), r[zc['Zone Hide ']]])
         for s, m in enumerate(r[zc['Zone Channel Member']].split('|') if r[zc['Zone Channel Member']] else [], 1):
             members.append([zid, s, ids[m]])
@@ -70,18 +89,30 @@ def bootstrap(src):
     s = read(src / 'ScanList.CSV'); sh = s[0]; sc = {n: i for i, n in enumerate(sh)}
     keep = [i for i, n in enumerate(sh) if n in ('Scan Mode', 'Priority Channel Select', 'Priority Channel 1', 'Priority Channel 2', 'Revert Channel', 'Look Back Time A[s]', 'Look Back Time B[s]', 'Dropout Delay Time[s]', 'Dwell Time[s]')]
     scans, smem = [['id', 'name'] + [sh[i] for i in keep]], [['scanlist_id', 'seq', 'channel_id']]
-    for i, r in enumerate(s[1:], 1):
-        sid = 's%03d' % i
+    sids = assign([r[1] for r in s[1:]], old_ids('scanlists.csv', 1), 's%03d')
+    for r in s[1:]:
+        sid = sids[r[1]]
         scans.append([sid, r[sc['Scan List Name']]] + [r[i2] for i2 in keep])
         for n, m in enumerate(r[sc['Scan Channel Member']].split('|') if r[sc['Scan Channel Member']] else [], 1):
             smem.append([sid, n, ids[m]])
     write(DATA / 'scanlists.csv', scans, quote_all=False, eol='\n'); write(DATA / 'scanlist_members.csv', smem, quote_all=False, eol='\n')
+    # tables that are not generated from data/ travel with the working copy
+    dest = STATIC / 'd878uv'; dest.mkdir(parents=True, exist_ok=True)
+    for f in src.iterdir():
+        if f.is_file() and f.name not in GENERATED:
+            shutil.copyfile(f, dest / f.name)
     print(f'bootstrapped {len(rows)} channels, {len(z) - 1} zones, {len(s) - 1} scan lists, {len(tg) - 1} talkgroups')
 
 
 def bootstrap_extra(radio='d578uv'):
     """Adopt the channels (and zones) of a radio's own export that the D878UV cannot carry (e.g. 220 MHz) into data/."""
-    prof = RADIOS[radio]; src = ROOT / 'exports' / prof['folder']
+    prof = RADIOS[radio]; src = TEMPLATE / prof['folder']
+    dest = STATIC / radio
+    if not dest.exists():                       # first time: the 578's own non-generated tables come from its CPS export
+        dest.mkdir(parents=True)
+        for f in src.iterdir():
+            if f.is_file() and f.name not in GENERATED and f.name != '.gitkeep':
+                shutil.copyfile(f, dest / f.name)
     head, chs = table('channels.csv'); c = {n: i for i, n in enumerate(head)}
     names = {r[c['Channel Name']] for r in chs}
     base = next(r for r in chs if r[c['Channel Name']] == 'ECT1')
@@ -142,22 +173,23 @@ def in_bands(freq, bands):
 
 def build(radio, out=None, static=None):
     prof = RADIOS[radio]
-    out = Path(out or ROOT / 'out' / prof['folder'])
-    static = Path(static or ROOT / 'exports' / prof['folder'])
+    out = Path(out or IMPORT / prof['folder'])
+    templ = TEMPLATE / prof['folder']             # raw CPS export: headers and the radio's own per-channel values
+    static = Path(static or STATIC / prof['folder'])
     out.mkdir(parents=True, exist_ok=True)
     for f in static.iterdir():
         if f.name not in GENERATED and f.is_file():
             shutil.copyfile(f, out / f.name)
     for f in prof['share']:
-        shutil.copyfile(ROOT / 'exports' / 'd878uv' / f, out / f)
+        shutil.copyfile(STATIC / 'd878uv' / f, out / f)
     ch_head, chs = table('channels.csv')
     c = {n: i for i, n in enumerate(ch_head)}
     keep = [r for r in chs if in_bands(r[c['Receive Frequency']], prof['bands']) and in_bands(r[c['Transmit Frequency']], prof['bands'])]
     by_id = {r[0]: r for r in keep}
-    header = read(static / 'Channel.CSV')[0]
+    header = read(templ / 'Channel.CSV')[0]
     cm = prof['colmap']
     # columns with no 878 equivalent: keep the radio's own per-channel value (matched by name), else the radio's most common value
-    own = {n: dict(zip(header, r)) for n, r in ((r[1], r) for r in read(static / 'Channel.CSV')[1:])}
+    own = {n: dict(zip(header, r)) for n, r in ((r[1], r) for r in read(templ / 'Channel.CSV')[1:])}
     default = {h: 'Off' for h in prof['keep_own']}
     pick = [(c[cm.get(h, h)] if h != 'No.' and h not in prof['keep_own'] else None, prof['fixed'].get(h), h) for h in header]
     write(out / 'Channel.CSV', [header] + [[str(i) if h == 'No.' else (own.get(r[1], {}).get(h, default[h]) if h in prof['keep_own'] else (fx if fx is not None else r[j]))
@@ -165,7 +197,7 @@ def build(radio, out=None, static=None):
     name = lambda cid: by_id[cid][c['Channel Name']]
     rx = lambda cid: by_id[cid][c['Receive Frequency']]
     tx = lambda cid: by_id[cid][c['Transmit Frequency']]
-    zh = read(static / 'Zone.CSV')[0]
+    zh = read(templ / 'Zone.CSV')[0]
     zmem = {}
     for zid, seq, cid in table('zone_members.csv')[1]:
         if cid in by_id:
@@ -180,7 +212,7 @@ def build(radio, out=None, static=None):
                name(a), rx(a), tx(a), name(b), rx(b), tx(b), hide]
         rows.append(row[:len(zh)])
     write(out / 'Zone.CSV', [zh] + rows)
-    sh = read(static / 'ScanList.CSV')[0]
+    sh = read(templ / 'ScanList.CSV')[0]
     sh_h, sh_rows = table('scanlists.csv')
     smem = {}
     for sid, seq, cid in table('scanlist_members.csv')[1]:
@@ -195,7 +227,7 @@ def build(radio, out=None, static=None):
         rows.append([str(len(rows) + 1), sname, '|'.join(map(name, m)), '|'.join(map(rx, m)), '|'.join(map(tx, m)), mode, psel,
                      p1, *f(p1), p2, *f(p2), rev, lbA, lbB, drop, dwell])
     write(out / 'ScanList.CSV', [sh] + rows)
-    th = read(static / prof['tg_file'])[0]
+    th = read(templ / prof['tg_file'])[0]
     write(out / prof['tg_file'], [th] + [[str(i)] + r[1:] for i, r in enumerate(table('talkgroups.csv')[1], 1)])
     # OptionalSetting.CSV stores 0-based zone numbers: re-point by zone name if zones moved.
     return out, len(keep)
@@ -204,7 +236,7 @@ def build(radio, out=None, static=None):
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'bootstrap':
-        bootstrap(sys.argv[2] if len(sys.argv) > 2 else ROOT / 'exports' / 'd878uv')
+        bootstrap(sys.argv[2] if len(sys.argv) > 2 else IMPORT / 'd878uv')
     elif cmd == 'parity':        # the radios must match except for bands only one can carry (220 MHz on the 578)
         a, b = build('d878uv')[0], build('d578uv')[0]
         rd = lambda p: list(csv.DictReader(open(p, newline='')))
@@ -218,14 +250,18 @@ if __name__ == '__main__':
         print('878-only channels:', sorted(na - nb), '| 578-only channels:', len(nb - na), '| 578-only zones:', extra_zones, '| zones differing beyond 578-only members:', diff)
         print('PARITY OK' if ok else 'PARITY BROKEN'); sys.exit(not ok)
     elif cmd == 'sync':          # exports/d878uv -> data/, then adopt the 578-only channels
-        bootstrap(ROOT / 'exports' / 'd878uv'); bootstrap_extra('d578uv')
+        bootstrap(IMPORT / 'd878uv'); bootstrap_extra('d578uv')
     elif cmd == 'bootstrap-extra':
         bootstrap_extra(sys.argv[2] if len(sys.argv) > 2 else 'd578uv')
-    elif cmd in ('build', 'check'):
+    elif cmd == 'check':         # data/ -> build -> must equal the working copy byte for byte
+        import tempfile
+        bootstrap(IMPORT / 'd878uv'); bootstrap_extra('d578uv')
+        with tempfile.TemporaryDirectory() as t:
+            out, n = build(sys.argv[2], out=t)
+            ref = IMPORT / RADIOS[sys.argv[2]]['folder']
+            bad = [f.name for f in ref.iterdir() if f.is_file() and f.name != 'DigitalContactList.CSV' and f.read_bytes() != (out / f.name).read_bytes()]
+        print('MISMATCH: ' + ', '.join(bad) if bad else f'{n} channels, byte-identical to import/{sys.argv[2]}')
+        sys.exit(bool(bad))
+    elif cmd == 'build':
         out, n = build(sys.argv[2])
         print('built', out, n, 'channels')
-        if cmd == 'check':
-            bad = [f.name for f in (ROOT / 'exports' / RADIOS[sys.argv[2]]['folder']).iterdir()
-                   if f.is_file() and f.name != 'DigitalContactList.CSV' and f.read_bytes() != (out / f.name).read_bytes()]
-            print('MISMATCH: ' + ', '.join(bad) if bad else 'byte-identical to exports/')
-            sys.exit(bool(bad))

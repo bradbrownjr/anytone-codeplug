@@ -32,7 +32,7 @@ MED = [('MED %s' % n, f, '156.7') for n, f in zip(
 MED = [(n, round(f, 4), t) for n, f, t in MED]
 
 if __name__ == '__main__':
-    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
     members, new = [], 0
     last = 'CCFIRE'
     for name, rx, tone in VHF + FED_VHF + UHF + FED_UHF + MED:

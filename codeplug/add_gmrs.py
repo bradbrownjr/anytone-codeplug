@@ -19,7 +19,7 @@ EXISTING = {'ME': ['Brunswick-700', 'Falmouth-650', 'Gray-575', 'Hiram-575', 'Po
             'NH': ['Milton--700', 'Ossipee-550']}
 
 if __name__ == '__main__':
-    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
     per, new, skipped, made = {s: [] for s in ZONES}, [], [], {}
     for r in csv.DictReader(open('data/sources/gmrs_snapshots.csv', newline='')):
         st, rx = r['state'], float(r['rx'])

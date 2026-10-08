@@ -39,7 +39,7 @@ def analog(cp, rx, tx=None, tone=None):
 
 
 if __name__ == '__main__':
-    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
     members, new, last = [], [], 'ECT3'
     def use(name):
         if name not in members:

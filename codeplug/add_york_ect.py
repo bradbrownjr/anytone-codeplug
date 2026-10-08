@@ -9,7 +9,7 @@ from cplib import Codeplug
 from add_me_ares import analog
 
 if __name__ == '__main__':
-    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+    cp = Codeplug(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
     last = cp.members('ME ARES')[-1]
     members, new = [], []
     for name, rx, tx, tone, tmpl in [('KB1PRG Alfred', 444.85, 449.85, '103.5', 'W1QUI Falmouth'), ('KC1ETT Wells', 448.025, 443.025, '103.5', 'W1QUI Falmouth'),

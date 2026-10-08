@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render a printable PDF radio guide (zone list, per-zone channel tables, talkgroups) from a built codeplug folder.
 
-    python3 codeplug/guide.py [codeplug dir] [output.pdf] [radio title]     default: exports/d878uv -> out/guides/d878uv.pdf
+    python3 codeplug/guide.py [codeplug dir] [output.pdf] [radio title]     default: import/d878uv -> out/guides/d878uv.pdf
 
 The footer carries the date and git commit so a printed copy can be traced to a codeplug version.  The programmable
 button map and the diagram are NOT in the CSV export (key assignments live in the CPS binary); fill BUTTONS below once the
@@ -88,7 +88,7 @@ def build(folder, out, title):
 
 
 if __name__ == '__main__':
-    folder = Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / 'exports' / 'd878uv')
+    folder = Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / 'import' / 'd878uv')
     out = Path(sys.argv[2] if len(sys.argv) > 2 else ROOT / 'out' / 'guides' / (folder.name + '.pdf'))
     build(folder, out, sys.argv[3] if len(sys.argv) > 3 else 'AT-D878UV')
     print('wrote', out)

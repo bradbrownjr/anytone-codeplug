@@ -5,7 +5,7 @@ Usage: python3 codeplug/add_scanlists.py [codeplug dir]"""
 import csv, sys
 from pathlib import Path
 
-d = Path(sys.argv[1] if len(sys.argv) > 1 else 'exports/d878uv')
+d = Path(sys.argv[1] if len(sys.argv) > 1 else 'import/d878uv')
 rd = lambda f: list(csv.reader(open(d / f, newline='')))
 chs = rd('Channel.CSV'); ch, rows = chs[0], chs[1:]
 sc = rd('ScanList.CSV'); head, lists = sc[0], sc[1:]
