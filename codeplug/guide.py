@@ -78,15 +78,37 @@ class KeyDiagram(Flowable):
                 c.line(x + (1.35 * inch if x < tx else 0), y + 0.25 * inch, tx, ty)
             c.setFont('Helvetica', 6.5)
             c.drawString(0.1 * inch, 0.05 * inch, 'Not programmable here: channel switch and POWER/VOL knobs (top), Menu, Exit, speaker, PTT.')
-        else:                   # mobile: control head and hand microphone
-            c.roundRect(0.2 * inch, 1.9 * inch, 4.2 * inch, 1.4 * inch, 6); c.setFont('Helvetica', 7); c.drawCentredString(2.3 * inch, 2.6 * inch, 'control head / display')
-            c.roundRect(5.3 * inch, 0.3 * inch, 1.1 * inch, 2.6 * inch, 8); c.drawCentredString(5.85 * inch, 1.6 * inch, 'hand mic')
-            c.rect(5.45 * inch, 0.5 * inch, 0.8 * inch, 1.0 * inch); c.drawCentredString(5.85 * inch, 0.95 * inch, 'keypad')
-            for x, t in enumerate(('head key 1', 'head key 2', 'head key 3')):
-                self.box(c, (0.2 + x * 1.5) * inch, 1.1 * inch, t, w=1.4 * inch)
-            for x, t in enumerate(('mic P1', 'mic P2', 'mic P3', 'mic P4')):
-                self.box(c, (6.5 + 0 * x) * inch if False else 6.5 * inch, (2.85 - x * 0.65) * inch, t, w=0.95 * inch)
-            self.box(c, 0.2 * inch, 0.3 * inch, 'knobs / other', w=1.4 * inch); self.box(c, 1.75 * inch, 0.3 * inch, 'other', w=1.4 * inch)
+        else:                   # AT-D578UV: layout from the user manual, "3. Getting acquainted" (front panel and hand mic)
+            c.setFont('Helvetica', 6.5)
+            hx, hy, hw, hh = 0.2 * inch, 1.4 * inch, 4.0 * inch, 1.5 * inch
+            c.roundRect(hx, hy, hw, hh, 6)
+            c.circle(hx + 0.35 * inch, hy + 1.0 * inch, 0.22 * inch); c.circle(hx + 0.35 * inch, hy + 0.45 * inch, 0.18 * inch)   # A/B volume knob, power
+            c.rect(hx + 1.35 * inch, hy + 0.45 * inch, 1.5 * inch, 0.95 * inch); c.drawCentredString(hx + 2.1 * inch, hy + 0.9 * inch, 'display')
+            for i in range(3):
+                c.rect(hx + 0.85 * inch, hy + (1.05 - i * 0.3) * inch, 0.35 * inch, 0.22 * inch); c.drawString(hx + 0.9 * inch, hy + (1.11 - i * 0.3) * inch, 'P%d' % (i + 1))
+                c.rect(hx + 3.0 * inch, hy + (1.05 - i * 0.3) * inch, 0.3 * inch, 0.22 * inch); c.drawString(hx + 3.05 * inch, hy + (1.11 - i * 0.3) * inch, 'P%d' % (i + 4))
+            c.rect(hx + 1.0 * inch, hy + 0.08 * inch, 0.6 * inch, 0.22 * inch); c.drawString(hx + 1.1 * inch, hy + 0.14 * inch, 'MENU')
+            c.rect(hx + 2.6 * inch, hy + 0.08 * inch, 0.6 * inch, 0.22 * inch); c.drawString(hx + 2.7 * inch, hy + 0.14 * inch, 'EXIT')
+            c.circle(hx + 3.65 * inch, hy + 0.95 * inch, 0.25 * inch); c.drawCentredString(hx + 3.65 * inch, hy + 0.5 * inch, 'channel knob')
+            c.drawString(hx, hy + hh + 6, 'FRONT PANEL (P1-P3 left, P4-P6 right of the display)')
+            mx, my = 5.0 * inch, 0.35 * inch                       # hand microphone
+            c.roundRect(mx, my, 1.4 * inch, 2.7 * inch, 10)
+            c.rect(mx + 0.15 * inch, my + 2.2 * inch, 1.1 * inch, 0.35 * inch); c.drawCentredString(mx + 0.7 * inch, my + 2.35 * inch, 'Up / Down')
+            c.rect(mx + 0.15 * inch, my + 0.95 * inch, 1.1 * inch, 1.15 * inch); c.drawCentredString(mx + 0.7 * inch, my + 1.5 * inch, 'keypad 0-9 * #')
+            for i, t in enumerate('ABCD'):
+                c.rect(mx + (0.15 + i * 0.28) * inch, my + 0.6 * inch, 0.25 * inch, 0.25 * inch); c.drawCentredString(mx + (0.275 + i * 0.28) * inch, my + 0.7 * inch, t)
+            c.drawString(mx + 0.25 * inch, my + 0.25 * inch, 'speaker'); c.drawString(mx - 0.05 * inch, my + 2.8 * inch, 'HAND MIC')
+            c.rect(mx - 0.12 * inch, my + 1.5 * inch, 0.12 * inch, 0.55 * inch)                  # PTT on the left edge
+            c.drawRightString(mx - 0.15 * inch, my + 1.7 * inch, 'PTT')
+            targets = [('P1 / P2 / P3 (left of display)', 0.2, 0.15, hx + 0.85 * inch, hy + 0.45 * inch),
+                       ('P4 / P5 / P6 (right of display)', 1.8, 0.15, hx + 3.15 * inch, hy + 0.45 * inch),
+                       ('Mic keys A / B / C / D', 6.55, 0.6, mx + 1.1 * inch, my + 0.72 * inch),
+                       ('Mic Up / Down', 6.55, 1.5, mx + 1.25 * inch, my + 2.35 * inch)]
+            for t, x, y, tx, ty in targets:
+                x, y = x * inch, y * inch
+                self.box(c, x, y, t, w=1.5 * inch if x < 6 * inch else 0.95 * inch)
+                c.setLineWidth(0.4)
+                c.line(x + (0.75 * inch if x < 6 * inch else 0), y + 0.5 * inch if x < 6 * inch else y + 0.25 * inch, tx, ty)
         c.restoreState()
 
 
@@ -156,7 +178,7 @@ def build(folder, out, title):
     S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
     mobile = 'D578' in title
     S += [Paragraph('Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile), Spacer(1, 6)]
-    keys = [['PF1 (side, upper)', '', ''], ['PF2 (side, lower)', '', ''], ['PF3 (top, emergency)', '', ''], ['P1', '', ''], ['P2', '', '']] if not mobile else []
+    keys = [['PF1 (side, upper)', '', ''], ['PF2 (side, lower)', '', ''], ['PF3 (top, emergency)', '', ''], ['P1', '', ''], ['P2', '', '']] if not mobile else [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']]
     blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(8 - len(keys))]
     bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
     S += [bt]
