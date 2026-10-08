@@ -9,6 +9,8 @@ channels (Maine FOG, NIFOG).
 - `exports/d878uv/`, `exports/d578uv/` — raw CPS exports, kept only as templates (column headers; the 578's own per-channel values). Not edited.
 - `codeplug/` — the generator (`model.py`), fetchers, parsers and the one-shot zone builders (`add_*.py`, which edit `import/d878uv`). `TODO.md` — status and open items.
 
+**Maintaining this (agents and humans): see [docs/MAINTAINING.md](docs/MAINTAINING.md)** — the model, the refresh procedure, standing rules and the verification checklist.
+
 ## Importing into the CPS
 Back up your current codeplug first. In the CPS: Tools -> Import -> select `at-d878uv.LST` from the folder (the CPS imports by that list; do not rename the files).
 Check Zone and Channel counts afterwards. Receive-only channels have PTT Prohibit on and cannot transmit.

@@ -10,6 +10,9 @@ Data sources: nedecn.org (DMR repeaters, plus its official AnyTone CSV pack), th
 
 ## Workflow
 
+Read `docs/MAINTAINING.md` first: it has the data model, the refresh procedure, the standing rules (CCEMA channels untouched, receive-only government channels, naming, radios must match) and the verification checklist.
+
+
 Commit and push after every change so each one is a restore point.
 
 ## File format rules (CPS import is strict)
