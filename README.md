@@ -19,7 +19,7 @@ Check Zone and Channel counts afterwards. Receive-only channels have PTT Prohibi
     python3 codeplug/model.py build d878uv   # data/ -> import/d878uv   (also: build d578uv)
     python3 codeplug/model.py check d878uv   # round trip: data/ -> build -> byte-identical to import/d878uv
     python3 codeplug/model.py parity         # the radios must match except the 578's 220 MHz content
-    python3 codeplug/guide.py import/d578uv out/guides/d578uv.pdf AT-D578UV   # printable PDF guide
+    python3 codeplug/guide.py import/d578uv guides/d578uv.pdf AT-D578UV   # printable PDF guide
 To change the codeplug: edit `import/d878uv` (with `codeplug/cplib.py` or a script like `add_*.py`), then run `python3 codeplug/model.py sync` to fold the change into `data/` (IDs are kept by name) and `build` both radios. `DigitalContactList.CSV` is large and gitignored: it is kept in `data/static/` locally and regenerated from RadioID.net.
 
 ## Sources

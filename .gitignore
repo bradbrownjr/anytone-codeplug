@@ -11,8 +11,6 @@ secrets.*
 # Raw fetcher cache (source sites' terms may not allow redistribution)
 cache/
 
-# Build output — regenerated from data/
-out/
 
 # Python
 __pycache__/

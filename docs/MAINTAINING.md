@@ -49,7 +49,13 @@ Test a CPS import on a small piece first (Channel.CSV + Zone.CSV) and keep a bac
 
 `python3 codeplug/build_roaming.py` regenerates `data/static/d878uv/RoamingChannel.CSV` and `RoamingZone.CSV` (shared by the 578) from the DMR zones: one roaming channel per site, one roaming zone per state plus the curated i95 Corridor. Run it after adding or removing a DMR site, then `model.py build` both radios.
 
-CPS import: always point the file list (or the individual import buttons) at `import/<radio>`. Earlier output lived in `out/<radio>` and a stale copy there caused `ImportFromFileError---18--RoamingZone.CSV` (its NEDECN (ALL) zone had 65 members; the CPS limit is 64 per roaming zone). Roaming zones are capped at 60 members here to stay clear of it.
+CPS import: always point the file list (or the individual import buttons) at `import/<radio>`. An old stale output folder (`out/<radio>`, since removed) caused `ImportFromFileError---18--RoamingZone.CSV` (its NEDECN (ALL) zone had 65 members; the CPS limit is 64 per roaming zone). Roaming zones are capped at 60 members here to stay clear of it.
 
 ## Known gaps (also in TODO.md)
 DCS tones are written as `D<code>N` (unverified, four GMRS channels use them; FOG channels still Off); 578 `OptionalSetting`/AES/AlertTone/GPSRoaming tables are not in the firmware-1.14 export; button map and diagrams for the guide need Brad's input; sites with no NEDECN page cannot be verified (see TODO.md).
+
+## Folder roles
+
+- `exports/<radio>`: raw CPS exports from the radios; templates only, never imported.
+- `import/<radio>`: generated CSVs to import into the CPS (committed). The only place to import from.
+- `guides/`: printable PDF guides (`python3 codeplug/guide.py import/d878uv guides/d878uv.pdf`, and `import/d578uv guides/d578uv.pdf AT-D578UV`), committed; regenerate after any codeplug change.
