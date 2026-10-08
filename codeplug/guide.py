@@ -14,7 +14,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
-from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import Flowable, KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
 ROOT = Path(__file__).resolve().parent.parent
 BUTTONS = []   # [(key, short press, long press)] -- needs Brad's confirmation / the 578 export
@@ -28,6 +28,51 @@ NAV = {
 }
 
 
+class KeyDiagram(Flowable):
+    """Blank radio outline with write-in boxes, to be filled by hand (key assignments are not in the CSV export)."""
+    W, H = 7.5 * inch, 3.6 * inch
+
+    def __init__(self, mobile):
+        super().__init__(); self.mobile = mobile; self.width, self.height = self.W, self.H
+
+    def wrap(self, aw, ah):
+        return self.W, self.H
+
+    def box(self, c, x, y, label, w=1.45 * inch):
+        c.setLineWidth(0.6); c.rect(x, y, w, 0.5 * inch)
+        c.setFont('Helvetica', 6.5); c.drawString(x + 3, y + 0.5 * inch - 8, label)
+        c.setLineWidth(0.25); c.line(x + 3, y + 8, x + w - 3, y + 8); c.line(x + 3, y + 20, x + w - 3, y + 20)
+
+    def draw(self):
+        c = self.canv; c.saveState(); c.setStrokeColor(colors.black)
+        cx = self.W / 2
+        c.setLineWidth(1.2)
+        if not self.mobile:     # handheld: body, antenna, display, keypad block, side keys on the left, top controls on the right
+            c.roundRect(cx - 0.8 * inch, 0.2 * inch, 1.6 * inch, 3.0 * inch, 8)
+            c.rect(cx - 0.55 * inch, 2.2 * inch, 1.1 * inch, 0.7 * inch); c.setFont('Helvetica', 7); c.drawCentredString(cx, 2.5 * inch, 'display')
+            c.rect(cx - 0.55 * inch, 0.45 * inch, 1.1 * inch, 1.5 * inch); c.drawCentredString(cx, 1.15 * inch, 'keypad')
+            c.line(cx + 0.45 * inch, 3.2 * inch, cx + 0.45 * inch, 3.55 * inch)
+            c.circle(cx - 0.35 * inch, 3.3 * inch, 0.1 * inch); c.circle(cx + 0.0 * inch, 3.3 * inch, 0.1 * inch)
+            for i, (x, y, t) in enumerate([(0.1, 2.35, 'side key 1 (near PTT)'), (0.1, 1.65, 'side key 2'), (0.1, 0.95, 'side key 3 / other'),
+                                              (0.1, 0.25, 'P-key row / other')]):
+                self.box(c, x * inch, y * inch, t)
+                c.setLineWidth(0.4); c.line((x + 1.45) * inch, (y + 0.25) * inch, cx - 0.8 * inch, (y + 0.25) * inch)
+            for i, (x, y, t) in enumerate([(5.95, 2.9, 'top: orange / emergency'), (5.95, 2.2, 'top: knob / channel'), (5.95, 1.5, 'top: volume / power'),
+                                              (5.95, 0.8, 'keypad / other'), (5.95, 0.1, 'other')]):
+                self.box(c, x * inch, y * inch, t)
+                c.setLineWidth(0.4); c.line(5.95 * inch, (y + 0.25) * inch, cx + 0.8 * inch, (y + 0.25) * inch)
+        else:                   # mobile: control head and hand microphone
+            c.roundRect(0.2 * inch, 1.9 * inch, 4.2 * inch, 1.4 * inch, 6); c.setFont('Helvetica', 7); c.drawCentredString(2.3 * inch, 2.6 * inch, 'control head / display')
+            c.roundRect(5.3 * inch, 0.3 * inch, 1.1 * inch, 2.6 * inch, 8); c.drawCentredString(5.85 * inch, 1.6 * inch, 'hand mic')
+            c.rect(5.45 * inch, 0.5 * inch, 0.8 * inch, 1.0 * inch); c.drawCentredString(5.85 * inch, 0.95 * inch, 'keypad')
+            for x, t in enumerate(('head key 1', 'head key 2', 'head key 3')):
+                self.box(c, (0.2 + x * 1.5) * inch, 1.1 * inch, t, w=1.4 * inch)
+            for x, t in enumerate(('mic P1', 'mic P2', 'mic P3', 'mic P4')):
+                self.box(c, (6.5 + 0 * x) * inch if False else 6.5 * inch, (2.85 - x * 0.65) * inch, t, w=0.95 * inch)
+            self.box(c, 0.2 * inch, 0.3 * inch, 'knobs / other', w=1.4 * inch); self.box(c, 1.75 * inch, 0.3 * inch, 'other', w=1.4 * inch)
+        c.restoreState()
+
+
 def rows(path):
     with open(path, newline='') as f:
         return list(csv.DictReader(f))
@@ -38,6 +83,37 @@ def commit():
         return subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', '--short', 'HEAD'], text=True).strip()
     except Exception:
         return 'unknown'
+
+
+def channel_types(chs, zones):
+    """(category, zones, channels, description) rows for the channel-types summary, derived from the built codeplug."""
+    def members(z): return z['Zone Channel Member'].split('|') if z['Zone Channel Member'] else []
+    cat = {}
+    for z in zones:
+        n = z['Zone Name']; m = members(z)
+        digital = bool(m) and chs[m[0]]['Channel Type'] == 'D-Digital'
+        if n == 'Simplex': k = 'Simplex'
+        elif digital: k = 'DMR repeater sites (NEDECN)'
+        elif n.endswith(' GMRS') or n == 'GMRS': k = 'GMRS'
+        elif n.endswith(' Analog'): k = 'Analog repeaters by state'
+        elif n.startswith('EMA '): k = 'County EMA (Maine)'
+        elif n.startswith('SAT-'): k = 'Satellites'
+        elif n.startswith('CCEMA') or n in ('ME ARES', 'ME State Net', 'ME Interop'): k = 'ARES / EmComm (Maine)'
+        elif n == 'US Interop': k = 'Federal / national interoperability'
+        else: k = n
+        c = cat.setdefault(k, [0, set()]); c[0] += 1; c[1].update(m)
+    desc = {
+        'DMR repeater sites (NEDECN)': 'One zone per repeater site across New England, NY and RI. Each channel is a talkgroup on that repeater (CC and time slot set per site); network talkgroups include state-wide, regional, TAC, SKYWARN and Parrot.',
+        'Analog repeaters by state': 'FM repeaters (2 m, 70 cm and 1.25 m on the 578), filed by state and named CALL City. Tones are programmed.',
+        'ARES / EmComm (Maine)': 'Maine ARES and Cumberland County EMA channels, state net and interoperability lists.',
+        'County EMA (Maine)': 'County emergency management frequencies, from the Maine FOG. Receive only.',
+        'Federal / national interoperability': 'NIFOG national interoperability channels (VHF, UHF, 700/800 MHz). Government channels are receive only.',
+        'GMRS': 'GMRS simplex and repeater channels, shared and by state. A trailing * means the repeater tone is not publicly listed.',
+        'Satellites': 'Amateur satellite downlink/uplink pairs (SO-50, ISS, AO-91, AO-123 and others), one zone each.',
+        'Simplex': 'Amateur simplex calling and common simplex frequencies.',
+        'MURS': 'MURS channels 1-5.', 'Marine': 'Marine VHF channels.', 'Weather': 'NOAA weather radio, receive only.',
+        'Packet': 'Packet radio (APRS and node frequencies).'}
+    return [(k, v[0], len(v[1]), desc.get(k, '')) for k, v in sorted(cat.items(), key=lambda kv: -kv[1][1] if False else 0)]
 
 
 def build(folder, out, title):
@@ -61,10 +137,18 @@ def build(folder, out, title):
     S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 12),
          Paragraph('Moving between zones and channels', ss['Heading2'])]
     S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
-    S += [Paragraph('Programmable buttons', ss['Heading2'])]
-    S += [tbl([['Key', 'Short press', 'Long press']] + BUTTONS, [1.5 * inch, 2.5 * inch, 2.5 * inch])] if BUTTONS else \
-         [Paragraph('Not yet filled in: key assignments are not part of the CPS CSV export and the button diagram needs the physical layout confirmed.', ss['BodyText'])]
-    S += [Paragraph('Zones', ss['Heading2'])]
+    mobile = 'D578' in title
+    S += [Paragraph('Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile), Spacer(1, 6)]
+    blank = [['Key', 'Short press', 'Long press']] + [['', '', ''] for _ in range(8)]
+    bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
+    S += [bt]
+    S += [PageBreak(), Paragraph('What is programmed on this radio', ss['Heading2'])]
+    ro = sum(1 for r in chs.values() if r['PTT Prohibit'] == 'On')
+    S += [Paragraph(f"{len(chs)} channels in {len(zones)} zones; {ro} are receive only. Zones fall into these groups:", ss['BodyText']), Spacer(1, 4)]
+    S += [tbl([['Group', 'Zones', 'Channels', 'What it is']] + [[Paragraph(escape(k), small), str(zn), str(cn), Paragraph(escape(d), small)] for k, zn, cn, d in channel_types(chs, zones)],
+              [1.6 * inch, 0.5 * inch, 0.7 * inch, 4.7 * inch])]
+    S += [Spacer(1, 6), Paragraph('Channel names: DMR channels are SITE then talkgroup (e.g. BRDCT CT SW); FM repeaters are CALL City. A zone holds up to 250 channels; a scan list is selected per channel.', ss['BodyText'])]
+    S += [PageBreak(), Paragraph('Zones', ss['Heading2'])]
     S += [tbl([['#', 'Zone', 'Channels']] + [[z['No.'], escape(z['Zone Name']), str(len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0)] for z in zones],
               [0.5 * inch, 3 * inch, 1 * inch])]
     S += [PageBreak()]
