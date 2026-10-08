@@ -18,14 +18,20 @@ from reportlab.platypus import BaseDocTemplate, Flowable, Frame, KeepTogether, N
 from reportlab.platypus.tableofcontents import TableOfContents
 
 ROOT = Path(__file__).resolve().parent.parent
-BUTTONS = []   # [(key, short press, long press)] -- needs Brad's confirmation / the 578 export
+# Key assignments (CPS Optional Setting -> Key Function; not in the CSV export).  {model: {key: (short press, long press)}}.
+# The 578 is still to be filled in from its CPS screen.
+BUTTONS = {
+    'AT-D878UV': {'PF1': ('Scan', 'Nuisance Delete'), 'PF2': ('Digital Monitor', 'LastCall Reply'), 'PF3': ('Power', 'Roaming'),
+                  'P1': ('Main Channel Switch', 'APRS Send'), 'P2': ('V/M', 'FM'), 'UPDN': ('Up: Next zone', 'Down: Previous zone')},
+}
+KEYNOTE = {'AT-D878UV': 'Long press = hold 1 second. Key lock: manual.'}
 
 NAV = {
-    'AT-D878UV': ['Change zone: press the Zone/menu function (long press of the P-key mapped to it, or Menu -> Zone) and pick the zone with the knob or Up/Down, then confirm.',
-                  'Change channel: turn the channel knob (or Up/Down) within the current zone; the A/B line shows the active VFO.',
-                  'Switch A/B: use the A/B key (top of keypad); each line holds its own zone and channel.',
+    'AT-D878UV': ['Change zone: press Up on the front pad for the next zone, Down for the previous zone.',
+                  'Change channel: turn the channel knob (top of the radio) within the current zone.',
+                  'Switch the main channel between A and B: short press P1 (Main Channel Switch).',
                   'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
-                  'Confirm these steps against your radio; button assignments are in the CPS under Optional Setting -> Key Function.'],
+                  'Key assignments below are from the CPS (Optional Setting -> Key Function).'],
 }
 
 
@@ -33,16 +39,19 @@ class KeyDiagram(Flowable):
     """Blank radio outline with write-in boxes, to be filled by hand (key assignments are not in the CSV export)."""
     W, H = 7.5 * inch, 3.6 * inch
 
-    def __init__(self, mobile):
-        super().__init__(); self.mobile = mobile; self.width, self.height = self.W, self.H
+    def __init__(self, mobile, keys=None):
+        super().__init__(); self.mobile = mobile; self.keys = keys or {}; self.width, self.height = self.W, self.H
 
     def wrap(self, aw, ah):
         return self.W, self.H
 
-    def box(self, c, x, y, label, w=1.45 * inch):
-        c.setLineWidth(0.6); c.rect(x, y, w, 0.5 * inch)
-        c.setFont('Helvetica', 6.5); c.drawString(x + 3, y + 0.5 * inch - 8, label)
+    def box(self, c, x, y, label, w=1.45 * inch, vals=None):
+        c.setLineWidth(0.6); c.rect(x, y, w, 0.58 * inch)
+        c.setFont('Helvetica', 6.5); c.drawString(x + 3, y + 0.58 * inch - 8, label)
         c.setLineWidth(0.25); c.line(x + 3, y + 8, x + w - 3, y + 8); c.line(x + 3, y + 20, x + w - 3, y + 20)
+        if vals:     # typed assignments sit on the two write-in lines: long press on the lower one
+            c.setFont('Helvetica-Bold', 7.5)
+            c.drawString(x + 4, y + 21.5, vals[0] if vals[0][:3] in ('Up:', 'Dow') else 'S: ' + vals[0]); c.drawString(x + 4, y + 9.5, vals[1] if vals[1][:3] in ('Up:', 'Dow') else 'L: ' + vals[1])
 
     def draw(self):
         c = self.canv; c.saveState(); c.setStrokeColor(colors.black)
@@ -67,16 +76,18 @@ class KeyDiagram(Flowable):
             c.rect(sx - 0.15 * inch, 0.75 * inch, 0.3 * inch, 0.2 * inch); c.drawRightString(sx - 0.2 * inch, 0.8 * inch, 'PF2')
             c.drawString(fx + 0.3 * inch, 3.3 * inch, 'FRONT VIEW'); c.drawString(sx - 0.3 * inch, 2.85 * inch, 'LEFT SIDE VIEW')
             # write-in boxes for the keys that can be programmed; leaders point at the key
-            targets = [('PF3 - emergency key (top)', 0.1, 2.95, fx - 0.5 * inch, 2.78 * inch),
-                       ('P1 key', 0.1, 0.75, fx - 0.55 * inch, 1.23 * inch),
-                       ('P2 key', 3.9, 0.75, fx + 0.55 * inch, 1.23 * inch),
-                       ('PF1 - upper side key', 6.15, 1.45, sx + 0.15 * inch, 1.2 * inch),
-                       ('PF2 - lower side key', 6.15, 0.6, sx + 0.15 * inch, 0.85 * inch)]
-            for t, x, y, tx, ty in targets:
+            k = self.keys
+            targets = [('PF3 - emergency key (top)', 0.1, 2.95, fx - 0.5 * inch, 2.78 * inch, k.get('PF3')),
+                       ('Up / Down (front pad): zone', 0.1, 1.8, fx - 0.17 * inch, 1.5 * inch, k.get('UPDN')),
+                       ('P1 key', 0.1, 0.75, fx - 0.55 * inch, 1.23 * inch, k.get('P1')),
+                       ('P2 key', 3.9, 0.75, fx + 0.55 * inch, 1.23 * inch, k.get('P2')),
+                       ('PF1 - upper side key', 6.15, 1.45, sx + 0.15 * inch, 1.2 * inch, k.get('PF1')),
+                       ('PF2 - lower side key', 6.15, 0.6, sx + 0.15 * inch, 0.85 * inch, k.get('PF2'))]
+            for t, x, y, tx, ty, v in targets:
                 x, y = x * inch, y * inch
-                self.box(c, x, y, t, w=1.35 * inch)
+                self.box(c, x, y, t, w=1.35 * inch if not v else 1.55 * inch, vals=v)
                 c.setLineWidth(0.4)
-                c.line(x + (1.35 * inch if x < tx else 0), y + 0.25 * inch, tx, ty)
+                c.line(x + ((1.55 * inch if v else 1.35 * inch) if x < tx else 0), y + 0.25 * inch, tx, ty)
             c.setFont('Helvetica', 6.5)
             c.drawString(0.1 * inch, 0.05 * inch, 'Not programmable here: channel switch and POWER/VOL knobs (top), Menu, Exit, speaker, PTT.')
         else:                   # AT-D578UV: layout from the user manual, "3. Getting acquainted" (front panel and hand mic)
@@ -213,11 +224,20 @@ def build(folder, out, title):
     S = [Paragraph(head, ss['Title']), Paragraph(f'Generated {datetime.date.today()} from codeplug commit {commit()}. KC1JMH.', ss['BodyText']), Spacer(1, 8),
          Paragraph('Moving between zones and channels', ss['Heading2'])]
     S += [Paragraph(escape(t), ss['BodyText']) for t in NAV.get(title, ['(navigation steps for this model still to be written)'])]
-    S += [Paragraph('Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile), Spacer(1, 6)]
-    keys = [['PF1 (side, upper)', '', ''], ['PF2 (side, lower)', '', ''], ['PF3 (top, emergency)', '', ''], ['P1', '', ''], ['P2', '', '']] if not mobile else [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']]
-    blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(8 - len(keys))]
-    bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
-    S += [bt, PageBreak()]
+    S += [Paragraph('Programmable buttons' if BUTTONS.get(title) else 'Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile, BUTTONS.get(title)), Spacer(1, 6)]
+    bk = BUTTONS.get(title)
+    if bk:
+        keys = [[n, *bk[k]] for n, k in (('PF1 (side, upper)', 'PF1'), ('PF2 (side, lower)', 'PF2'), ('PF3 (top, emergency)', 'PF3'), ('P1', 'P1'), ('P2', 'P2'))]
+        keys += [['Up (front pad)', 'Next zone', ''], ['Down (front pad)', 'Previous zone', '']]
+    else:
+        keys = [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']] if mobile else []
+    blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(0 if bk else 8 - len(keys))]
+    bt = tbl(blank, [1.8 * inch, 2.35 * inch, 2.35 * inch], fs=8 if bk else 7, pad=3 if bk else 1)
+    if not bk:
+        bt._argH[1:] = [0.3 * inch] * (len(blank) - 1)
+    if KEYNOTE.get(title):
+        S += [Spacer(1, 2)]
+    S += [bt] + ([Spacer(1, 4), Paragraph(KEYNOTE[title], small)] if KEYNOTE.get(title) else []) + [PageBreak()]
 
     toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=10, leading=14)]
     S += [Paragraph('Contents', ss['Heading2']), toc, Spacer(1, 10)]
