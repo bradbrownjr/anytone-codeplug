@@ -70,7 +70,7 @@ class KeyDiagram(Flowable):
         c.setLineWidth(0.25); c.line(x + 3, y + 8, x + w - 3, y + 8); c.line(x + 3, y + 20, x + w - 3, y + 20)
         if vals:     # typed assignments sit on the two write-in lines: long press on the lower one
             c.setFont('Helvetica-Bold', 7.5)
-            c.drawString(x + 4, y + 21.5, vals[0] if vals[0][:3] in ('Up:', 'Dow') else 'S: ' + vals[0]); c.drawString(x + 4, y + 9.5, vals[1] if vals[1][:3] in ('Up:', 'Dow') else 'L: ' + vals[1])
+            c.drawString(x + 4, y + 21.5, vals[0] if vals[0][:3] in ('Up:', 'Dow') else 'Short: ' + vals[0]); c.drawString(x + 4, y + 9.5, vals[1] if vals[1][:3] in ('Up:', 'Dow') else 'Long: ' + vals[1])
 
     def draw(self):
         c = self.canv; c.saveState(); c.setStrokeColor(colors.black)
@@ -134,26 +134,26 @@ class KeyDiagram(Flowable):
             k = self.keys
             def lines(*ids): return [f'{i}  S: {k[i][0]}  L: {k[i][1]}' for i in ids] if k else None
             groups = [('P1 P2 P3 (left of display)', 0.2, 0.05, hx + 0.85 * inch, hy + 0.45 * inch, ('P1', 'P2', 'P3')),
-                      ('P4 P5 P6 (right of display)', 2.35, 0.05, hx + 3.15 * inch, hy + 0.45 * inch, ('P4', 'P5', 'P6')),
+                      ('P4 P5 P6 (right of display)', 2.6, 0.05, hx + 3.15 * inch, hy + 0.45 * inch, ('P4', 'P5', 'P6')),
                       ('Mic keys (short)', 6.45, 0.75, 'mic', None, ('PA', 'PB', 'PC', 'PD')),
                       ]
             for t, x, y, tx, ty, ids in groups:
                 x, y = x * inch, y * inch
-                w = 2.0 * inch if tx != 'mic' else 1.0 * inch
+                w = 2.3 * inch if tx != 'mic' else 1.0 * inch
                 h = 0.2 * inch + 0.13 * inch * len(ids) + 0.1 * inch
                 c.setLineWidth(0.6); c.rect(x, y, w, h); c.setFont('Helvetica', 6.5); c.drawString(x + 3, y + h - 8, t)
-                c.setFont('Helvetica-Bold', 7)
+                c.setFont('Helvetica-Bold', 6.5)
                 for j, i in enumerate(ids):
                     if k:
                         sh, lg = k[i]
-                        c.drawString(x + 4, y + h - 8 - 11 * (j + 1), f'{i}:  S: {sh}  /  L: {lg}' if tx != 'mic' else f'{ "ABCD"[j]}: {sh}')
+                        c.drawString(x + 4, y + h - 8 - 11 * (j + 1), f'{i}:  Short: {sh}  /  Long: {lg}' if tx != 'mic' else f'{ "ABCD"[j]}: {sh}')
                 if tx == 'mic':
                     c.setLineWidth(0.4); c.line(x, y + h - 6, 5.0 * inch + 1.1 * inch, 1.0 * inch)
                 elif tx:
                     c.setLineWidth(0.4); c.line(x + w / 2, y + h, tx, ty)
             kb = k['KNOB'] if k else ('', '')
             c.setFont('Helvetica', 6.5)
-            c.drawString(hx + 0.9 * inch, hy + hh + 6, 'Channel knob push:  S: %s  /  L: %s' % kb)
+            c.drawString(hx + 0.9 * inch, hy + hh + 6, 'Channel knob push:  Short: %s  /  Long: %s' % kb)
         c.restoreState()
 
 
