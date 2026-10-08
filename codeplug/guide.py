@@ -314,6 +314,21 @@ def build(folder, out, title):
         S += [KeepTogether([Paragraph(f"{z['No.']}. {escape(z['Zone Name'])}", zhead), tbl(data, [1.05 * inch, 0.62 * inch, 0.62 * inch, col - 2.29 * inch], fs=6.5, pad=0.5)]), Spacer(1, 4)]
     S += [Paragraph('Talkgroups', h1),
           tbl([['#', 'ID', 'Name', 'Call type']] + [[t['No.'], t['Radio ID'], escape(t['Name']), t['Call Type']] for t in tgs], [0.4 * inch, 0.7 * inch, 1.6 * inch, col - 2.7 * inch], fs=6.5, pad=0.5)]
+    def grid(names, n=3):
+        cells = [[Paragraph(escape(x), ztext) for x in names[k:k + n]] + [Paragraph('', ztext)] * (n - len(names[k:k + n])) for k in range(0, len(names), n)]
+        t = Table(cells, colWidths=[col / n] * n)
+        t.setStyle(TableStyle([('GRID', (0, 0), (-1, -1), 0.25, colors.grey), ('TOPPADDING', (0, 0), (-1, -1), 0.5), ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5)]))
+        return t
+
+    def named_lists(title_, items):
+        out_ = [Paragraph(title_, h1)]
+        for name, members in items:
+            out_ += [KeepTogether([Paragraph(f'{escape(name)} ({len(members)})', zhead), grid(members)]), Spacer(1, 4)]
+        return out_
+
+    S += named_lists('Scan lists', [(r['Scan List Name'], r['Scan Channel Member'].split('|')) for r in rows(folder / 'ScanList.CSV') if r['Scan Channel Member']])
+    rz = [r for r in csv.reader(open(folder / 'RoamingZone.CSV', newline='')) if len(r) > 2 and r[0] != 'No.']
+    S += named_lists('Roaming zones (DMR sites)', [(r[1], r[2].split('|')) for r in rz])
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     doc.multiBuild(S)
 
