@@ -118,7 +118,7 @@ def bootstrap_extra(radio='d578uv'):
     base = next(r for r in chs if r[c['Channel Name']] == 'ECT1')
     other = read(src / 'Channel.CSV'); oh = other[0]
     inv = {v: k for k, v in prof['colmap'].items()}
-    added, nid = [], len(chs)
+    added, nid = [], max(int(r[0][2:]) for r in chs)      # max, not len: removed rows leave gaps in the stable IDs
     for r in other[1:]:
         d = dict(zip(oh, r))
         rxf = float(d['Receive Frequency'])
@@ -142,7 +142,7 @@ def bootstrap_extra(radio='d578uv'):
     new_z, new_m = [], []
     ordered = sorted(added, key=lambda r: float(r[c['Receive Frequency']]))
     if ordered:       # all 578-only channels go in one zone, named for the band
-        zid = 'z%03d' % (len(zrows) + 1)
+        zid = 'z%03d' % (max(int(r[0][1:]) for r in zrows) + 1)
         new_z.append([zid, '220', ordered[0][0], ordered[0][0], '0'])
         new_m += [[zid, i, r[0]] for i, r in enumerate(ordered, 1)]
     # Maine ARES list: state coordination simplex 223.500 and the Oxford 224.620 repeater (578 only)
