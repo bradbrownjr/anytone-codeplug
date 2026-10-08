@@ -118,6 +118,19 @@ def bootstrap_extra(radio='d578uv'):
     for i, n in enumerate(('1.25m Calling', 'W1IF Hebron ME'), 950):
         if n in ids and 'ME ARES' in zname:
             new_m.append([zname['ME ARES'], i, ids[n]])
+    # 220 MHz repeaters also belong in their state's analog zone and the All Analog scan list; calling channel with the simplex ones
+    place = {n: ('ME Analog', 'All Analog') for n in ('W1IF Hebron ME', 'KQ1L Augusta', 'Corinna 220')}
+    place['1.25m Calling'] = ('Simplex', 'Simplex')
+    sh, srows = table('scanlists.csv'); sm_h, sm = table('scanlist_members.csv')
+    sid = {r[1]: r[0] for r in srows}
+    new_s = []
+    for r in added:
+        zn, sn = place.get(r[c['Channel Name']], ('NH Analog', 'All Analog'))
+        r[c['Scan List']] = sn
+        new_m.append([zname[zn], 960 + len(new_m), r[0]])
+        new_s.append([sid[sn], 960 + len(new_s), r[0]])
+    write(DATA / 'channels.csv', [head] + chs + added, quote_all=False, eol='\n')
+    write(DATA / 'scanlist_members.csv', [sm_h] + sm + new_s, quote_all=False, eol='\n')
     write(DATA / 'zones.csv', [zh] + zrows + new_z, quote_all=False, eol='\n')
     write(DATA / 'zone_members.csv', [zm_h] + zm + new_m, quote_all=False, eol='\n')
     print(f'adopted {len(added)} {radio}-only channels into zone 220')
@@ -194,9 +207,10 @@ if __name__ == '__main__':
         na, nb = {r['Channel Name'] for r in rd(a / 'Channel.CSV')}, {r['Channel Name'] for r in rd(b / 'Channel.CSV')}
         za = {z['Zone Name']: z['Zone Channel Member'].split('|') for z in rd(a / 'Zone.CSV')}
         zb = {z['Zone Name']: z['Zone Channel Member'].split('|') for z in rd(b / 'Zone.CSV')}
+        scans = lambda d: {r['Scan List Name']: [m for m in r['Scan Channel Member'].split('|') if m in na] for r in rd(d / 'ScanList.CSV')}
         extra_zones = sorted(set(zb) - set(za))
         diff = [k for k in za if za[k] != [m for m in zb.get(k, []) if m in na]]
-        ok = not (na - nb) and not diff and rd(a / 'ScanList.CSV') == rd(b / 'ScanList.CSV')
+        ok = not (na - nb) and not diff and scans(a) == scans(b)
         print('878-only channels:', sorted(na - nb), '| 578-only channels:', len(nb - na), '| 578-only zones:', extra_zones, '| zones differing beyond 578-only members:', diff)
         print('PARITY OK' if ok else 'PARITY BROKEN'); sys.exit(not ok)
     elif cmd == 'sync':          # exports/d878uv -> data/, then adopt the 578-only channels
