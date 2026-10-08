@@ -188,6 +188,17 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'bootstrap':
         bootstrap(sys.argv[2] if len(sys.argv) > 2 else ROOT / 'exports' / 'd878uv')
+    elif cmd == 'parity':        # the radios must match except for bands only one can carry (220 MHz on the 578)
+        a, b = build('d878uv')[0], build('d578uv')[0]
+        rd = lambda p: list(csv.DictReader(open(p, newline='')))
+        na, nb = {r['Channel Name'] for r in rd(a / 'Channel.CSV')}, {r['Channel Name'] for r in rd(b / 'Channel.CSV')}
+        za = {z['Zone Name']: z['Zone Channel Member'].split('|') for z in rd(a / 'Zone.CSV')}
+        zb = {z['Zone Name']: z['Zone Channel Member'].split('|') for z in rd(b / 'Zone.CSV')}
+        extra_zones = sorted(set(zb) - set(za))
+        diff = [k for k in za if za[k] != [m for m in zb.get(k, []) if m in na]]
+        ok = not (na - nb) and not diff and rd(a / 'ScanList.CSV') == rd(b / 'ScanList.CSV')
+        print('878-only channels:', sorted(na - nb), '| 578-only channels:', len(nb - na), '| 578-only zones:', extra_zones, '| zones differing beyond 578-only members:', diff)
+        print('PARITY OK' if ok else 'PARITY BROKEN'); sys.exit(not ok)
     elif cmd == 'sync':          # exports/d878uv -> data/, then adopt the 578-only channels
         bootstrap(ROOT / 'exports' / 'd878uv'); bootstrap_extra('d578uv')
     elif cmd == 'bootstrap-extra':
