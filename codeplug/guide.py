@@ -219,16 +219,15 @@ def build(folder, out, title):
     bt = tbl(blank, [1.5 * inch, 2.5 * inch, 2.5 * inch]); bt._argH[1:] = [0.3 * inch] * 8
     S += [bt, PageBreak()]
 
+    toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=10, leading=14)]
+    S += [Paragraph('Contents', ss['Heading2']), toc, Spacer(1, 10)]
     ro = sum(1 for r in chs.values() if r['PTT Prohibit'] == 'On')
     S += [Paragraph('What is programmed on this radio', h1)]
     S += [Paragraph(f"{len(chs)} channels in {len(zones)} zones; {ro} are receive only. Zones fall into these groups:", ss['BodyText']), Spacer(1, 4)]
     S += [tbl([['Group', 'Zones', 'Channels', 'What it is']] + [[Paragraph(escape(k), small), str(zn), str(cn), Paragraph(escape(d), small)] for k, zn, cn, d in channel_types(chs, zones)],
               [1.6 * inch, 0.5 * inch, 0.7 * inch, 4.7 * inch])]
     S += [Spacer(1, 6), Paragraph('Channel names: DMR channels are SITE then talkgroup (e.g. BRDCT CT SW); FM repeaters are CALL City. A zone holds up to 250 channels; a scan list is selected per channel.', ss['BodyText'])]
-    S += [Spacer(1, 10)]
-
-    toc = TableOfContents(); toc.levelStyles = [ss['BodyText'].clone('toc0', fontSize=10, leading=14)]
-    S += [Paragraph('Contents', ss['Heading2']), toc, PageBreak()]
+    S += [PageBreak()]
 
     cnt = lambda z: len(z['Zone Channel Member'].split('|')) if z['Zone Channel Member'] else 0
     def zone_table():
