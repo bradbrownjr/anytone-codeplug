@@ -25,12 +25,12 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / 'data'
 GENERATED = ('Channel.CSV', 'Zone.CSV', 'ScanList.CSV', 'TalkGroups.CSV', 'ContactTalkGroups.CSV')
 RADIOS = {  # MHz ranges the radio can transmit/receive; channels.csv uses the D878UV column names
-    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}, 'share': []},
+    'd878uv': {'folder': 'd878uv', 'bands': [(136, 174), (400, 480)], 'tg_file': 'TalkGroups.CSV', 'colmap': {}, 'fixed': {}, 'keep_own': [], 'share': []},
     # D578UV firmware 1.14 export: renamed/fewer channel columns, no Zone Hide, ContactTalkGroups.CSV, 16-char radio ID name
     'd578uv': {'folder': 'd578uv', 'bands': [(136, 174), (200, 260), (400, 480)], 'tg_file': 'ContactTalkGroups.CSV',
                'colmap': {'Color Code': 'RX Color Code', 'TDMA': 'Simplex TDMA', 'TDMA Adaptive': 'Slot Suit', 'Simplex': 'Through Mode',
                           'Exclude Channel From Roaming': 'Exclude channel from roaming'},
-               'fixed': {'Simplex': 'Off', 'Radio ID': 'KC1JMH / Brad Br'},
+               'fixed': {'Radio ID': 'KC1JMH / Brad Br'}, 'keep_own': ['Simplex'],
                'share': ['RoamingChannel.CSV', 'RoamingZone.CSV']},   # NEDECN roaming tables, taken from the 878 export (same layout; the 578's are older)
 }
 
@@ -156,8 +156,12 @@ def build(radio, out=None, static=None):
     by_id = {r[0]: r for r in keep}
     header = read(static / 'Channel.CSV')[0]
     cm = prof['colmap']
-    pick = [(c[cm.get(h, h)] if h != 'No.' else None, prof['fixed'].get(h)) for h in header]
-    write(out / 'Channel.CSV', [header] + [[str(i) if j is None else (fx if fx is not None else r[j]) for j, fx in pick] for i, r in enumerate(keep, 1)])
+    # columns with no 878 equivalent: keep the radio's own per-channel value (matched by name), else the radio's most common value
+    own = {n: dict(zip(header, r)) for n, r in ((r[1], r) for r in read(static / 'Channel.CSV')[1:])}
+    default = {h: 'Off' for h in prof['keep_own']}
+    pick = [(c[cm.get(h, h)] if h != 'No.' and h not in prof['keep_own'] else None, prof['fixed'].get(h), h) for h in header]
+    write(out / 'Channel.CSV', [header] + [[str(i) if h == 'No.' else (own.get(r[1], {}).get(h, default[h]) if h in prof['keep_own'] else (fx if fx is not None else r[j]))
+                                            for j, fx, h in pick] for i, r in enumerate(keep, 1)])
     name = lambda cid: by_id[cid][c['Channel Name']]
     rx = lambda cid: by_id[cid][c['Receive Frequency']]
     tx = lambda cid: by_id[cid][c['Transmit Frequency']]

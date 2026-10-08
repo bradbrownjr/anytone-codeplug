@@ -4,3 +4,13 @@ s002,GMRS,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
 s003,Marine,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
 s004,All Analog,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
 s005,Simplex,Off,Priority Channel Select1,Off,Off,Selected,0.0,0.0,0.0,0.0
+s006,Packet,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s007,SO-50,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s008,ISS,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s009,AO-123,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s010,CAS-3H,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s011,IO-86,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s012,RS95S,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s013,TEVEL2,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s014,AO-91,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
+s015,PO-101,Off,Off,Off,Off,Selected,2.0,3.0,3.1,3.1
