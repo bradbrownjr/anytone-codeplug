@@ -24,9 +24,18 @@ BUTTONS = {
     'AT-D878UV': {'PF1': ('Scan', 'Nuisance Delete'), 'PF2': ('Digital Monitor', 'LastCall Reply'), 'PF3': ('Power', 'Roaming'),
                   'P1': ('Main Channel Switch', 'APRS Send'), 'P2': ('V/M', 'FM'), 'UPDN': ('Up: Next zone', 'Down: Previous zone')},
 }
-KEYNOTE = {'AT-D878UV': 'Long press = hold 1 second. Key lock: manual.'}
+BUTTONS['AT-D578UV'] = {'P1': ('Power', 'Repeater'), 'P2': ('Scan', 'Nuisance Delete'), 'P3': ('Digital Monitor', 'Roaming'), 'P4': ('Zone-', 'APRS Send'),
+                        'P5': ('Zone+', 'GPS Information'), 'P6': ('VFO/MR', 'Reverse'), 'PA': ('Menu', 'Off'), 'PB': ('Zone+', 'Off'), 'PC': ('Zone-', 'Off'),
+                        'PD': ('Exit', 'Off'), 'KNOB': ('Main Channel Switch', 'Sub CH On/Off')}
+KEYNOTE = {'AT-D878UV': 'Long press = hold 1 second. Key lock: manual.',
+           'AT-D578UV': 'Long press = hold 2 seconds. Key lock: manual. Mic keys A-D are set as Menu, Zone+, Zone-, Exit (left to right), not the labels printed on the keys. Knob = push the channel knob.'}
 
 NAV = {
+    'AT-D578UV': ['Change zone: P5 or mic B = next zone (Zone+); P4 or mic C = previous zone (Zone-).',
+                  'Change channel: turn the channel knob (right of the display). Push the knob to switch the main channel between A and B.',
+                  'P6 switches between VFO and memory (channel) mode. P1 sets power level (Power).',
+                  'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
+                  'Key assignments below are from the CPS (Optional Setting -> Key Function).'],
     'AT-D878UV': ['Change zone: press Up on the front pad for the next zone, Down for the previous zone.',
                   'Change channel: turn the channel knob (top of the radio) within the current zone.',
                   'Switch the main channel between A and B: short press P1 (Main Channel Switch).',
@@ -102,25 +111,39 @@ class KeyDiagram(Flowable):
             c.rect(hx + 1.0 * inch, hy + 0.08 * inch, 0.6 * inch, 0.22 * inch); c.drawString(hx + 1.1 * inch, hy + 0.14 * inch, 'MENU')
             c.rect(hx + 2.6 * inch, hy + 0.08 * inch, 0.6 * inch, 0.22 * inch); c.drawString(hx + 2.7 * inch, hy + 0.14 * inch, 'EXIT')
             c.circle(hx + 3.65 * inch, hy + 0.95 * inch, 0.25 * inch); c.drawCentredString(hx + 3.65 * inch, hy + 0.5 * inch, 'channel knob')
-            c.drawString(hx, hy + hh + 6, 'FRONT PANEL (P1-P3 left, P4-P6 right of the display)')
+            c.drawString(hx, hy + hh + 6, 'FRONT PANEL')
             mx, my = 5.0 * inch, 0.35 * inch                       # hand microphone
             c.roundRect(mx, my, 1.4 * inch, 2.7 * inch, 10)
             c.rect(mx + 0.15 * inch, my + 2.2 * inch, 1.1 * inch, 0.35 * inch); c.drawCentredString(mx + 0.7 * inch, my + 2.35 * inch, 'Up / Down')
             c.rect(mx + 0.15 * inch, my + 0.95 * inch, 1.1 * inch, 1.15 * inch); c.drawCentredString(mx + 0.7 * inch, my + 1.5 * inch, 'keypad 0-9 * #')
             for i, t in enumerate('ABCD'):
                 c.rect(mx + (0.15 + i * 0.28) * inch, my + 0.6 * inch, 0.25 * inch, 0.25 * inch); c.drawCentredString(mx + (0.275 + i * 0.28) * inch, my + 0.7 * inch, t)
-            c.drawString(mx + 0.25 * inch, my + 0.25 * inch, 'speaker'); c.drawString(mx - 0.05 * inch, my + 2.8 * inch, 'HAND MIC')
+            c.drawString(mx - 0.05 * inch, my + 2.8 * inch, 'HAND MIC')
             c.rect(mx - 0.12 * inch, my + 1.5 * inch, 0.12 * inch, 0.55 * inch)                  # PTT on the left edge
             c.drawRightString(mx - 0.15 * inch, my + 1.7 * inch, 'PTT')
-            targets = [('P1 / P2 / P3 (left of display)', 0.2, 0.15, hx + 0.85 * inch, hy + 0.45 * inch),
-                       ('P4 / P5 / P6 (right of display)', 1.8, 0.15, hx + 3.15 * inch, hy + 0.45 * inch),
-                       ('Mic keys A / B / C / D', 6.55, 0.6, mx + 1.1 * inch, my + 0.72 * inch),
-                       ('Mic Up / Down', 6.55, 1.5, mx + 1.25 * inch, my + 2.35 * inch)]
-            for t, x, y, tx, ty in targets:
+            k = self.keys
+            def lines(*ids): return [f'{i}  S: {k[i][0]}  L: {k[i][1]}' for i in ids] if k else None
+            groups = [('P1 P2 P3 (left of display)', 0.2, 0.05, hx + 0.85 * inch, hy + 0.45 * inch, ('P1', 'P2', 'P3')),
+                      ('P4 P5 P6 (right of display)', 2.35, 0.05, hx + 3.15 * inch, hy + 0.45 * inch, ('P4', 'P5', 'P6')),
+                      ('Mic keys (short)', 6.45, 0.75, 'mic', None, ('PA', 'PB', 'PC', 'PD')),
+                      ]
+            for t, x, y, tx, ty, ids in groups:
                 x, y = x * inch, y * inch
-                self.box(c, x, y, t, w=1.5 * inch if x < 6 * inch else 0.95 * inch)
-                c.setLineWidth(0.4)
-                c.line(x + (0.75 * inch if x < 6 * inch else 0), y + 0.5 * inch if x < 6 * inch else y + 0.25 * inch, tx, ty)
+                w = 2.0 * inch if tx != 'mic' else 1.0 * inch
+                h = 0.2 * inch + 0.13 * inch * len(ids) + 0.1 * inch
+                c.setLineWidth(0.6); c.rect(x, y, w, h); c.setFont('Helvetica', 6.5); c.drawString(x + 3, y + h - 8, t)
+                c.setFont('Helvetica-Bold', 7)
+                for j, i in enumerate(ids):
+                    if k:
+                        sh, lg = k[i]
+                        c.drawString(x + 4, y + h - 8 - 11 * (j + 1), f'{i}:  S: {sh}  /  L: {lg}' if tx != 'mic' else f'{ "ABCD"[j]}: {sh}')
+                if tx == 'mic':
+                    c.setLineWidth(0.4); c.line(x, y + h - 6, 5.0 * inch + 1.1 * inch, 1.0 * inch)
+                elif tx:
+                    c.setLineWidth(0.4); c.line(x + w / 2, y + h, tx, ty)
+            kb = k['KNOB'] if k else ('', '')
+            c.setFont('Helvetica', 6.5)
+            c.drawString(hx + 0.9 * inch, hy + hh + 6, 'Channel knob push:  S: %s  /  L: %s' % kb)
         c.restoreState()
 
 
@@ -227,8 +250,10 @@ def build(folder, out, title):
     S += [Paragraph('Programmable buttons' if BUTTONS.get(title) else 'Programmable buttons (write in the assignments)', ss['Heading2']), KeyDiagram(mobile, BUTTONS.get(title)), Spacer(1, 6)]
     bk = BUTTONS.get(title)
     if bk:
-        keys = [[n, *bk[k]] for n, k in (('PF1 (side, upper)', 'PF1'), ('PF2 (side, lower)', 'PF2'), ('PF3 (top, emergency)', 'PF3'), ('P1', 'P1'), ('P2', 'P2'))]
-        keys += [['Up (front pad)', 'Next zone', ''], ['Down (front pad)', 'Previous zone', '']]
+        keys = [[n, *bk[k]] for n, k in ((('PF1 (side, upper)', 'PF1'), ('PF2 (side, lower)', 'PF2'), ('PF3 (top, emergency)', 'PF3'), ('P1', 'P1'), ('P2', 'P2')) if not mobile else
+                                         tuple((f'P{i}', f'P{i}') for i in range(1, 7)) + (('Mic A', 'PA'), ('Mic B', 'PB'), ('Mic C', 'PC'), ('Mic D', 'PD'), ('Channel knob push', 'KNOB')))]
+        if not mobile:
+            keys += [['Up (front pad)', 'Next zone', ''], ['Down (front pad)', 'Previous zone', '']]
     else:
         keys = [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']] if mobile else []
     blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(0 if bk else 8 - len(keys))]
