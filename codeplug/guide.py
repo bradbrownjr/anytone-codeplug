@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # The 578 is still to be filled in from its CPS screen.
 BUTTONS = {
     'AT-D878UV': {'PF1': ('Scan', 'Nuisance Delete'), 'PF2': ('Digital Monitor', 'LastCall Reply'), 'PF3': ('Power', 'Roaming'),
-                  'P1': ('Main Channel Switch', 'APRS Send'), 'P2': ('V/M', 'FM'), 'UPDN': ('Up: Next zone', 'Down: Previous zone')},
+                  'P1': ('Main Channel Switch', 'APRS Send'), 'P2': ('V/M', 'FM'), 'UPDN': ('Up: Previous zone', 'Down: Next zone')},
 }
 BUTTONS['AT-D578UV'] = {'P1': ('Power', 'Repeater'), 'P2': ('Scan', 'Nuisance Delete'), 'P3': ('Digital Monitor', 'Roaming'), 'P4': ('Zone-', 'APRS Send'),
                         'P5': ('Zone+', 'GPS Information'), 'P6': ('VFO/MR', 'Reverse'), 'PA': ('Menu', 'Off'), 'PB': ('Zone+', 'Off'), 'PC': ('Zone-', 'Off'),
@@ -46,7 +46,7 @@ NAV = {
                   'P6 switches between VFO and memory (channel) mode. P1 sets power level (Power).',
                   'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
                   'Key assignments below are from the CPS (Optional Setting -> Key Function).'],
-    'AT-D878UV': ['Change zone: press Up on the front pad for the next zone, Down for the previous zone.',
+    'AT-D878UV': ['Change zone: press Down on the front pad for the next zone, Up for the previous zone.',
                   'Change channel: turn the channel knob (top of the radio) within the current zone.',
                   'Switch the main channel between A and B: short press P1 (Main Channel Switch).',
                   'Receive-only channels (marked RX only) have PTT Prohibit on and will not transmit.',
@@ -263,7 +263,7 @@ def build(folder, out, title):
         keys = [[n, *bk[k]] for n, k in ((('PF1 (side, upper)', 'PF1'), ('PF2 (side, lower)', 'PF2'), ('PF3 (top, emergency)', 'PF3'), ('P1', 'P1'), ('P2', 'P2')) if not mobile else
                                          tuple((f'P{i}', f'P{i}') for i in range(1, 7)) + (('Mic A', 'PA'), ('Mic B', 'PB'), ('Mic C', 'PC'), ('Mic D', 'PD'), ('Channel knob push', 'KNOB')))]
         if not mobile:
-            keys += [['Up (front pad)', 'Next zone', ''], ['Down (front pad)', 'Previous zone', '']]
+            keys += [['Up (front pad)', 'Previous zone', ''], ['Down (front pad)', 'Next zone', '']]
     else:
         keys = [['P1-P6 (head)', '', ''], ['A / B / C / D (mic)', '', ''], ['Mic Up / Down', '', '']] if mobile else []
     blank = [['Key', 'Short press', 'Long press']] + keys + [['', '', ''] for _ in range(0 if bk else 8 - len(keys))]
