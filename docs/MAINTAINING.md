@@ -45,5 +45,9 @@ sources. Everything here can be re-run; read "Standing rules" before changing an
 `model.py check d878uv`, `check d578uv`, `parity`; `nedecn.py report` shows every page matching; no channel names >16; every zone/scan-list member exists with matching frequencies (`Codeplug.validate`); both radios have no dangling scan lists; open `TODO.md` for unverified items.
 Test a CPS import on a small piece first (Channel.CSV + Zone.CSV) and keep a backup of the radio's current codeplug.
 
+## Roaming
+
+`python3 codeplug/build_roaming.py` regenerates `data/static/d878uv/RoamingChannel.CSV` and `RoamingZone.CSV` (shared by the 578) from the DMR zones: one roaming channel per site, one roaming zone per state plus the curated i95 Corridor. Run it after adding or removing a DMR site, then `model.py build` both radios. A roaming zone must stay at 60 members or fewer (a 64-member zone was rejected by the CPS import).
+
 ## Known gaps (also in TODO.md)
 DCS tones are written as `D<code>N` (unverified, four GMRS channels use them; FOG channels still Off); 578 `OptionalSetting`/AES/AlertTone/GPSRoaming tables are not in the firmware-1.14 export; button map and diagrams for the guide need Brad's input; sites with no NEDECN page cannot be verified (see TODO.md).
