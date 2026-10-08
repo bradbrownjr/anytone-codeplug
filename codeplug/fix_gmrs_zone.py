@@ -14,7 +14,7 @@ assert all(n in cp.by for n in names)
 
 state_gmrs = {m for z in cp.zones if z[1].endswith(' GMRS') and z[1] != 'GMRS' for m in cp.members(z[1])}
 repeaters = [n for n in cp.members('GMRS') if not n.startswith('GMRS ')]
-drop = [n for n in repeaters if n in set(cp.members('ME GMRS'))]
+drop = list(repeaters)            # the GMRS zone is simplex only; repeaters live in the state GMRS zones
 cp.remove_from_zone('GMRS', set(drop))
 z = cp.zone('GMRS')
 members = names + cp.members('GMRS')
